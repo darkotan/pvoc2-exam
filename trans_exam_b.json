@@ -1,0 +1,335 @@
+[
+  {
+    "qnum": 1,
+    "ch": "ch14",
+    "en": "As shown in the diagram, which stroke is the internal combustion engine currently performing?",
+    "en_o": ["Intake", "Compression", "Power", "Exhaust"],
+    "en_exp": "In the four-stroke cycle, the exhaust stroke occurs when the piston moves upward to expel burnt gases through the open exhaust valve. The diagram depicts this upward movement with the exhaust valve open, corresponding to the exhaust stroke.",
+    "zhCN_exp": "在四冲程循环中，排气行程是活塞上行将燃烧废气通过打开的排气阀排出的过程。图中描绘了排气阀打开时活塞上行的动作，对应排气行程。",
+    "zhTW_exp": "在四衝程循環中，排氣行程是活塞上行將燃燒廢氣通過打開的排氣閥排出的過程。圖中描繪了排氣閥打開時活塞上行的動作，對應排氣行程。"
+  },
+  {
+    "qnum": 2,
+    "ch": "ch14",
+    "en": "Compared with wet cylinder liners, dry cylinder liners _____:\n(i) The liner does not come into direct contact with the cooling water\n(ii) No lubricating oil is required for lubrication\n(iii) The liner wall is thinner than that of a wet cylinder liner\n(iv) Cooled directly by air",
+    "en_o": ["(i) and (iv)", "(ii) only", "(i) and (ii)", "(i) and (iii)"],
+    "en_exp": "Dry cylinder liners do not come into direct contact with cooling water (i), as the coolant flows through passages in the cylinder block rather than around the liner. They are also thinner than wet liners (iii) since they do not need the structural thickness to withstand direct water contact and sealing. Statement (ii) is incorrect as dry liners still require lubrication, and (iv) is incorrect as they are cooled indirectly through the cylinder block.",
+    "zhCN_exp": "干式气缸套不与冷却水直接接触（i），冷却液通过气缸体中的水道流动而非直接围绕缸套。干式缸套壁比湿式缸套更薄（iii），因为不需要承受直接水接触和密封的结构厚度。陈述（ii）不正确，干式缸套仍需润滑；陈述（iv）不正确，干式缸套通过气缸体间接冷却。",
+    "zhTW_exp": "乾式氣缸套不與冷卻水直接接觸（i），冷卻液通過氣缸體中的水道流動而非直接圍繞缸套。乾式缸套壁比濕式缸套更薄（iii），因為不需要承受直接水接觸和密封的結構厚度。陳述（ii）不正確，乾式缸套仍需潤滑；陳述（iv）不正確，乾式缸套通過氣缸體間接冷卻。"
+  },
+  {
+    "qnum": 3,
+    "ch": "ch15",
+    "en": "When starting a petrol engine, the function of the throttle is:\n(i) To make the fuel/air mixture richer\n(ii) To make it easier for the spark plug to ignite the fuel/air mixture",
+    "en_o": ["(i) only", "(ii) only", "Both (i) and (ii) are correct", "Both (i) and (ii) are incorrect"],
+    "en_exp": "When starting a petrol engine, the throttle is used to enrich the fuel/air mixture by allowing more fuel into the intake, aiding cold starting. The enriched mixture does make ignition easier, so both statements (i) and (ii) are correct.",
+    "zhCN_exp": "启动汽油机时，节气门的作用是通过允许更多燃油进入进气道来加浓燃油/空气混合物，辅助冷启动。加浓的混合物确实使点火更容易，因此陈述（i）和（ii）都是正确的。",
+    "zhTW_exp": "起動汽油機時，節氣門的作用是通過允許更多燃油進入進氣道來加濃燃油/空氣混合物，輔助冷起動。加濃的混合物確實使點火更容易，因此陳述（i）和（ii）都是正確的。"
+  },
+  {
+    "qnum": 4,
+    "ch": "ch15",
+    "en": "In a four-stroke petrol engine, the speed of the distributor is:",
+    "en_o": ["The same as the engine speed", "Half the engine speed", "Double the engine speed", "Four times the engine speed"],
+    "en_exp": "In a four-stroke engine, the crankshaft rotates twice for every complete cycle (four strokes). Since the distributor must fire the spark plugs once per cycle per cylinder, it is driven at half the engine (crankshaft) speed by the camshaft gear.",
+    "zhCN_exp": "在四冲程汽油机中，曲轴每完成一个工作循环需旋转两圈。由于分电器必须在每个气缸的每个循环点火一次，因此它由凸轮轴齿轮驱动，转速为发动机转速的一半。",
+    "zhTW_exp": "在四衝程汽油機中，曲軸每完成一個工作循環需旋轉兩圈。由於分火器必須在每個氣缸的每個循環點火一次，因此它由凸輪軸齒輪驅動，轉速為主機速度的一半。"
+  },
+  {
+    "qnum": 5,
+    "ch": "ch16",
+    "en": "In a diesel engine common rail fuel injection system, the fuel injection pressure is regulated by ____.",
+    "en_o": ["The high-pressure fuel pump", "The high-pressure fuel accumulator rail", "The fuel injector", "The pressure limiting valve"],
+    "en_exp": "In a common rail fuel injection system, the fuel injection pressure is controlled by the pressure limiting valve (also known as the pressure relief valve). This valve regulates the pressure in the rail by releasing excess fuel back to the tank when the pressure exceeds the set value.",
+    "zhCN_exp": "在共轨燃油喷射系统中，燃油喷射压力由限制阀（也称为压力释放阀）调节。当油轨压力超过设定值时，该阀通过将多余燃油释放回油箱来调节油轨压力。",
+    "zhTW_exp": "在共軌燃油噴射系統中，燃油噴射壓力由限制閥（也稱為壓力釋放閥）調節。當油軌壓力超過設定值時，該閥通過將多餘燃油釋放回油箱來調節油軌壓力。"
+  },
+  {
+    "qnum": 8,
+    "ch": "ch18",
+    "en": "For vessels using water-cooled exhaust pipes and silencers, the water supply injected into the silencer usually comes from _____.",
+    "en_o": ["The engine seawater cooling system", "An independent seawater pump", "An independent freshwater tank", "The engine freshwater cooling system"],
+    "en_exp": "On vessels with water-cooled exhaust systems, the silencer is typically supplied with cooling water from the engine's seawater cooling system. This is the most practical source as seawater is readily available and provides sufficient cooling for the exhaust components.",
+    "zhCN_exp": "在使用水冷式排气管和消音器的船舶上，注入消音器的冷却水通常来自发动机海水冷却系统。这是最实用的水源，因为海水容易获得，且能为排气部件提供足够的冷却。",
+    "zhTW_exp": "在使用水冷式排氣管及消聲器的船隻上，注入消聲器的冷卻水通常來自引擎海水冷卻系統。這是最實用的水源，因為海水容易獲得，且能為排氣部件提供足夠的冷卻。"
+  },
+  {
+    "qnum": 9,
+    "ch": "ch19",
+    "en": "Which of the following statements about the functions of engine cylinder lubrication is CORRECT?\n(i) Cooling the cylinder liner\n(ii) Removing combustion residues\n(iii) Reducing noise\n(iv) Reducing wear between the cylinder liner and piston",
+    "en_o": ["(ii), (iii) and (iv)", "(i), (ii) and (iv)", "(ii) and (iv)", "(iv) only"],
+    "en_exp": "Cylinder lubrication serves multiple important functions: it removes combustion residues (ii), reduces noise by cushioning piston movement (iii), and reduces wear between the cylinder liner and piston rings (iv). While lubrication does provide some cooling effect, cooling the cylinder liner is primarily the function of the cooling water system, not lubrication.",
+    "zhCN_exp": "气缸润滑有多种重要功能：带走燃烧残留物（ii）、通过缓冲活塞运动减少噪音（iii）、以及减少气缸套与活塞环之间的磨损（iv）。虽然润滑确实提供一定的冷却效果，但冷却气缸套主要是冷却水系统的功能，而非润滑的作用。",
+    "zhTW_exp": "氣缸潤滑有多種重要功能：帶走燃燒殘留雜質（ii）、通過緩衝活塞運動減少噪音（iii）、以及減少氣缸套與活塞環之間的磨損（iv）。雖然潤滑確實提供一定的冷卻效果，但冷卻氣缸套主要是冷卻水系統的功能，而非潤滑的作用。"
+  },
+  {
+    "qnum": 10,
+    "ch": "ch16",
+    "en": "Air in the low-pressure fuel line of a diesel engine can cause:\n(i) Engine vibration\n(ii) Overheating of the fuel injection system\n(iii) Engine starting failure",
+    "en_o": ["(iii) only", "(i) and (ii)", "(i) only", "(i) and (iii)"],
+    "en_exp": "Air in the low-pressure fuel line disrupts proper fuel delivery, which can cause engine vibration (i) due to uneven combustion and engine starting failure (iii) because the fuel system cannot build up the necessary pressure. However, air in the fuel line does not cause overheating of the injection system (ii).",
+    "zhCN_exp": "低压燃油管中的空气会破坏正常的燃油输送，由于燃烧不均匀会导致发动机振动（i），并且由于燃油系统无法建立必要的压力而导致发动机启动故障（iii）。但燃油管中的空气不会导致喷油系统过热（ii）。",
+    "zhTW_exp": "低壓燃油管中的空氣會破壞正常的燃油輸送，由於燃燒不均勻會導致發動機振動（i），並且由於燃油系統無法建立必要的壓力而導致發動機啟動故障（iii）。但燃油管中的空氣不會導致噴油系統過熱（ii）。"
+  },
+  {
+    "qnum": 11,
+    "ch": "ch19",
+    "en": "Possible causes of abnormally low lubricating oil pressure include:\n(i) Excessive cooling by seawater\n(ii) High oil level in the crankcase\n(iii) Slightly worn piston rings and cylinder liner\n(iv) Faulty lubricating oil pressure gauge\n(v) Severely worn lubricating oil pump",
+    "en_o": ["(i) and (ii)", "(ii) and (iii)", "(iii) and (iv)", "(iv) and (v)"],
+    "en_exp": "A faulty lubricating oil pressure gauge (iv) can give a false low reading even though actual pressure is normal. A severely worn lubricating oil pump (v) cannot generate adequate pressure, resulting in genuinely low oil pressure. High oil level (ii) and slightly worn piston rings (iii) would not cause low oil pressure; excessive seawater cooling (i) would increase oil viscosity and potentially raise pressure.",
+    "zhCN_exp": "润滑油压力表故障（iv）可能在实际压力正常时显示低读值。润滑油泵严重磨损（v）无法产生足够的压力，导致油压真正偏低。油位偏高（ii）和轻微磨损的活塞环及缸套（iii）不会导致油压低；海水过度冷却（i）会增加润滑油粘度，可能反而使压力升高。",
+    "zhTW_exp": "潤滑油壓力錶失靈（iv）可能在實際壓力正常時顯示低讀值。潤滑油泵嚴重磨損（v）無法產生足夠的壓力，導致油壓真正偏低。油位偏高（ii）和輕微磨損的活塞環及缸套（iii）不會導致油壓低；海水過度冷卻（i）會增加潤滑油粘度，可能反而使壓力升高。"
+  },
+  {
+    "qnum": 12,
+    "ch": "ch19",
+    "en": "Immediately after starting the main diesel engine, what should the control panel instruments show?\n(i) The cooling freshwater temperature gauge indicates maximum temperature\n(ii) The lubricating oil pressure gauge indicates rated pressure\n(iii) The tachometer indicates full speed RPM",
+    "en_o": ["(i)", "(ii)", "(iii)", "(i) and (iii)"],
+    "en_exp": "Immediately after starting a diesel engine, the lubricating oil pressure gauge should show rated pressure (ii) as the oil pump begins circulating oil throughout the engine. The cooling water temperature gauge may initially read high (before the thermostat opens and water circulates), and the tachometer would show idle speed, not full speed RPM.",
+    "zhCN_exp": "柴油机刚启动后，润滑油压力表应显示额定压力（ii），因为油泵开始在整个发动机中循环润滑油。冷却水温度表可能最初读数较高（在恒温器打开和水开始循环之前），转速表应显示怠速转速，而非全速转速。",
+    "zhTW_exp": "主柴油機剛起動後，潤滑油壓力錶應顯示額定壓力（ii），因為油泵開始在整個發動機中循環潤滑油。冷卻淡水溫度錶可能最初讀數較高（在恆溫器打開和水開始循環之前），轉速錶應顯示怠速轉數，而非全速轉數。"
+  },
+  {
+    "qnum": 13,
+    "ch": "ch18",
+    "en": "The causes of air lock in a hydraulic steering gear are:\n(i) Leakage at pipeline connections\n(ii) Insufficient oil level",
+    "en_o": ["(i)", "(ii)", "Both (i) and (ii) are correct", "Both (i) and (ii) are incorrect"],
+    "en_exp": "Air lock in a hydraulic steering gear can be caused by both leakage at pipeline connections (i), which allows air to enter the hydraulic system, and insufficient oil level (ii), which means there is not enough oil to fill the system and air pockets can form. Both are common causes of air lock in hydraulic systems.",
+    "zhCN_exp": "液压舵机出现气锁的原因包括管路接口泄漏（i），这会使空气进入液压系统；以及油量不足（ii），这意味着没有足够的油液充满系统，可能形成气泡。两者都是液压系统中气锁的常见原因。",
+    "zhTW_exp": "液壓式舵機出現氣鎖的原因包括管路接口洩漏（i），這會使空氣進入液壓系統；以及油量不足（ii），這意味著沒有足夠的油液充滿系統，可能形成氣泡。兩者都是液壓系統中氣鎖的常見原因。"
+  },
+  {
+    "qnum": 14,
+    "ch": "ch17",
+    "en": "When starting a small simple outboard petrol engine, the first two important steps are:",
+    "en_o": ["Lower the outboard engine gearbox below the waterline, then check that the gear is in the neutral position", "Press the starter button and open the throttle", "Place the gear in the neutral position and open the throttle", "Pull the starter rope and engage the gear"],
+    "en_exp": "When starting a small outboard petrol engine, safety requires first lowering the gearbox below the waterline so the water pump can draw cooling water, and then verifying the gear is in neutral to prevent the propeller from turning and causing a hazard. These steps must be completed before attempting to start the engine.",
+    "zhCN_exp": "启动小型舷外汽油机时，安全要求首先将齿轮箱降到水线以下以便水泵能吸取冷却水，然后确认齿轮在空档位置以防螺旋桨转动造成危险。这些步骤必须在尝试启动发动机之前完成。",
+    "zhTW_exp": "起動小型簡單舷外汽油機時，安全要求首先將波箱降低到水線以下以便水泵能吸取冷卻水，然後確認齒輪在中立檔位置以防螺旋槳轉動造成危險。這些步驟必須在嘗試起動引擎之前完成。"
+  },
+  {
+    "qnum": 15,
+    "ch": "ch16",
+    "en": "Under normal circumstances, a diesel engine is shut down by which method?",
+    "en_o": ["Cutting off the air supply for combustion", "Cutting off the fuel supply", "Shutting off the electrical power", "Applying the brake to stop"],
+    "en_exp": "Diesel engines are normally shut down by cutting off the fuel supply (B). This is achieved by moving the fuel control lever or shutting off the fuel valve. Unlike petrol engines which require an ignition system, diesel engines rely on compression ignition and do not have an electrical ignition system that can be switched off.",
+    "zhCN_exp": "柴油机正常情况下通过截断燃油供应（B）来停机。这是通过移动燃油控制杆或关闭燃油阀来实现的。与需要点火系统的汽油机不同，柴油机依靠压缩点火，没有可以关闭的电气点火系统。",
+    "zhTW_exp": "柴油機正常情況下通過截停燃油供應（B）來停車。這是通過移動燃油控制桿或關閉燃油閥來實現的。與需要點火系統的汽油機不同，柴油機依靠壓縮點火，沒有可以關閉的電氣點火系統。"
+  },
+  {
+    "qnum": 16,
+    "ch": "ch19",
+    "en": "If a vessel runs aground and rescue has not yet arrived, which of the following measures are most appropriate?\n(i) Stop all main engines\n(ii) Inspect the engine room, main engines, and stern tube (wet) for damage\n(iii) Use the bilge pump to pump out all accumulated water\n(iv) Increase main engine power to try to leave the reef\n(v) Jettison cargo, discharge all fuel and fresh water to refloat the vessel",
+    "en_o": ["(i), (ii) and (iii)", "(ii), (iii) and (iv)", "(i), (iii) and (iv)", "(iii), (iv) and (v)"],
+    "en_exp": "When a vessel runs aground, the appropriate immediate actions are to stop all engines (i) to prevent further damage, inspect for damage (ii) to assess the situation, and pump out accumulated water (iii) to maintain buoyancy. Increasing power (iv) and jettisoning cargo (v) should only be attempted after proper assessment and as a last resort.",
+    "zhCN_exp": "船舶触礁后，在救援到达之前，适当的紧急措施包括：停止所有主机（i）以防进一步损坏，检查损坏情况（ii）评估状况，以及用舱底泵排水（iii）维持浮力。加大马力（iv）和抛弃货物（v）应仅在适当评估后作为最后手段。",
+    "zhTW_exp": "船隻觸礁後，在救援到達之前，適當的緊急措施包括：停止所有主機（i）以防進一步損壞，檢查損壞情況（ii）評估狀況，以及用艙底泵排水（iii）維持浮力。加大馬力（iv）和拋棄貨物（v）應僅在適當評估後作為最後手段。"
+  },
+  {
+    "qnum": 17,
+    "ch": "ch14",
+    "en": "With the hull and propeller correctly matched, the ideal operating condition for a propulsion engine should be at:",
+    "en_o": ["Full power at accelerating", "Minimum power at accelerating", "Full power at full speed", "Minimum power at full speed"],
+    "en_exp": "The ideal operating condition for a marine propulsion engine is running at full power at full speed (C), where the engine operates at its design point with optimal efficiency. The hull and propeller are designed to match the engine's full power output at the rated speed for maximum propulsion efficiency.",
+    "zhCN_exp": "船用推进发动机的理想运行状态是在全马力下全速运转（C），此时发动机在设计点运行，效率最优。船体和螺旋桨的设计与发动机在额定转速下的全功率输出相匹配，以获得最大推进效率。",
+    "zhTW_exp": "船用推進引擎的理想運行狀態是在全馬力下全速運轉（C），此時引擎在設計點運行，效率最優。船身和螺旋槳的設計與引擎在額定轉速下的全功率輸出相匹配，以獲得最大推進效率。"
+  },
+  {
+    "qnum": 18,
+    "ch": "ch14",
+    "en": "The thermostat used in an indirect cooling marine engine is not suitable for a direct cooling marine engine because:\n(i) Their operating principles are different\n(ii) Their operating temperatures are different\n(iii) They cannot operate in seawater",
+    "en_o": ["(i)", "(i) and (ii)", "(iii)", "None of (i), (ii) and (iii) is correct"],
+    "en_exp": "Thermostats for indirect and direct cooling systems differ in both operating principles (i) and operating temperatures (ii). In indirect cooling, the thermostat regulates freshwater temperature at a higher range, while in direct cooling with seawater, the operating parameters and materials must be different due to seawater's corrosive nature and different temperature requirements.",
+    "zhCN_exp": "间接冷却和直接冷却系统的恒温器在运作原理（i）和操作温度（ii）上都有所不同。间接冷却系统中恒温器调节淡水温度，范围较高；而在直接使用海水冷却时，由于海水的腐蚀性和不同的温度要求，操作参数和材料必须不同。",
+    "zhTW_exp": "間接冷卻和直接冷卻系統的恆溫器在運作原理（i）和操作/運作溫度（ii）上都有所不同。間接冷卻系統中恆溫器調節淡水溫度，範圍較高；而在直接使用海水冷卻時，由於海水的腐蝕性和不同的溫度要求，操作參數和材料必須不同。"
+  },
+  {
+    "qnum": 19,
+    "ch": "ch19",
+    "en": "When the lubricating oil pressure alarm sounds, you should immediately:",
+    "en_o": ["Reduce the engine speed", "Continue running and look for the cause", "Add lubricating oil", "Shut down the engine immediately"],
+    "en_exp": "When the lubricating oil pressure alarm sounds, the first action should be to reduce engine speed (A). This reduces the load on the bearings and other moving parts, minimizing potential damage from inadequate lubrication. After reducing speed, the cause of the low oil pressure should be investigated before deciding whether to continue operating or shut down completely.",
+    "zhCN_exp": "当润滑油压力报警器响起时，首先应做的是降低发动机转速（A）。这可以减少轴承和其他运动部件的负荷，将润滑不足造成的潜在损害降到最低。降速后应调查油压低的原因，再决定是否继续运行或完全停机。",
+    "zhTW_exp": "當潤滑油壓力報警鐘響起時，首先應做的是將發動機減速（A）。這可以減少軸承和其他運動部件的負荷，將潤滑不足造成的潛在損害降到最低。減速後應調查油壓低的原因，再決定是否繼續運行或完全停機。"
+  },
+  {
+    "qnum": 20,
+    "ch": "ch20",
+    "en": "What are the functions of insulating material installed on exhaust pipes?\nI. Reduce heat radiation from the exhaust pipe\nII. Lower the engine room temperature\nIII. Prevent high-temperature exhaust pipes from coming into contact with any oils, which could cause a fire\nIV. Prevent high-temperature exhaust pipes from potentially burning crew members working in the engine room",
+    "en_o": ["(I) and (IV) only", "(I) and (II) only", "(II) and (III) only", "All of the above"],
+    "en_exp": "Insulating material on exhaust pipes serves all four listed functions: it reduces heat radiation (I), lowers engine room temperature (II), prevents oil from contacting hot surfaces and causing fire (III), and protects personnel from burns (IV). All are important safety and operational functions of exhaust pipe insulation.",
+    "zhCN_exp": "排气管隔热材料具有以上所有四项功能：减少热辐射（I）、降低机房温度（II）、防止油类接触高温排气管引发火灾（III）、以及保护机舱工作人员免受灼伤（IV）。这些都是排气管隔热的重要安全和操作功能。",
+    "zhTW_exp": "排氣管隔熱物料具有以上所有四項功用：減少熱力散發（I）、降低機房溫度（II）、防止油類接觸高溫排氣管引發火警（III）、以及防止高溫排氣管灼傷輪機艙工作人員（IV）。這些都是排氣管隔熱的重要安全和操作功能。"
+  },
+  {
+    "qnum": 21,
+    "ch": "ch17",
+    "en": "Insufficient clearance between the intake and exhaust valves of a stern (outboard) petrol engine will cause:",
+    "en_o": ["Rich fuel/air mixture", "Lean fuel/air mixture", "Tappet noise", "Loss of compression"],
+    "en_exp": "When the valve clearance is insufficient (too tight), the valves cannot close fully due to thermal expansion when the engine is running. This results in loss of compression (D) as the combustion chamber cannot seal properly. It does not directly affect the fuel/air mixture ratio or cause tappet noise (excessive clearance would cause tappet noise).",
+    "zhCN_exp": "当气门间隙不足（过紧）时，发动机运行时因热膨胀导致气门无法完全关闭。这会导致压缩力丧失（D），因为燃烧室无法正常密封。这不会直接影响燃油/空气混合比，也不会引起挺杆噪音（间隙过大才会产生挺杆噪音）。",
+    "zhTW_exp": "當進氣和排氣閥間隙不足（過緊）時，引擎運行時因熱膨脹導致閥門無法完全關閉。這會導致壓縮力喪失（D），因為燃燒室無法正常密封。這不會直接影響汽油/空氣混合比，也不會引起挺杆噪音（間隙過大才會產生挺杆噪音）。"
+  },
+  {
+    "qnum": 22,
+    "ch": "ch18",
+    "en": "In a piston pump, when the handle is pushed in, which valves are CLOSED?",
+    "en_o": ["1, 4", "2, 3", "1, 2", "3, 4"],
+    "en_exp": "When the handle of a piston pump is pushed in, valves 2 and 3 close. This creates suction on the inlet side drawing fluid through the open inlet valve, while the closed outlet valve prevents backflow. The specific valve numbering corresponds to the diagram showing the pump's internal check valve arrangement.",
+    "zhCN_exp": "当活塞泵的手柄推入时，阀门2和3关闭。这在入口侧产生吸力，使流体通过打开的入口阀进入，而关闭的出口阀防止回流。具体的阀门编号对应图中所示泵的内部止回阀布置。",
+    "zhTW_exp": "當活塞泵的手柄推入時，閥門2和3關閉。這在入口側產生吸力，使流體通過打開的入口閥進入，而關閉的出口閥防止回流。具體的閥門編號對應圖中所示泵的內部止回閥佈置。"
+  },
+  {
+    "qnum": 23,
+    "ch": "ch18",
+    "en": "A fan installed in the battery compartment to prevent the accumulation of hydrogen gas should use which type of electric motor?",
+    "en_o": ["Drip-proof type", "Watertight type", "Weatherproof type", "Explosion-proof type"],
+    "en_exp": "Hydrogen gas is highly flammable and explosive when mixed with air. An explosion-proof (flameproof) motor (D) is required in battery compartments because any electrical spark from the motor could ignite the hydrogen gas and cause an explosion. Other motor types do not provide adequate protection against igniting explosive gas atmospheres.",
+    "zhCN_exp": "氢气与空气混合后极易燃烧和爆炸。电池室必须使用防爆型电动机（D），因为电动机产生的任何电火花都可能点燃氢气引发爆炸。其他类型的电动机无法提供足够的防护来避免点燃爆炸性气体环境。",
+    "zhTW_exp": "氫氣與空氣混合後極易燃燒和爆炸。電池室必須使用防爆式電動馬達（D），因為馬達產生的任何電火花都可能點燃氫氣引發爆炸。其他類型的馬達無法提供足夠的防護來避免點燃爆炸性氣體環境。"
+  },
+  {
+    "qnum": 24,
+    "ch": "ch18",
+    "en": "The capacity of a battery cell depends on:",
+    "en_o": ["The voltage it can maintain over a certain period of time", "The charging time", "The surface area of the battery plates immersed in the electrolyte", "The number of battery cells"],
+    "en_exp": "The capacity of a battery cell depends on the surface area of the battery plates immersed in the electrolyte (C). A larger plate surface area provides more active material for the chemical reaction, allowing the cell to store and deliver more electrical energy. The voltage of a cell is determined by its chemistry, not its capacity.",
+    "zhCN_exp": "单格电池的容量取决于浸在电解液中的电池极板表面积（C）。更大的极板表面积提供更多的活性物质用于化学反应，使电池能够储存和释放更多电能。电池的电压由其化学成分决定，而非容量。",
+    "zhTW_exp": "單元電池的容量取決於浸在電解液裏的電池板表面面積（C）。更大的板表面積提供更多活性物質用於化學反應，使電池能夠儲存和釋放更多電能。單元電池的電壓由其化學成分決定，而非容量。"
+  },
+  {
+    "qnum": 25,
+    "ch": "ch18",
+    "en": "General precautions during generator operation:\n(i) Should be kept clean and dry\n(ii) Bearings should be kept well lubricated\n(iii) The governor should be maintained in good condition\n(iv) Should maintain a constant unchanging load",
+    "en_o": ["(i), (ii) and (iii)", "(ii), (iii) and (iv)", "(i), (iii) and (iv)", "(i), (ii) and (iv)"],
+    "en_exp": "General generator operating precautions include keeping the generator clean and dry (i), maintaining well-lubricated bearings (ii), and ensuring the governor is in good condition (iii). Maintaining a constant load (iv) is not a general requirement - generators are designed to handle varying loads within their rated capacity.",
+    "zhCN_exp": "发电机操作的一般注意事项包括保持清洁干燥（i）、轴承保持良好润滑（ii）以及调速器保持良好状态（iii）。保持恒定不变的负荷（iv）不是一般要求，发电机设计用于在其额定容量内处理变化的负荷。",
+    "zhTW_exp": "發電機操作的一般注意事項包括保持清潔乾燥（i）、軸承保持良好潤滑（ii）以及調速器保持良好狀況（iii）。保持一定不變負載（iv）不是一般要求，發電機設計用於在其額定容量內處理變化的負載。"
+  },
+  {
+    "qnum": 26,
+    "ch": "ch18",
+    "en": "A yacht is moored at a floating pier. Before connecting the shore power cable, you must first ________. (Please select the most appropriate answer)",
+    "en_o": ["Switch off the main circuit breaker on the shore power supply box and the circuit breaker on the vessel's distribution system", "Disconnect the engine starting battery cables", "Secure and tighten all mooring lines, and if necessary, place additional fenders", "Put on a life jacket and prepare a CO2 fire extinguisher"],
+    "en_exp": "Before connecting shore power, the most critical safety step is to switch off both the shore power supply breaker and the vessel's distribution system breaker (A). This prevents electrical shock, arcing, or short circuits during the connection process. The other options, while good practices in general, are not the most critical immediate step before connecting shore power.",
+    "zhCN_exp": "连接岸电之前，最关键的安全步骤是关闭码头供电箱的主断路器和船上配电系统的断路器（A）。这可以防止在连接过程中发生电击、电弧或短路。其他选项虽然是良好的做法，但不是连接岸电之前最关键的立即步骤。",
+    "zhTW_exp": "接駁岸電之前，最關鍵的安全步驟是關閉碼頭供電箱的主斷路器及船上配電系統的斷路器（A）。這可以防止在接駁過程中發生觸電、電弧或短路。其他選項雖然是一般良好的做法，但不是接駁岸電之前最關鍵的立即步驟。"
+  },
+  {
+    "qnum": 27,
+    "ch": "ch20",
+    "en": "If someone receives an electric shock in the engine room and part of the victim's body is still in contact with the electrical source, before attempting a rescue you must first:",
+    "en_o": ["Switch off the power supply", "Place the victim in the recovery position and call for medical assistance", "Begin external chest compressions (CPR)", "Call for medical assistance, then perform artificial respiration and external chest compressions"],
+    "en_exp": "The absolute first priority when someone is being electrocuted is to switch off the power supply (A) to prevent further injury to both the victim and the rescuer. Never touch the victim while they are still in contact with the electrical source. Only after the power is off should you assess the victim and provide first aid.",
+    "zhCN_exp": "当有人触电时，首要任务是切断电源（A），以防止受害者和救援者进一步受伤。在受害者仍与电源接触时，切勿触碰受害者。只有在电源关闭后才能评估受害者并提供急救。",
+    "zhTW_exp": "當有人觸電時，首要任務是將電源關閉（A），以防止傷者和救援者進一步受傷。在傷者仍與電源接觸時，切勿觸碰傷者。只有在電源關閉後才能評估傷者並提供急救。"
+  },
+  {
+    "qnum": 28,
+    "ch": "ch16",
+    "en": "Regarding diesel engine starting difficulties, which of the following is NOT a correct cause?",
+    "en_o": ["The starter motor turns the diesel engine at slow speed", "Insufficient lubricating oil in the crankcase", "Blocked air filter", "Air lock (air) in the fuel pump"],
+    "en_exp": "Insufficient lubricating oil in the crankcase (B) does not directly cause starting difficulties - it would cause increased wear and potential damage once running, but would not prevent the engine from starting. Slow starter motor speed, blocked air filter, and air in the fuel pump are all valid causes of diesel engine starting difficulties.",
+    "zhCN_exp": "曲轴箱内润滑油不足（B）不会直接导致启动困难——它会在发动机运行后造成磨损增加和潜在损坏，但不会阻止发动机启动。启动马达转速过慢、空气过滤器堵塞和燃油泵中有空气都是柴油机启动困难的有效原因。",
+    "zhTW_exp": "曲軸箱內潤滑油不足（B）不會直接導致啟動困難——它會在發動機運行後造成磨損增加和潛在損壞，但不會阻止發動機啟動。起動馬達轉速緩慢、空氣過濾器阻塞和燃油泵中有空氣都是柴油機啟動困難的有效原因。"
+  },
+  {
+    "qnum": 29,
+    "ch": "ch17",
+    "en": "If a stern (outboard) petrol engine cannot accelerate, the cause is:",
+    "en_o": ["Abnormal petrol/oil mixture ratio", "Blocked carburetor jet", "Fuel hose not primed with fuel", "Ignition system malfunction"],
+    "en_exp": "A blocked carburetor jet (B) restricts fuel flow to the engine, which prevents proper acceleration as the engine cannot receive sufficient fuel at higher speeds. While the other options could cause various running problems, a blocked jet is the most common and direct cause of inability to accelerate in an outboard petrol engine.",
+    "zhCN_exp": "化油器喷嘴堵塞（B）限制了燃油流向发动机，导致无法正常加速，因为发动机在较高转速时无法获得足够的燃油。虽然其他选项也可能导致各种运行问题，但喷嘴堵塞是舷外汽油机无法加速最常见和直接的原因。",
+    "zhTW_exp": "化油器噴嘴堵塞（B）限制了燃油流向發動機，導致無法正常加速，因為發動機在較高轉速時無法獲得足夠的燃油。雖然其他選項也可能導致各種運行問題，但噴嘴堵塞是舷外汽油機無法加速最常見和直接的原因。"
+  },
+  {
+    "qnum": 30,
+    "ch": "ch16",
+    "en": "A leaking fuel injector will cause:\n(i) Reduced power\n(ii) Black smoke\n(iii) Vibration\n(iv) Excessive fuel consumption",
+    "en_o": ["(i), (ii) and (iii)", "(i), (iii) and (iv)", "(ii), (iii) and (iv)", "(i), (ii), (iii) and (iv)"],
+    "en_exp": "A leaking fuel injector causes all four symptoms: reduced power (i) due to improper fuel delivery timing, black smoke (ii) from incomplete combustion of excess fuel, vibration (iii) from uneven combustion across cylinders, and excessive fuel consumption (iv) from fuel waste through the leak. All listed effects are direct consequences of injector leakage.",
+    "zhCN_exp": "喷油器泄漏会导致所有四种症状：由于燃油输送正时不正确导致功率下降（i）、多余燃油不完全燃烧产生黑烟（ii）、各缸燃烧不均匀引起振动（iii）、以及泄漏造成燃油浪费导致油耗增加（iv）。所列症状都是喷油器泄漏的直接后果。",
+    "zhTW_exp": "噴油器洩漏會導致所有四種症狀：由於燃油輸送正時不正確導致動力減弱（i）、多餘燃油不完全燃燒產生黑煙（ii）、各缸燃燒不均勻引起震動（iii）、以及洩漏造成燃油浪費導致多耗燃油（iv）。所列症狀都是噴油器洩漏的直接後果。"
+  },
+  {
+    "qnum": 31,
+    "ch": "ch19",
+    "en": "Which of the following is the most likely cause of cylinder wear?",
+    "en_o": ["Engine operating at high speed", "Engine operating at low speed", "Engine operating with cooling water temperature too low", "Engine idling for too long"],
+    "en_exp": "Operating with cooling water temperature too low (C) is the most likely cause of cylinder wear. When the cooling water is too cold, the cylinder walls operate below the optimal temperature, causing incomplete combustion and the formation of acidic combustion by-products that corrode the cylinder walls. Additionally, cold cylinders cause fuel to condense on the walls, washing away the lubricating oil film.",
+    "zhCN_exp": "冷却水温过低运行（C）是最容易引起汽缸磨损的原因。当冷却水过冷时，气缸壁在低于最佳温度下运行，导致不完全燃烧并形成酸性燃烧副产物腐蚀缸壁。此外，冷缸壁使燃油凝结在壁上，冲走润滑油膜。",
+    "zhTW_exp": "冷卻水溫太低運作（C）是最容易引起汽缸磨耗的原因。當冷卻水過冷時，氣缸壁在低於最佳溫度下運作，導致不完全燃燒並形成酸性燃燒副產物腐蝕缸壁。此外，冷缸壁使燃油凝結在壁上，沖走潤滑油膜。"
+  },
+  {
+    "qnum": 32,
+    "ch": "ch14",
+    "en": "Which of the following can cause loss of 'compression' in an internal combustion engine?",
+    "en_o": ["Incorrect fuel grade", "Exhaust port leakage", "An exhaust valve stuck in the open position", "Inlet port leakage"],
+    "en_exp": "An exhaust valve stuck in the open position (C) directly causes loss of compression because the combustion chamber cannot seal during the compression stroke. The burnt gases escape through the open exhaust valve, preventing the pressure build-up needed for compression. Incorrect fuel grade would affect combustion quality but not compression, and port leakage would cause some loss but less severe than a stuck open valve.",
+    "zhCN_exp": "排气阀卡在开启位置（C）会直接导致压缩力丧失，因为燃烧室在压缩行程中无法密封。燃烧废气通过打开的排气阀逸出，阻碍了压缩所需的压力积聚。燃油等级不正确会影响燃烧质量但不会影响压缩，气口泄漏会造成一定损失但不如卡开的阀门严重。",
+    "zhTW_exp": "排氣閥黏著在開啟位置（C）會直接導致壓縮力喪失，因為燃燒室在壓縮行程中無法密封。燃燒廢氣通過打開的排氣閥逸出，阻礙了壓縮所需的壓力積聚。燃油等級不正確會影響燃燒質量但不會影響壓縮，氣槽洩漏會造成一定損失但不如黏著開啟的閥門嚴重。"
+  },
+  {
+    "qnum": 33,
+    "ch": "ch15",
+    "en": "Petrol engines produce less black smoke in their exhaust because:\n(i) They burn less fuel\n(ii) Complete combustion is more easily achieved\n(iii) Petrol contains less carbon\n(iv) Petrol ignites easily",
+    "en_o": ["(i), (ii) and (iii)", "(i), (iii) and (iv)", "(ii), (iii) and (iv)", "(i), (ii) and (iv)"],
+    "en_exp": "Petrol engines produce less black smoke because complete combustion is more easily achieved (ii) due to better fuel-air mixing, petrol contains less carbon (iii) than diesel fuel, and petrol ignites easily (iv) leading to more efficient combustion. The amount of fuel burned (i) is not a primary reason for less black smoke - it is the completeness of combustion that matters.",
+    "zhCN_exp": "汽油机产生的黑烟较少，因为汽油更容易实现完全燃烧（ii），汽油含碳量比柴油少（iii），且汽油容易点燃（iv）导致更高效的燃烧。燃油消耗量（i）不是黑烟较少的主要原因，关键是燃烧的完全程度。",
+    "zhTW_exp": "汽油機產生的黑煙較少，因為汽油更容易達到完全燃燒（ii），汽油含碳量比柴油少（iii），且汽油容易燃點（iv）導致更高效的燃燒。所燒的燃油量（i）不是黑煙較少的主要原因，關鍵是燃燒的完全程度。"
+  },
+  {
+    "qnum": 35,
+    "ch": "ch18",
+    "en": "When the lubricating oil level in the oil reservoir of a hydraulic winch is found to be too low, the most appropriate response is:",
+    "en_o": ["Immediately stop the winch operation and inspect the winch area and all piping for oil leaks", "Immediately refill the reservoir", "Check and drain any accumulated water and sludge from the reservoir", "Release pressure in the reservoir caused by oil expansion"],
+    "en_exp": "The most appropriate response is to immediately stop the winch and inspect for oil leaks (A). Simply refilling without finding the leak would waste oil and potentially hide a serious problem. Identifying and fixing the leak source is essential before refilling the reservoir to prevent the problem from recurring.",
+    "zhCN_exp": "最适当的反应是立即停止绞盘机运作并检查漏油（A）。不查明泄漏原因就直接加油会浪费油液，且可能掩盖严重问题。在重新注满储油柜之前，必须找出并修复泄漏源，以防问题再次发生。",
+    "zhTW_exp": "最適當的反應是馬上停止絞盤機運作並檢查漏油（A）。不查明洩漏原因就直接加油會浪費油液，且可能掩蓋嚴重問題。在重新注滿儲油櫃之前，必須找出並修復洩漏源，以防問題再次發生。"
+  },
+  {
+    "qnum": 36,
+    "ch": "ch20",
+    "en": "What are the factors required for a fire?\n(i) Fuel\n(ii) Air\n(iii) Fuel and air reaching ignition temperature",
+    "en_o": ["(i) and (ii)", "(ii) and (iii)", "(i) and (iii)", "(i), (ii) and (iii)"],
+    "en_exp": "A fire requires all three elements of the fire triangle: fuel (i), air/oxygen (ii), and heat sufficient to reach ignition temperature (iii). All three factors must be present simultaneously for combustion to occur. Removing any one of these three elements will extinguish or prevent a fire.",
+    "zhCN_exp": "火灾需要火三角的三个要素：燃料（i）、空气/氧气（ii）以及达到着火温度的足够热量（iii）。三个因素必须同时存在才能发生燃烧。移除这三个要素中的任何一个都能扑灭或预防火灾。",
+    "zhTW_exp": "火警需要火三角的三個要素：燃料（i）、空氣/氧氣（ii）以及達到燃燒溫度的足夠熱量（iii）。三個因素必須同時存在才能發生燃燒。移除這三個要素中的任何一個都能撲滅或預防火災。"
+  },
+  {
+    "qnum": 37,
+    "ch": "ch20",
+    "en": "Which of the following is NOT suitable for fighting electrical fires?\n(i) Dry powder extinguisher\n(ii) Foam extinguisher\n(iii) CO2 extinguisher",
+    "en_o": ["(i)", "(ii)", "(iii)", "None of (i), (ii) and (iii) is suitable"],
+    "en_exp": "Foam extinguishers (ii) are not suitable for fighting electrical fires because the foam contains water which conducts electricity, posing a serious electrocution risk to the operator. For electrical fires, dry powder or CO2 extinguishers should be used as they are non-conductive and safe to use on energized equipment.",
+    "zhCN_exp": "泡沫灭火器（ii）不适用于扑灭电气火灾，因为泡沫含有导电的水分，对操作人员构成严重的触电风险。对于电气火灾，应使用干粉或二氧化碳灭火器，因为它们不导电，可在带电设备上安全使用。",
+    "zhTW_exp": "泡沫滅火筒（ii）不適宜用於救電器失火，因為泡沫含有導電的水份，對操作人員構成嚴重的觸電風險。對於電器火災，應使用乾粉或二氧化碳滅火筒，因為它們不導電，可在帶電設備上安全使用。"
+  },
+  {
+    "qnum": 38,
+    "ch": "ch20",
+    "en": "Fire prevention measures in the engine room do NOT include:",
+    "en_o": ["Regular inspection of sand boxes and fire extinguishers", "Preventing the generator from being overloaded", "Regular fire drills", "Regular drills for the emergency fire pump system"],
+    "en_exp": "Preventing generator overloading (B) is an electrical safety measure, not a fire prevention measure specific to the engine room. While overloading can potentially cause overheating and fire, it is primarily an electrical system management concern. The other three options are all direct fire prevention measures: regular inspection of firefighting equipment, conducting fire drills, and practicing with the emergency fire pump system.",
+    "zhCN_exp": "防止发电机过载（B）是电气安全措施，而非机房的专用防火措施。虽然过载可能导致过热和火灾，但主要是电气系统管理的问题。其他三个选项都是直接的防火措施：定期检查消防设备、举行消防演习和操练应急消防水泵系统。",
+    "zhTW_exp": "防止發電機超負荷（B）是電氣安全措施，而非機房的專用防火措施。雖然超負荷可能導致過熱和火災，但主要是電氣系統管理的問題。其他三個選項都是直接的防火措施：定期檢查消防設備、舉行消防演習和操練應急消防水泵系統。"
+  },
+  {
+    "qnum": 39,
+    "ch": "ch21",
+    "en": "Regarding LPG cylinders, which of the following statements is INCORRECT?",
+    "en_o": ["Should be stored in a location not exposed to direct sunlight", "The LPG hose connecting the cylinder to the stove should be as short as possible", "If the LPG cylinder is stored in a cabinet, the bottom of the cabinet must have proper ventilation", "LPG cylinders should be stored on deck"],
+    "en_exp": "The statement that LPG cylinders should be stored on deck (D) is incorrect. LPG cylinders should be stored in a well-ventilated area that is protected from direct sunlight and excessive heat, but they should not simply be placed on the open deck where they could be exposed to weather, sea spray, or physical damage. The other statements are all correct safety practices for LPG cylinder storage.",
+    "zhCN_exp": "石油气瓶应储存在甲板上（D）这一说法不正确。石油气瓶应储存在通风良好、避免阳光直射和过度高温的地方，但不应简单地放在露天甲板上，以免暴露于天气、海水飞溅或物理损坏。其他说法都是石油气瓶存储的正确安全做法。",
+    "zhTW_exp": "石油氣瓶應儲存在甲板上（D）這一說法不正確。石油氣瓶應儲存在通風良好、避免陽光直射和過度高溫的地方，但不應簡單地放在露天甲板上，以免暴露於天氣、海水飛濺或物理損壞。其他說法都是石油氣瓶儲存的正確安全做法。"
+  },
+  {
+    "qnum": 40,
+    "ch": "ch14",
+    "en": "Why do some diesel fuels have a reddish colour?",
+    "en_o": ["A dye is added to the diesel fuel in accordance with the 'Dutiable Commodities (Marking and Colouring of Hydrocarbon Oils) Regulations'", "The diesel fuel comes into contact with air and produces a reddish colour due to oxidation", "The diesel fuel comes into contact with moisture in the air and produces a reddish colour due to a chemical reaction", "The colour is artificially added to distinguish the quality and grade of fuel oil; a reddish colour indicates the fuel is 'Ultra Low Sulphur Diesel (ULSD)'"],
+    "en_exp": "Diesel fuel is dyed red in accordance with the 'Dutiable Commodities (Marking and Colouring of Hydrocarbon Oils) Regulations' (A). The dye is added by the government to distinguish duty-paid diesel from untaxed fuel oil, enabling authorities to detect illegal use of untaxed fuel. This is a regulatory requirement, not related to fuel quality grading.",
+    "zhCN_exp": "柴油呈微红色是根据《应课税品（碳氢油的标记及染色）规例》添加了染色物质（A）。政府添加染色剂以区分已缴税的柴油和未缴税的燃油，使当局能够检测非法使用未缴税燃油的行为。这是法规要求，与燃料品质分级无关。",
+    "zhTW_exp": "柴油呈現微紅色是根據《應課稅品（碳氫油的標記及染色）規例》加染色物質進入柴油燃料（A）。政府添加染色劑以區分已繳稅的柴油和未繳稅的燃油，使當局能夠偵測非法使用未繳稅燃油的行為。這是法規要求，與燃料品質分級無關。"
+  }
+]

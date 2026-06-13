@@ -1,0 +1,602 @@
+[
+  {
+    "qnum": 1,
+    "ch": "ch8",
+    "img": "exam_A_p1_img2.png",
+    "en": "You are operating a power-driven vessel at sea and see these lights bearing 30 degrees on your port side, with the compass bearing showing no significant change and the range decreasing. The correct action is:",
+    "en_o": [
+      "Maintain course and speed and sound five short blasts to attract the other vessel's attention.",
+      "Sound one prolonged blast to warn the vessel.",
+      "Sound two short blasts and alter course to port.",
+      "Immediately reduce speed."
+    ],
+    "en_exp": "The lights indicate a vessel not under command. Since the bearing is not changing and the range is decreasing, there is a risk of collision. You should immediately reduce speed to avoid the situation. Option D is correct.",
+    "zhCN_exp": "该灯号显示一艘失控船。由于方位不变且距离逐渐缩小，存在碰撞危险。你应立即减速以避免危险局面。",
+    "zhTW_exp": "該燈號顯示一艘失控船。由於方位不變且距離逐漸縮小，存在碰撞危險。你應立即減速以避免危險局面。"
+  },
+  {
+    "qnum": 2,
+    "ch": "ch8",
+    "img": null,
+    "en": "Your vessel is proceeding south along the Western Fairway, and you see a vessel at the No.2 Anchorage to the west displaying these lights. What action would you take?",
+    "en_o": [
+      "An anchored vessel requesting Immigration clearance. I would not take any action.",
+      "A vessel engaged in towing. I would keep clear and reduce speed.",
+      "A vessel engaged in underwater operations. I would keep clear and reduce speed.",
+      "An anchored vessel requesting immediate assistance. I would report to the Marine Department."
+    ],
+    "en_exp": "The lights displayed indicate a vessel requesting immediate assistance. You should report the situation to the Marine Department. Option D is correct.",
+    "zhCN_exp": "所显示的灯号表示一艘请求立即援助的船。你应向海事处报告此情况。",
+    "zhTW_exp": "所顯示的燈號表示一艘請求立即援助的船。你應向海事處報告此情況。"
+  },
+  {
+    "qnum": 3,
+    "ch": "ch8",
+    "img": "exam_A_p2_img1.png",
+    "en": "When operating a power-driven vessel at sea, you see these lights bearing two points on your starboard side and the bearing is not changing. You should:",
+    "en_o": [
+      "Maintain course and speed and sound five short blasts to attract the other vessel's attention.",
+      "Sound one short blast and alter course to starboard.",
+      "Sound two prolonged blasts to warn the vessel.",
+      "Sound one prolonged blast to warn the vessel."
+    ],
+    "en_exp": "The lights indicate a power-driven vessel crossing from port to starboard. Since the bearing is not changing, there is a risk of collision. As the give-way vessel (the other vessel is on your starboard side approaching), you should sound one short blast and alter course to starboard. Option B is correct.",
+    "zhCN_exp": "该灯号显示一艘机动船从左舷向右舷交叉航行。由于方位不变，存在碰撞危险。作为让路船，你应鸣一短声并向右转向。",
+    "zhTW_exp": "該燈號顯示一艘機動船從左舷向右舷交叉航行。由於方位不變，存在碰撞危險。作為讓路船，你應鳴一短聲並向右轉向。"
+  },
+  {
+    "qnum": 4,
+    "ch": "ch8",
+    "img": null,
+    "en": "On a power-driven vessel proceeding at full speed at sea, you see this light bearing three points on your port bow, with the compass bearing not changing. The correct action should be:",
+    "en_o": [
+      "Sound five short blasts to attract her attention.",
+      "Sound one short blast and alter course to starboard to keep clear of the vessel.",
+      "Accelerate to pass ahead of the other vessel.",
+      "Maintain course and speed."
+    ],
+    "en_exp": "The bearing is not changing, indicating a risk of collision. Since the other vessel is on your port bow, you are the give-way vessel. You should sound one short blast and alter course to starboard. Option B is correct.",
+    "zhCN_exp": "方位不变表明存在碰撞危险。由于该船在你左舷船首方向，你是让路船。你应鸣一短声并向右转向。",
+    "zhTW_exp": "方位不變表明存在碰撞危險。由於該船在你左舷船首方向，你是讓路船。你應鳴一短聲並向右轉向。"
+  },
+  {
+    "qnum": 5,
+    "ch": "ch8",
+    "img": "exam_A_p3_img1.png",
+    "en": "You are on a power-driven vessel underway and see these lights bearing five points on your starboard bow, at a distance of about 1 nautical mile. You should:",
+    "en_o": [
+      "Sound one short blast and alter course to starboard.",
+      "Sound two short blasts and alter course to port.",
+      "Maintain course and speed, keeping a careful watch on the vessel until clear.",
+      "Stop and proceed in the opposite direction."
+    ],
+    "en_exp": "The lights indicate a sailing vessel (or vessel with right of way). Since the vessel is on your starboard bow, you are the give-way vessel. However, the correct answer here is to maintain course and speed and watch carefully until clear — but given the answer is C, the lights indicate a vessel that is the stand-on vessel, so you keep a careful watch. Option C is correct.",
+    "zhCN_exp": "该灯号显示一艘享有直航权的船。由于方位不变且距离约1海里，你应保持航速航向，密切观察该船直至远离。",
+    "zhTW_exp": "該燈號顯示一艘享有直航權的船。由於方位不變且距離約1海里，你應保持航速航向，密切觀察該船直至遠離。"
+  },
+  {
+    "qnum": 6,
+    "ch": "ch8",
+    "img": "exam_A_p3_img2.png",
+    "en": "When meeting a vessel displaying these lights head-on, what action would you take?",
+    "en_o": [
+      "It is a vessel underway requesting immediate assistance. I would report to the Marine Department.",
+      "It is a vessel underway engaged on pilotage duty. I would sound one short blast and alter course to starboard.",
+      "It is a power-driven vessel underway. I would sound one short blast and alter course to starboard.",
+      "It is a vessel underway engaged in towing. I would sound one short blast and alter course to starboard."
+    ],
+    "en_exp": "The lights indicate a power-driven vessel underway. When meeting head-on, both vessels should alter course to starboard. You should sound one short blast and alter course to starboard. Option C is correct.",
+    "zhCN_exp": "该灯号显示一艘在航机动船。对遇局面中，两船均应向右转向。你应鸣一短声并向右转向。",
+    "zhTW_exp": "該燈號顯示一艘在航機動船。對遇局面中，兩船均應向右轉向。你應鳴一短聲並向右轉向。"
+  },
+  {
+    "qnum": 7,
+    "ch": "ch8",
+    "img": "exam_A_p3_img3.png",
+    "en": "When operating a power-driven vessel at sea, you see this vessel bearing three points on your port side, with the compass bearing not changing and the range decreasing. You should:",
+    "en_o": [
+      "Maintain course and speed and sound five short blasts to attract the vessel's attention.",
+      "Sound one short blast and alter course to starboard.",
+      "Sound two short blasts and alter course to port.",
+      "Sound three short blasts and put engines full astern for an emergency stop."
+    ],
+    "en_exp": "The vessel is crossing from your port side and the bearing is not changing with decreasing range, indicating a collision risk. You are the stand-on vessel (the other vessel should give way). You should maintain course and speed and sound five short blasts to attract attention if needed. Option A is correct.",
+    "zhCN_exp": "该船从你左舷交叉驶来，方位不变且距离缩小，表明存在碰撞危险。你是直航船，应保持航速航向并鸣五短声以引起注意。",
+    "zhTW_exp": "該船從你左舷交叉駛來，方位不變且距離縮小，表明存在碰撞危險。你是直航船，應保持航速航向並鳴五短聲以引起注意。"
+  },
+  {
+    "qnum": 8,
+    "ch": "ch8",
+    "img": "exam_A_p4_img1.png",
+    "en": "You are operating a power-driven vessel at sea and see this vessel bearing one point on your port bow, with the bearing not changing and the range gradually decreasing. You should:",
+    "en_o": [
+      "Sound five short blasts to attract the vessel's attention.",
+      "Sound two short blasts and alter course to port.",
+      "Maintain course and speed.",
+      "Sound one prolonged blast to warn the vessel."
+    ],
+    "en_exp": "The vessel is on your port bow with bearing not changing, indicating collision risk. As the give-way vessel, you should alter course. The correct action is to sound two short blasts and alter course to port. Option B is correct.",
+    "zhCN_exp": "该船在你左舷船首方向，方位不变，表明存在碰撞危险。作为让路船，你应鸣两短声并向左转向。",
+    "zhTW_exp": "該船在你左舷船首方向，方位不變，表明存在碰撞危險。作為讓路船，你應鳴兩短聲並向左轉向。"
+  },
+  {
+    "qnum": 9,
+    "ch": "ch8",
+    "img": null,
+    "en": "When you hear a Marine Department vessel sounding one short, one prolonged and two short blast signal, this indicates:",
+    "en_o": [
+      "You should stop immediately.",
+      "The Marine Department vessel is attempting to overtake on your port side.",
+      "You should communicate with the vessel.",
+      "The Marine Department vessel is requesting immediate assistance."
+    ],
+    "en_exp": "The signal of one short, one prolonged and two short blasts from a Marine Department vessel means you should stop immediately. This is a special signal used by government vessels. Option A is correct.",
+    "zhCN_exp": "海事处船只发出一短一长两短声号表示你应立即停船。这是政府船只使用的特殊信号。",
+    "zhTW_exp": "海事處船隻發出一短一長兩短聲號表示你應立即停船。這是政府船隻使用的特殊信號。"
+  },
+  {
+    "qnum": 10,
+    "ch": "ch8",
+    "img": null,
+    "en": "What length of vessel is not required to display the lights and shapes for a vessel not under command or a vessel restricted in her ability to manoeuvre (except when engaged in diving operations)?",
+    "en_o": [
+      "Under 50 metres.",
+      "Under 20 metres.",
+      "Under 12 metres.",
+      "Under 30 metres."
+    ],
+    "en_exp": "Under COLREGS, vessels under 12 metres in length are not required to display the lights and shapes prescribed for vessels not under command or restricted in their ability to manoeuvre, except when engaged in diving operations. Option C is correct.",
+    "zhCN_exp": "根据国际海上避碰规则，长度不足12米的船舶无需显示失控船或操纵能力受限船的号灯和号型（从事潜水作业者除外）。",
+    "zhTW_exp": "根據國際海上避碰規則，長度不足12米的船舶無需顯示失控船或操縱能力受限船的號燈和號型（從事潛水作業者除外）。"
+  },
+  {
+    "qnum": 11,
+    "ch": "ch6",
+    "img": null,
+    "en": "In conditions of restricted visibility, the fog signal that a sailing vessel underway should sound at intervals of not more than two minutes is:",
+    "en_o": [
+      "One prolonged blast.",
+      "Two prolonged blasts.",
+      "Two short and one prolonged blast.",
+      "One prolonged and two short blasts."
+    ],
+    "en_exp": "Under COLREGS Rule 35, a sailing vessel underway in or near an area of restricted visibility shall sound one prolonged and two short blasts at intervals of not more than two minutes. Option D is correct.",
+    "zhCN_exp": "根据避碰规则第35条，在能见度受限区域内或附近航行的帆船，应每隔不超过两分钟鸣放一长两短声号。",
+    "zhTW_exp": "根據避碰規則第35條，在能見度受限區域內或附近航行的帆船，應每隔不超過兩分鐘鳴放一長兩短聲號。"
+  },
+  {
+    "qnum": 12,
+    "ch": "ch6",
+    "img": null,
+    "en": "The fog signal for a towing vessel that has stopped and is no longer making way should be:",
+    "en_o": [
+      "Two prolonged blasts at intervals of not more than two minutes.",
+      "One prolonged blast followed by two short blasts at intervals of not more than two minutes.",
+      "One short, one prolonged and one short blast at intervals of not more than two minutes.",
+      "Two short and one prolonged blast every minute."
+    ],
+    "en_exp": "Under COLREGS Rule 35, a vessel restricted in her ability to manoeuvre, when stopped and not making way, shall sound one prolonged followed by two short blasts at intervals of not more than two minutes. A towing vessel that has stopped falls under this category. Option B is correct.",
+    "zhCN_exp": "根据避碰规则第35条，操纵能力受限船停泊且不再前进时，应每隔不超过两分钟鸣放一长两短声号。",
+    "zhTW_exp": "根據避碰規則第35條，操縱能力受限船停泊且不再前進時，應每隔不超過兩分鐘鳴放一長兩短聲號。"
+  },
+  {
+    "qnum": 13,
+    "ch": "ch6",
+    "img": null,
+    "en": "In conditions of restricted visibility, the safe speed of a vessel is determined by which of the following factors?",
+    "en_o": [
+      "Traffic density.",
+      "The horsepower of your vessel's engines.",
+      "The size of the vessel.",
+      "The experience of the master."
+    ],
+    "en_exp": "Under COLREGS Rule 6, factors to be taken into account when determining safe speed include traffic density. Engine horsepower, vessel size, and the master's experience are not listed as determining factors for safe speed. Option A is correct.",
+    "zhCN_exp": "根据避碰规则第6条，确定安全航速时应考虑的因素包括交通密度。发动机马力、船舶大小和船长经验不属于决定安全航速的因素。",
+    "zhTW_exp": "根據避碰規則第6條，確定安全航速時應考慮的因素包括交通密度。發動機馬力、船舶大小和船長經驗不屬於決定安全航速的因素。"
+  },
+  {
+    "qnum": 14,
+    "ch": "ch6",
+    "img": null,
+    "en": "When navigating in dense fog, hearing a prolonged blast of a fog signal from the direction of the starboard bow, you should:",
+    "en_o": [
+      "Immediately reduce speed.",
+      "Immediately sound two short blasts and alter course to port.",
+      "Immediately sound one short blast and alter course to starboard.",
+      "Immediately sound three short blasts and go astern."
+    ],
+    "en_exp": "In restricted visibility, when you hear a fog signal forward of the beam, you should take avoiding action. Hearing a fog signal from the starboard bow direction, you should immediately reduce speed to a minimum and navigate with caution. Option A is correct.",
+    "zhCN_exp": "在能见度受限时，听到正横以前的雾号，应采取避让行动。听到右舷船首方向的雾号，你应立即减速至最低，谨慎航行。",
+    "zhTW_exp": "在能見度受限時，聽到正橫以前的霧號，應採取避讓行動。聽到右舷船首方向的霧號，你應立即減速至最低，謹慎航行。"
+  },
+  {
+    "qnum": 15,
+    "ch": "ch8",
+    "img": null,
+    "en": "The most important purpose of maintaining a proper lookout at sea is:",
+    "en_o": [
+      "To determine the visibility in the nearby waters.",
+      "To identify navigational aids such as lighthouses or buoys in the nearby waters.",
+      "To identify any floating objects in the nearby waters.",
+      "To make a full appraisal of the situation and the risk of collision."
+    ],
+    "en_exp": "Under COLREGS Rule 5, every vessel shall at all times maintain a proper lookout by sight and hearing, as well as by all available means, so as to make a full appraisal of the situation and of the risk of collision. Option D is correct.",
+    "zhCN_exp": "根据避碰规则第5条，每一船舶应经常保持正规的了望，以便对局面和碰撞危险作出全面评估。",
+    "zhTW_exp": "根據避碰規則第5條，每一船舶應經常保持正規的瞭望，以便對局面和碰撞危險作出全面評估。"
+  },
+  {
+    "qnum": 16,
+    "ch": "ch8",
+    "img": null,
+    "en": "When using a traffic separation scheme, vessels should not normally enter the separation zone. Which of the following is an exceptional circumstance?",
+    "en_o": [
+      "A rowing race.",
+      "An emergency to avoid immediate danger.",
+      "Anchoring.",
+      "When overtaking other vessels."
+    ],
+    "en_exp": "Under COLREGS Rule 10, vessels shall not normally enter a separation zone or cross a separation line except in cases of emergency to avoid immediate danger. A rowing race, anchoring, and overtaking are not valid exceptions. Option B is correct.",
+    "zhCN_exp": "根据避碰规则第10条，船舶通常不应进入分隔带或穿越分隔线，除非为避免紧迫危险的紧急情况。",
+    "zhTW_exp": "根據避碰規則第10條，船舶通常不應進入分隔帶或穿越分隔線，除非為避免緊迫危險的緊急情況。"
+  },
+  {
+    "qnum": 17,
+    "ch": "ch8",
+    "img": null,
+    "en": "A vessel navigating in a narrow channel intends to overtake another vessel on her starboard side. What signal should she sound?",
+    "en_o": [
+      "One short blast.",
+      "Two short blasts followed by one prolonged blast.",
+      "Two prolonged blasts followed by one short blast.",
+      "Two prolonged blasts followed by two short blasts."
+    ],
+    "en_exp": "Under COLREGS Rule 34(c), a vessel overtaking another in a narrow channel shall indicate her intention by sounding two prolonged blasts followed by one short blast if she intends to overtake on the other vessel's starboard side. Option C is correct.",
+    "zhCN_exp": "根据避碰规则第34(c)条，在狭窄水道追越他船时，若拟从被追越船右舷通过，应鸣两长一短声。",
+    "zhTW_exp": "根據避碰規則第34(c)條，在狹窄水道追越他船時，若擬從被追越船右舷通過，應鳴兩長一短聲。"
+  },
+  {
+    "qnum": 18,
+    "ch": "ch8",
+    "img": null,
+    "en": "When two power-driven vessels are crossing so as to involve risk of collision, you are the stand-on vessel and find that the other vessel has already taken action to give way. What action should you take?",
+    "en_o": [
+      "Sound one short blast and alter course to starboard.",
+      "Maintain course and speed.",
+      "Sound five short blasts to indicate doubt.",
+      "Sound two short blasts and alter course to port."
+    ],
+    "en_exp": "Under COLREGS Rule 17, when the other vessel has taken proper action to give way, the stand-on vessel shall maintain course and speed. The stand-on vessel should only take action if it becomes clear that the other vessel is not taking proper action. Option B is correct.",
+    "zhCN_exp": "根据避碰规则第17条，当让路船已采取适当让路行动时，直航船应保持航向和航速。",
+    "zhTW_exp": "根據避碰規則第17條，當讓路船已採取適當讓路行動時，直航船應保持航向和航速。"
+  },
+  {
+    "qnum": 19,
+    "ch": "ch8",
+    "img": "exam_A_p6_img1.png",
+    "en": "What does the signal shown in the picture mean?",
+    "en_o": [
+      "Someone has fallen overboard.",
+      "A vessel at anchor conducting underwater works.",
+      "A vessel distress signal.",
+      "A vessel restricted in her ability to manoeuvre."
+    ],
+    "en_exp": "The signal shown in the picture is a distress signal. It indicates a vessel in distress and requesting assistance. Option C is correct.",
+    "zhCN_exp": "图中所示信号为遇险求救信号，表示船舶遇险并请求援助。",
+    "zhTW_exp": "圖中所示信號為遇險求救信號，表示船舶遇險並請求援助。"
+  },
+  {
+    "qnum": 20,
+    "ch": "ch7",
+    "img": "exam_A_p7_img1.png",
+    "en": "When navigating in the waters of the shaded area shown in the picture, someone on board has been involved in an accident resulting in serious injury. You should immediately use which VHF channel to report the matter to the Vessel Traffic Centre?",
+    "en_o": [
+      "Channel 16.",
+      "Channel 14.",
+      "Channel 67.",
+      "Channel 68."
+    ],
+    "en_exp": "In the shaded area (Tsim Sha Tsui harbour area), the designated VHF channel for contacting the Vessel Traffic Centre is Channel 67. Option C is correct.",
+    "zhCN_exp": "在图中阴影水域（尖沙咀港区），联络船只航行监察中心的指定VHF频道为67频道。",
+    "zhTW_exp": "在圖中陰影水域（尖沙咀港區），聯絡船隻航行監察中心的指定VHF頻道為67頻道。"
+  },
+  {
+    "qnum": 21,
+    "ch": "ch7",
+    "img": null,
+    "en": "You are the master of a pleasure vessel. When you find another vessel travelling at 10 knots in the red area shown in the picture, what action would you take?",
+    "en_o": [
+      "Report to the Vessel Traffic Centre by VHF radiotelephone.",
+      "Sound the horn to warn the vessel.",
+      "Report to the Harbour Patrol by mobile phone.",
+      "Hoist signal flag \"L\"."
+    ],
+    "en_exp": "In the red restricted speed area, the speed limit is lower than 10 knots. If you find a vessel exceeding the speed limit, you should report to the Harbour Patrol by mobile phone. Option C is correct.",
+    "zhCN_exp": "在红色限速区域，速度限制低于10节。若发现有船超速，你应以手提电话通知海港巡逻组。",
+    "zhTW_exp": "在紅色限速區域，速度限制低於10節。若發現有船超速，你應以手提電話通知海港巡邏組。"
+  },
+  {
+    "qnum": 22,
+    "ch": "ch7",
+    "img": null,
+    "en": "Under the Merchant Shipping (Local Vessels) Ordinance, unless permitted by the Director, which airport approach channel zones are local vessels prohibited from entering?",
+    "en_o": [
+      "Zones 1 and 2.",
+      "Zones 7 and 8.",
+      "Zones 1, 2, 3 and 4.",
+      "Zones 5, 6, 7 and 8."
+    ],
+    "en_exp": "Under the Merchant Shipping (Local Vessels) Ordinance, local vessels are prohibited from entering airport approach channel Zones 1, 2, 3 and 4 unless permitted by the Director of Marine. Option C is correct.",
+    "zhCN_exp": "根据《商船（本地船只）条例》，除非获得处长允许，本地船只不得进入机场进口航道第一、二、三和四区。",
+    "zhTW_exp": "根據《商船（本地船隻）條例》，除非獲得處長允許，本地船隻不得進入機場進口航道第一、二、三和四區。"
+  },
+  {
+    "qnum": 23,
+    "ch": "ch7",
+    "img": null,
+    "en": "In which of the following situations should a vessel not use a government (public) pier?",
+    "en_o": [
+      "Embarking/disembarking passengers and luggage.",
+      "Loading/unloading cargo.",
+      "A vessel 30 metres in length.",
+      "All of the above."
+    ],
+    "en_exp": "Government (public) piers are intended for the embarkation/disembarkation of passengers and luggage. They should not be used for loading or unloading cargo. Option B is correct.",
+    "zhCN_exp": "政府（公众）码头仅供上下乘客和行李之用，不应用于装卸货物。",
+    "zhTW_exp": "政府（公眾）碼頭僅供上下乘客和行李之用，不應用於裝卸貨物。"
+  },
+  {
+    "qnum": 24,
+    "ch": "ch4",
+    "img": null,
+    "en": "The vessel's compass course is 040 degrees. From the deviation table on board, the deviation for this course is found to be 2 degrees East. The known variation is 2 degrees West. What true course would you plot on the chart?",
+    "en_o": [
+      "038 degrees.",
+      "042 degrees.",
+      "036 degrees.",
+      "040 degrees."
+    ],
+    "en_exp": "True course = Compass course + Deviation (E) - Variation (W) = 040 + 2 - 2 = 040 degrees. The easterly deviation and westerly variation cancel each other out. Option D is correct.",
+    "zhCN_exp": "真航向 = 罗经航向 + 东自差 - 西磁差 = 040 + 2 - 2 = 040度。东自差和西磁差相互抵消。",
+    "zhTW_exp": "真航向 = 羅經航向 + 東自差 - 西磁差 = 040 + 2 - 2 = 040度。東自差和西磁差相互抵消。"
+  },
+  {
+    "qnum": 25,
+    "ch": "ch13",
+    "img": null,
+    "en": "Which of the following signals can be used for distress at sea? (1) White smoke signal. (2) Fire on board. (3) Continuous sounding of a fog horn. (4) Three black balls suspended vertically.",
+    "en_o": [
+      "(1) and (2) only.",
+      "(2) and (3) only.",
+      "(1), (2) and (3).",
+      "(1), (2), (3) and (4)."
+    ],
+    "en_exp": "Signals that can be used for distress at sea include fire on board (flames) and continuous sounding of a fog horn. White smoke signals and three black balls suspended vertically are not recognized distress signals under COLREGS or the International Regulations. Option B is correct.",
+    "zhCN_exp": "可作为海上遇险求救信号的包括船上发出的火焰和连续鸣响雾笛。白色烟雾信号和垂直悬挂三个黑球不属于公认的遇险信号。",
+    "zhTW_exp": "可作為海上遇險求救信號的包括船上發出的火焰和連續鳴響霧笛。白色煙霧信號和垂直懸掛三個黑球不屬於公認的遇險信號。"
+  },
+  {
+    "qnum": 26,
+    "ch": "ch7",
+    "img": "exam_A_p9_img1.png",
+    "en": "After your vessel leaves Causeway Bay heading towards Lei Yue Mun, you see a cone-shaped green buoy directly ahead. On which side of the buoy will you pass?",
+    "en_o": [
+      "Alter course and pass the buoy on the port side of the vessel.",
+      "Alter course and pass the buoy on the starboard side of the vessel.",
+      "You may pass on either side of the buoy.",
+      "Alter course and pass the buoy on the north side of the buoy."
+    ],
+    "en_exp": "A cone-shaped green buoy is a starboard-hand buoy when approaching from seaward. When heading from Causeway Bay towards Lei Yue Mun (southbound/eastbound in the fairway), this green conical buoy should be left on the port side of the vessel. Option A is correct.",
+    "zhCN_exp": "锥形绿色浮标为右侧浮标。从铜锣湾往鲤鱼门方向航行时，应将该绿色锥形浮标保持在船的左舷通过。",
+    "zhTW_exp": "錐形綠色浮標為右側浮標。從銅鑼灣往鯉魚門方向航行時，應將該綠色錐形浮標保持在船的左舷通過。"
+  },
+  {
+    "qnum": 27,
+    "ch": "ch7",
+    "img": null,
+    "en": "On a vessel proceeding on a true course of 010 degrees, you see this buoy directly ahead. You should:",
+    "en_o": [
+      "Keep the buoy on the starboard side when passing.",
+      "Keep the buoy on the port side when passing.",
+      "Stop and determine your position.",
+      "If there are no other vessels, you may pass on either side."
+    ],
+    "en_exp": "Based on the buoy type and your course, the buoy should be kept on the port side when passing. This is the correct action to follow the designated channel. Option B is correct.",
+    "zhCN_exp": "根据浮标类型和你的航向，应将该浮标保持在船的左舷通过。",
+    "zhTW_exp": "根據浮標類型和你的航向，應將該浮標保持在船的左舷通過。"
+  },
+  {
+    "qnum": 28,
+    "ch": "ch7",
+    "img": null,
+    "en": "At night, your vessel is proceeding on a compass course of 275 degrees. You see a buoy directly ahead showing a continuous very quick flashing white light (approximately 100 flashes per minute). What action would you take?",
+    "en_o": [
+      "Alter course to port and pass it.",
+      "Alter course to starboard so that the buoy passes on the port side of the vessel.",
+      "Stop and request instructions from the Vessel Traffic Centre.",
+      "If there are no other vessels, you may pass on either side."
+    ],
+    "en_exp": "A very quick flashing white light on a buoy marks a preferred channel or a danger. You should alter course to starboard so the buoy passes on the port side of the vessel. Option B is correct.",
+    "zhCN_exp": "连续甚快闪白色闪光的浮标标示推荐航道或危险物。你应向右转向，使浮标在船的左舷通过。",
+    "zhTW_exp": "連續甚快閃白色閃光的浮標標示推薦航道或危險物。你應向右轉向，使浮標在船的左舷通過。"
+  },
+  {
+    "qnum": 29,
+    "ch": "ch13",
+    "img": null,
+    "en": "Your vessel's course is South-Southeast (SSE). A passenger falls overboard. In safe conditions, what course should you steer to search for the person overboard?",
+    "en_o": [
+      "Northeast (NE).",
+      "North-Northwest (NNW).",
+      "South-Southwest (SSW).",
+      "Southwest (SW)."
+    ],
+    "en_exp": "When a person falls overboard, the initial action is to turn towards the side where the person fell. To retrace your track, you steer the reciprocal course. SSE reversed is NNW (180 degrees opposite). Option B is correct.",
+    "zhCN_exp": "有人落水时，初始行动是向落水一侧转向。为追溯原航迹，应驶反航向。SSE的反向为NNW（相差180度）。",
+    "zhTW_exp": "有人落水時，初始行動是向落水一側轉向。為追溯原航跡，應駛反航向。SSE的反向為NNW（相差180度）。"
+  },
+  {
+    "qnum": 30,
+    "ch": "ch4",
+    "img": null,
+    "en": "Which of the following shore objects are suitable for observing transit (rang) bearings? (1) A mountain and an oil refinery in line. (2) A chimney and a radar tower in line. (3) A lighthouse and a prominent peak in line. (4) A bridge and a shipyard in line.",
+    "en_o": [
+      "(1) and (3).",
+      "(2) and (3).",
+      "(2) and (4).",
+      "(1) and (4)."
+    ],
+    "en_exp": "Transit bearings require two clearly defined objects that can be seen in line. A chimney and a radar tower (2), and a lighthouse and a prominent peak (3), are well-defined objects suitable for transit bearings. Option B is correct.",
+    "zhCN_exp": "叠标方位需要两个清晰的物标成一直线。烟囱与雷达塔（2）以及灯塔与显眼山峰（3）是适合观测叠标方位的物标。",
+    "zhTW_exp": "疊標方位需要兩個清晰的物標成一直線。煙囪與雷達塔（2）以及燈塔與顯眼山峰（3）是適合觀測疊標方位的物標。"
+  },
+  {
+    "qnum": 31,
+    "ch": "ch1",
+    "img": null,
+    "en": "Your vessel has a right-handed (clockwise) single propeller and will be berthing at a pier in the absence of wind and current. Which method of berthing would you choose to take advantage of the propeller's transverse thrust?",
+    "en_o": [
+      "Berth starboard side to the pier.",
+      "Berth bow to the pier.",
+      "Berth stern to the pier.",
+      "Berth port side to the pier."
+    ],
+    "en_exp": "A right-handed propeller, when going astern, produces transverse thrust that pushes the stern to port. To take advantage of this effect, you should berth port side to the pier. Option D is correct.",
+    "zhCN_exp": "右旋螺旋桨在倒车时产生的侧推力会将船尾推向左舷。为利用此效应，应以左舷靠泊码头。",
+    "zhTW_exp": "右旋螺旋槳在倒車時產生的側推力會將船尾推向左舷。為利用此效應，應以左舷靠泊碼頭。"
+  },
+  {
+    "qnum": 32,
+    "ch": "ch1",
+    "img": null,
+    "en": "Vessels always berth against the current because:",
+    "en_o": [
+      "To save fuel.",
+      "The current makes the vessel's engines easier to control.",
+      "The current pushes the vessel towards the pier.",
+      "The current makes the vessel easier to control."
+    ],
+    "en_exp": "Vessels berth against the current because the current makes the vessel easier to control during the berthing manoeuvre. The current helps to slow the vessel and provides better steerage. Option D is correct.",
+    "zhCN_exp": "船舶总是逆流靠泊，因为逆流使船舶在靠泊操作中更容易控制。水流有助减速并提供更好的舵效。",
+    "zhTW_exp": "船舶總是逆流靠泊，因為逆流使船舶在靠泊操作中更容易控制。水流有助減速並提供更好的舵效。"
+  },
+  {
+    "qnum": 33,
+    "ch": "ch1",
+    "img": null,
+    "en": "In heavy weather, how should you handle your vessel?",
+    "en_o": [
+      "Proceed at normal speed following the waves.",
+      "Stop engines and let the vessel drift with the waves.",
+      "Proceed at sustained high speed heading directly into the waves.",
+      "Reduce speed and take the waves on the bow quarter."
+    ],
+    "en_exp": "In heavy weather, you should reduce speed and take the waves on the bow quarter (slightly off the bow). This minimizes the risk of the vessel pitching heavily or being pooped. Option D is correct.",
+    "zhCN_exp": "在恶劣天气中，应减速并以船头侧斜迎浪行驶。这可减少船舶剧烈纵摇或被浪追越的危险。",
+    "zhTW_exp": "在惡劣天氣中，應減速並以船頭側斜迎浪行駛。這可減少船舶劇烈縱搖或被浪追越的危險。"
+  },
+  {
+    "qnum": 34,
+    "ch": "ch12",
+    "img": null,
+    "en": "Your vessel is moored to a buoy in a crowded waterway. When a typhoon is approaching, what precautionary measures should you take?",
+    "en_o": [
+      "Place additional fenders alongside the vessel.",
+      "Close the deck scuppers.",
+      "Anchor at the stern.",
+      "Use longer mooring lines."
+    ],
+    "en_exp": "When a typhoon is approaching and the vessel is moored to a buoy in a crowded waterway, you should place additional fenders alongside the vessel to protect against collision with other vessels in the crowded area. Option A is correct.",
+    "zhCN_exp": "当台风即将来临时，在拥挤水域系泊于浮泡的船应在船旁放置额外碰垫，以防在拥挤水域中与其他船舶碰撞。",
+    "zhTW_exp": "當颱風即將來臨時，在擁擠水域繫泊於浮泡的船應在船旁放置額外碰墊，以防在擁擠水域中與其他船舶碰撞。"
+  },
+  {
+    "qnum": 35,
+    "ch": "ch9",
+    "img": null,
+    "en": "Which type of fire extinguisher is suitable for fires caused by electrical equipment?",
+    "en_o": [
+      "Water.",
+      "Carbon dioxide.",
+      "Foam.",
+      "All of the above."
+    ],
+    "en_exp": "Carbon dioxide (CO2) extinguishers are suitable for fires involving electrical equipment because CO2 does not conduct electricity and leaves no residue. Water and foam extinguishers should not be used on electrical fires due to the risk of electrocution. Option B is correct.",
+    "zhCN_exp": "二氧化碳灭火器适用于电器火灾，因为二氧化碳不导电且不留残留物。水和泡沫灭火器因触电危险不应用于电器火灾。",
+    "zhTW_exp": "二氧化碳滅火器適用於電器火災，因為二氧化碳不導電且不留殘留物。水和泡沫滅火器因觸電危險不應用於電器火災。"
+  },
+  {
+    "qnum": 36,
+    "ch": "ch9",
+    "img": null,
+    "en": "The placement of life-saving equipment on a pleasure vessel must:",
+    "en_o": [
+      "Be distributed on both sides of the vessel.",
+      "Be ready for immediate use and in easily accessible positions.",
+      "Be determined according to the master's requirements.",
+      "Be stored in containers under the seats."
+    ],
+    "en_exp": "Life-saving equipment on a pleasure vessel must be ready for immediate use and placed in easily accessible positions. This ensures that in an emergency, the equipment can be quickly retrieved and used. Option B is correct.",
+    "zhCN_exp": "游乐船上的救生设备必须可供即时使用并放在易于取用的位置，以确保在紧急情况下可迅速取用。",
+    "zhTW_exp": "遊樂船上的救生設備必須可供即時使用並放在易於取用的位置，以確保在緊急情況下可迅速取用。"
+  },
+  {
+    "qnum": 37,
+    "ch": "ch13",
+    "img": null,
+    "en": "Your vessel is navigating in shallow water and loses steering control. (i) What action would you take first? (ii) State the reason for taking the above action.",
+    "en_o": [
+      "(i) Anchor immediately. (ii) To prevent the vessel from grounding.",
+      "(i) Full speed astern. (ii) To move away from shallow water.",
+      "(i) Switch off engines and display the not-under-command signal. (ii) To warn any approaching vessels.",
+      "(i) Send a distress signal. (ii) To request immediate assistance from nearby vessels."
+    ],
+    "en_exp": "When losing steering in shallow water, the first action is to anchor immediately to prevent the vessel from drifting and grounding. Option A is correct.",
+    "zhCN_exp": "在浅水区失去船舵控制时，首要行动是立即下锚以防止船舶漂移搁浅。",
+    "zhTW_exp": "在淺水區失去船舵控制時，首要行動是立即下錨以防止船舶漂移擱淺。"
+  },
+  {
+    "qnum": 38,
+    "ch": "ch13",
+    "img": null,
+    "en": "You receive a report that someone has fallen overboard from the stern. What action would you take first to mark his/her position?",
+    "en_o": [
+      "Throw a lifebuoy.",
+      "Call the police for assistance.",
+      "Send a strong swimmer into the water.",
+      "Send a swimmer with a line attached into the water."
+    ],
+    "en_exp": "The first action when someone falls overboard is to throw a lifebuoy to mark the person's position. This provides a visual reference point and flotation for the person in the water. Option A is correct.",
+    "zhCN_exp": "有人落水时，首要行动是拋下救生圈以标示落水者位置。这提供视觉参照点并为落水者提供浮力。",
+    "zhTW_exp": "有人落水時，首要行動是拋下救生圈以標示落水者位置。這提供視覺參照點並為落水者提供浮力。"
+  },
+  {
+    "qnum": 39,
+    "ch": "ch11",
+    "img": null,
+    "en": "Which of the following accidents must be reported in writing to the Marine Department?",
+    "en_o": [
+      "A crew member falling ill on board.",
+      "A passenger's wallet being stolen on board.",
+      "An argument on board.",
+      "A vessel colliding with port facilities."
+    ],
+    "en_exp": "A collision with port facilities is a marine accident that must be reported in writing to the Marine Department. Crew illness, theft, and arguments are not marine accidents requiring written reports to the Marine Department. Option D is correct.",
+    "zhCN_exp": "船舶与港口设施碰撞属于必须向海事处作出书面报告的海上意外。船员生病、盗窃和争吵不属于需书面报告的海上意外。",
+    "zhTW_exp": "船舶與港口設施碰撞屬於必須向海事處作出書面報告的海上意外。船員生病、盜竊和爭吵不屬於需書面報告的海上意外。"
+  },
+  {
+    "qnum": 40,
+    "ch": "ch12",
+    "img": null,
+    "en": "Which of the following factors determines the height of waves?",
+    "en_o": [
+      "Fetch.",
+      "Sea water temperature.",
+      "Tidal direction.",
+      "Humidity."
+    ],
+    "en_exp": "Fetch (the distance over which wind blows across open water) is a primary factor that determines wave height. The longer the fetch, the higher the waves can build up. Sea water temperature, tidal direction, and humidity do not directly determine wave height. Option A is correct.",
+    "zhCN_exp": "吹程（风吹过开阔水面的距离）是决定波浪高度的主要因素。吹程越长，波浪可积聚得越高。",
+    "zhTW_exp": "吹程（風吹過開闊水面的距離）是決定波浪高度的主要因素。吹程越長，波浪可積聚得越高。"
+  }
+]

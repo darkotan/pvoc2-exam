@@ -602,7 +602,7 @@ function renderQuestion() {
   let optHtml = '';
   for (let i = 0; i < 4; i++) {
     let cls = 'option';
-    if (answered) cls += ' locked';
+    // No lock - allow answer changes
     if (answered && answers[q.id] === i) {
       cls += i === q.a ? ' correct' : ' wrong';
     }
@@ -640,7 +640,7 @@ function renderQuestion() {
 
 function selectOption(i) {
   const q = currentQs[currentIdx];
-  if (answers[q.id] !== undefined) return;
+  if (answers[q.id] !== undefined) { delete answers[q.id]; delete doneMap[q.id]; renderQuestion(); return; }
   answers[q.id] = i;
   const correct = i === q.a;
   doneMap[q.id] = {correct};
