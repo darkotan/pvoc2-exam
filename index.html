@@ -640,7 +640,11 @@ function renderQuestion() {
 
 function selectOption(i) {
   const q = currentQs[currentIdx];
-  if (answers[q.id] !== undefined) { delete answers[q.id]; delete doneMap[q.id]; renderQuestion(); return; }
+  if (answers[q.id] !== undefined) {
+    if (answers[q.id] === i) { delete answers[q.id]; delete doneMap[q.id]; renderQuestion(); return; }
+    delete doneMap[q.id];
+    wrongIds = wrongIds.filter(id => id !== q.id);
+  }
   answers[q.id] = i;
   const correct = i === q.a;
   doneMap[q.id] = {correct};
