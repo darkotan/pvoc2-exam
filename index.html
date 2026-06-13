@@ -1,0 +1,2232 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>二級遊樂船考試通 - PvOC2 備考神器</title>
+<style>
+:root {
+  --bg: #0f172a;
+  --bg2: #1e293b;
+  --bg3: #334155;
+  --accent: #3b82f6;
+  --accent2: #8b5cf6;
+  --green: #22c55e;
+  --red: #ef4444;
+  --orange: #f59e0b;
+  --text: #f1f5f9;
+  --text2: #94a3b8;
+  --border: #475569;
+  --card: #1e293b;
+  --gold: #fbbf24;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro', 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); min-height:100vh; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width:6px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--bg3); border-radius:3px; }
+
+/* Header */
+.header { background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%); border-bottom:1px solid var(--border); padding:12px 20px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:100; }
+.logo { display:flex; align-items:center; gap:10px; }
+.logo-icon { font-size:28px; }
+.logo-text { font-size:18px; font-weight:700; background: linear-gradient(90deg, var(--accent), var(--accent2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.header-right { display:flex; align-items:center; gap:16px; }
+.streak-badge { background: var(--bg3); padding:6px 12px; border-radius:20px; font-size:13px; display:flex; align-items:center; gap:6px; }
+.streak-badge .fire { color: var(--orange); }
+.user-level { background: linear-gradient(135deg, var(--accent), var(--accent2)); padding:6px 14px; border-radius:20px; font-size:13px; font-weight:600; }
+
+/* Nav tabs */
+.nav { display:flex; gap:4px; padding:8px 20px; background: var(--bg2); border-bottom:1px solid var(--border); overflow-x:auto; }
+.nav-btn { padding:8px 16px; border:none; background:transparent; color:var(--text2); font-size:14px; cursor:pointer; border-radius:8px; white-space:nowrap; transition:all .2s; }
+.nav-btn:hover { background: var(--bg3); color:var(--text); }
+.nav-btn.active { background: var(--accent); color:#fff; font-weight:600; }
+
+/* Main content */
+.main { max-width:900px; margin:0 auto; padding:20px; }
+
+/* Dashboard */
+.stats-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap:12px; margin-bottom:24px; }
+.stat-card { background: var(--card); border:1px solid var(--border); border-radius:12px; padding:16px; text-align:center; }
+.stat-value { font-size:28px; font-weight:700; }
+.stat-label { font-size:12px; color:var(--text2); margin-top:4px; }
+.stat-card.blue .stat-value { color: var(--accent); }
+.stat-card.green .stat-value { color: var(--green); }
+.stat-card.orange .stat-value { color: var(--orange); }
+.stat-card.purple .stat-value { color: var(--accent2); }
+
+/* Progress bar */
+.progress-section { background: var(--card); border:1px solid var(--border); border-radius:12px; padding:20px; margin-bottom:24px; }
+.progress-header { display:flex; justify-content:space-between; margin-bottom:10px; }
+.progress-bar { height:10px; background: var(--bg); border-radius:5px; overflow:hidden; }
+.progress-fill { height:100%; border-radius:5px; transition: width .5s; }
+.progress-fill.part-a { background: linear-gradient(90deg, var(--accent), #60a5fa); }
+.progress-fill.part-b { background: linear-gradient(90deg, var(--accent2), #a78bfa); }
+
+/* Study cards */
+.topic-grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap:12px; margin-bottom:24px; }
+.topic-card { background: var(--card); border:1px solid var(--border); border-radius:12px; padding:16px; cursor:pointer; transition:all .2s; position:relative; overflow:hidden; }
+.topic-card:hover { border-color:var(--accent); transform:translateY(-2px); }
+.topic-card.locked { opacity:0.6; }
+.topic-card.locked::after { content:'🔒'; position:absolute; top:12px; right:12px; font-size:18px; }
+.topic-icon { font-size:24px; margin-bottom:8px; }
+.topic-title { font-size:15px; font-weight:600; margin-bottom:4px; }
+.topic-desc { font-size:12px; color:var(--text2); line-height:1.4; }
+.topic-meta { display:flex; justify-content:space-between; margin-top:10px; font-size:11px; color:var(--text2); }
+.topic-progress { height:3px; background: var(--bg); border-radius:2px; margin-top:8px; }
+.topic-progress-fill { height:100%; background: var(--green); border-radius:2px; }
+
+/* Quiz */
+.quiz-container { background: var(--card); border:1px solid var(--border); border-radius:12px; padding:24px; margin-bottom:16px; }
+.quiz-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
+.quiz-counter { font-size:13px; color:var(--text2); }
+.quiz-timer { font-size:14px; font-weight:600; color:var(--orange); display:flex; align-items:center; gap:6px; }
+.question-text { font-size:16px; line-height:1.6; margin-bottom:20px; font-weight:500; }
+.question-text .highlight { background: rgba(59,130,246,0.2); padding:2px 6px; border-radius:4px; }
+
+.options-list { display:flex; flex-direction:column; gap:10px; }
+.option-btn { display:flex; align-items:flex-start; gap:12px; padding:14px 16px; background: var(--bg); border:2px solid var(--border); border-radius:10px; cursor:pointer; transition:all .2s; text-align:left; font-size:14px; color:var(--text); line-height:1.5; }
+.option-btn:hover { border-color: var(--accent); background: rgba(59,130,246,0.1); }
+.option-btn.selected { border-color: var(--accent); background: rgba(59,130,246,0.15); }
+.option-btn.correct { border-color: var(--green); background: rgba(34,197,94,0.15); }
+.option-btn.wrong { border-color: var(--red); background: rgba(239,68,68,0.15); }
+.option-letter { width:28px; height:28px; border-radius:50%; background: var(--bg3); display:flex; align-items:center; justify-content:center; font-weight:600; font-size:13px; flex-shrink:0; }
+.option-btn.correct .option-letter { background: var(--green); color:#000; }
+.option-btn.wrong .option-letter { background: var(--red); color:#fff; }
+.option-btn.selected .option-letter { background: var(--accent); color:#fff; }
+
+.explanation { margin-top:16px; padding:16px; background: rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.3); border-radius:10px; font-size:13px; line-height:1.6; display:none; }
+.explanation.show { display:block; }
+.explanation-title { font-weight:700; color: var(--accent); margin-bottom:6px; display:flex; align-items:center; gap:6px; }
+.explanation .ref { color: var(--text2); font-size:12px; margin-top:8px; font-style:italic; }
+
+.quiz-actions { display:flex; gap:10px; margin-top:20px; justify-content:flex-end; }
+
+/* Buttons */
+.btn { padding:10px 20px; border:none; border-radius:8px; font-size:14px; font-weight:600; cursor:pointer; transition:all .2s; }
+.btn-primary { background: var(--accent); color:#fff; }
+.btn-primary:hover { background: #2563eb; }
+.btn-secondary { background: var(--bg3); color:var(--text); }
+.btn-secondary:hover { background: var(--border); }
+.btn-success { background: var(--green); color:#000; }
+.btn-gold { background: linear-gradient(135deg, var(--gold), #f59e0b); color:#000; }
+.btn-gold:hover { transform:scale(1.02); }
+.btn:disabled { opacity:0.4; cursor:not-allowed; }
+
+/* Study content view */
+.study-view { display:none; }
+.study-view.active { display:block; }
+.content-section { background: var(--card); border:1px solid var(--border); border-radius:12px; padding:24px; margin-bottom:16px; }
+.content-section h2 { font-size:20px; margin-bottom:16px; color: var(--accent); display:flex; align-items:center; gap:8px; }
+.content-section h3 { font-size:16px; margin:16px 0 8px; color: var(--text); }
+.content-section p, .content-section li { font-size:14px; line-height:1.7; color: var(--text); }
+.content-section ul { padding-left:20px; margin:8px 0; }
+.content-section li { margin-bottom:4px; }
+.key-point { background: rgba(251,191,36,0.1); border-left:3px solid var(--gold); padding:12px 16px; margin:12px 0; border-radius:0 8px 8px 0; font-size:13px; }
+.danger-box { background: rgba(239,68,68,0.1); border-left:3px solid var(--red); padding:12px 16px; margin:12px 0; border-radius:0 8px 8px 0; font-size:13px; }
+.info-box { background: rgba(59,130,246,0.1); border-left:3px solid var(--accent); padding:12px 16px; margin:12px 0; border-radius:0 8px 8px 0; font-size:13px; }
+.data-table { width:100%; border-collapse:collapse; margin:12px 0; font-size:13px; }
+.data-table th { background: var(--bg3); padding:8px 12px; text-align:left; font-weight:600; }
+.data-table td { padding:8px 12px; border-bottom:1px solid var(--border); }
+.back-btn { display:inline-flex; align-items:center; gap:6px; color:var(--text2); cursor:pointer; font-size:14px; margin-bottom:16px; }
+.back-btn:hover { color:var(--text); }
+
+/* Paywall modal */
+.modal-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.7); z-index:200; align-items:center; justify-content:center; }
+.modal-overlay.show { display:flex; }
+.modal { background: var(--bg2); border:1px solid var(--border); border-radius:16px; padding:32px; max-width:420px; width:90%; text-align:center; }
+.modal h2 { font-size:22px; margin-bottom:8px; }
+.modal p { color:var(--text2); font-size:14px; margin-bottom:20px; line-height:1.5; }
+.price-tag { font-size:36px; font-weight:800; margin:16px 0; }
+.price-tag .currency { font-size:18px; vertical-align:super; }
+.price-tag .period { font-size:14px; font-weight:400; color:var(--text2); }
+.price-features { text-align:left; margin:20px 0; }
+.price-features li { font-size:14px; padding:6px 0; list-style:none; display:flex; align-items:center; gap:8px; }
+.price-features li::before { content:'✓'; color:var(--green); font-weight:700; }
+.modal-actions { display:flex; flex-direction:column; gap:10px; }
+.modal-close { color:var(--text2); cursor:pointer; font-size:13px; margin-top:10px; }
+
+/* Exam results */
+.result-container { text-align:center; padding:40px 20px; }
+.result-score { font-size:64px; font-weight:800; margin:20px 0; }
+.result-score.pass { color:var(--green); }
+.result-score.fail { color:var(--red); }
+.result-label { font-size:16px; color:var(--text2); margin-bottom:8px; }
+.result-detail { font-size:14px; color:var(--text2); margin:4px 0; }
+.result-bar { display:flex; gap:4px; justify-content:center; margin:20px 0; flex-wrap:wrap; }
+.result-dot { width:12px; height:12px; border-radius:50%; }
+.result-dot.correct { background:var(--green); }
+.result-dot.wrong { background:var(--red); }
+
+/* Leaderboard */
+.lb-row { display:flex; align-items:center; gap:12px; padding:12px 16px; background: var(--card); border:1px solid var(--border); border-radius:10px; margin-bottom:8px; }
+.lb-rank { width:32px; font-weight:700; font-size:16px; text-align:center; }
+.lb-rank.gold { color:var(--gold); }
+.lb-rank.silver { color:#c0c0c0; }
+.lb-rank.bronze { color:#cd7f32; }
+.lb-name { flex:1; font-size:14px; }
+.lb-score { font-weight:600; font-size:14px; color:var(--accent); }
+.lb-avatar { width:36px; height:36px; border-radius:50%; background:var(--bg3); display:flex; align-items:center; justify-content:center; font-size:16px; }
+
+/* Tags */
+.tag { display:inline-block; padding:3px 8px; border-radius:4px; font-size:11px; font-weight:600; }
+.tag-part-a { background: rgba(59,130,246,0.2); color:var(--accent); }
+.tag-part-b { background: rgba(139,92,246,0.2); color:var(--accent2); }
+.tag-free { background: rgba(34,197,94,0.2); color:var(--green); }
+.tag-paid { background: rgba(251,191,36,0.2); color:var(--gold); }
+
+/* Responsive */
+@media(max-width:600px) {
+  .stats-grid { grid-template-columns: repeat(2,1fr); }
+  .topic-grid { grid-template-columns:1fr; }
+  .header { padding:10px 14px; }
+  .main { padding:14px; }
+  .quiz-container { padding:16px; }
+}
+
+/* Animations */
+@keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+.fade-in { animation: fadeIn .3s ease; }
+@keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)} }
+.pulse { animation: pulse .3s ease; }
+@keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-5px)} 75%{transform:translateX(5px)} }
+.shake { animation: shake .3s ease; }
+
+/* Confetti effect placeholder */
+.confetti-container { position:fixed; top:0; left:0; right:0; bottom:0; pointer-events:none; z-index:300; }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="logo">
+    <span class="logo-icon">⛵</span>
+    <span class="logo-text">PvOC2 考試通</span>
+  </div>
+  <div class="header-right">
+    <div class="streak-badge"><span class="fire">🔥</span> <span id="streakCount">0</span>天連續</div>
+    <div class="user-level" id="userLevel">Lv.1 菜鳥水手</div>
+  </div>
+</div>
+
+<!-- Nav -->
+<div class="nav">
+  <button class="nav-btn active" data-view="dashboard">📊 儀表板</button>
+  <button class="nav-btn" data-view="study">📚 學習資料</button>
+  <button class="nav-btn" data-view="practice">✍️ 刷題練習</button>
+  <button class="nav-btn" data-view="exam">🎯 模擬考試</button>
+  <button class="nav-btn" data-view="wrong-book">📕 錯題本</button>
+  <button class="nav-btn" data-view="leaderboard">🏆 排行榜</button>
+</div>
+
+<!-- Main -->
+<div class="main">
+
+  <!-- Dashboard View -->
+  <div id="view-dashboard" class="view active fade-in">
+    <div class="stats-grid">
+      <div class="stat-card blue">
+        <div class="stat-value" id="totalAnswered">0</div>
+        <div class="stat-label">已答題數</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-value" id="accuracy">0%</div>
+        <div class="stat-label">正確率</div>
+      </div>
+      <div class="stat-card orange">
+        <div class="stat-value" id="freeLeft">20</div>
+        <div class="stat-label">免費題額度</div>
+      </div>
+      <div class="stat-card purple">
+        <div class="stat-value" id="examReady">—</div>
+        <div class="stat-label">模擬考試最高</div>
+      </div>
+    </div>
+
+    <div class="progress-section">
+      <div class="progress-header">
+        <span style="font-weight:600;">甲部 · 航駛船藝安全</span>
+        <span style="font-size:13px;color:var(--text2)" id="partAProgress">0/14 章節</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill part-a" id="partABar" style="width:0%"></div></div>
+    </div>
+    <div class="progress-section">
+      <div class="progress-header">
+        <span style="font-weight:600;">乙部 · 輪機知識</span>
+        <span style="font-size:13px;color:var(--text2)" id="partBProgress">0/5 章節</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill part-b" id="partBBar" style="width:0%"></div></div>
+    </div>
+
+    <h3 style="margin:20px 0 12px;">📌 今日推薦</h3>
+    <div class="topic-grid" id="recommendGrid"></div>
+
+    <h3 style="margin:20px 0 12px;">📊 薄弱章節</h3>
+    <div id="weakTopics" style="color:var(--text2);font-size:14px;">答題超過20題後顯示分析</div>
+  </div>
+
+  <!-- Study View -->
+  <div id="view-study" class="view" style="display:none">
+    <div class="study-view" id="studyList">
+      <h3 style="margin-bottom:12px;">甲部：航駛、船藝及安全 <span class="tag tag-part-a">必考</span></h3>
+      <div class="topic-grid" id="partATopics"></div>
+      <h3 style="margin:24px 0 12px;">乙部：輪機知識 <span class="tag tag-part-b">必考</span></h3>
+      <div class="topic-grid" id="partBTopics"></div>
+    </div>
+    <div class="study-view" id="studyContent"></div>
+  </div>
+
+  <!-- Practice View -->
+  <div id="view-practice" class="view" style="display:none">
+    <div id="practiceSetup">
+      <h3 style="margin-bottom:16px;">選擇練習範圍</h3>
+      <div class="topic-grid">
+        <div class="topic-card" onclick="startPractice('all')">
+          <div class="topic-icon">🎯</div>
+          <div class="topic-title">綜合練習</div>
+          <div class="topic-desc">甲部+乙部隨機出題，模擬真實考試</div>
+          <div class="topic-meta"><span>40題/組</span><span class="tag tag-free">免費</span></div>
+        </div>
+        <div class="topic-card" onclick="startPractice('partA')">
+          <div class="topic-icon">🧭</div>
+          <div class="topic-title">甲部專練</div>
+          <div class="topic-desc">航駛、船藝、安全、避碰規則</div>
+          <div class="topic-meta"><span>40題</span><span class="tag tag-free">免費</span></div>
+        </div>
+        <div class="topic-card" onclick="startPractice('partB')">
+          <div class="topic-icon">⚙️</div>
+          <div class="topic-title">乙部專練</div>
+          <div class="topic-desc">輪機原理、輔機系統、維修保養</div>
+          <div class="topic-meta"><span>40題</span><span class="tag tag-free">免費</span></div>
+        </div>
+        <div class="topic-card" onclick="startPractice('wrong')">
+          <div class="topic-icon">📕</div>
+          <div class="topic-title">錯題重練</div>
+          <div class="topic-desc">針對做錯的題目反覆鞏固</div>
+          <div class="topic-meta"><span>自定義</span><span class="tag tag-free">免費</span></div>
+        </div>
+        <div class="topic-card" onclick="startPractice('weak')">
+          <div class="topic-icon">💪</div>
+          <div class="topic-title">薄弱強化</div>
+          <div class="topic-desc">AI推薦你最弱的知識點出題</div>
+          <div class="topic-meta"><span>智能</span><span class="tag tag-paid">付費</span></div>
+        </div>
+        <div class="topic-card" onclick="startPractice('mock')">
+          <div class="topic-icon">📝</div>
+          <div class="topic-title">考前衝刺</div>
+          <div class="topic-desc">高頻考點+易錯題精選</div>
+          <div class="topic-meta"><span>30題</span><span class="tag tag-paid">付費</span></div>
+        </div>
+      </div>
+    </div>
+    <div id="practiceQuiz" style="display:none"></div>
+    <div id="practiceResult" style="display:none"></div>
+  </div>
+
+  <!-- Exam View -->
+  <div id="view-exam" class="view" style="display:none">
+    <div id="examSetup">
+      <div class="content-section">
+        <h2>🎯 模擬考試</h2>
+        <p>完全還原真實考試環境：</p>
+        <ul>
+          <li>甲部 + 乙部各 <strong>40題選擇題</strong></li>
+          <li>每部限時 <strong>45分鐘</strong></li>
+          <li>每部答對 <strong>≥24題（60%）</strong>方為合格</li>
+          <li>必須 <strong>兩部均合格</strong> 才獲發證明書</li>
+        </ul>
+        <div class="key-point">💡 單一部分及格成績可保留兩年，可分開應考</div>
+        <div style="margin-top:20px; text-align:center;">
+          <button class="btn btn-primary" onclick="startExam('partA')" style="margin:6px;">開始甲部考試（免費）</button>
+          <button class="btn btn-primary" onclick="startExam('partB')" style="margin:6px;">開始乙部考試（免費）</button>
+          <button class="btn btn-gold" onclick="startExam('full')" style="margin:6px;">完整模擬考（付費）</button>
+        </div>
+      </div>
+      <div id="examHistory"></div>
+    </div>
+    <div id="examQuiz" style="display:none"></div>
+    <div id="examResult" style="display:none"></div>
+  </div>
+
+  <!-- Wrong Book View -->
+  <div id="view-wrong-book" class="view" style="display:none">
+    <h3 style="margin-bottom:16px;">📕 錯題本 <span id="wrongCount" style="color:var(--text2);font-size:14px;"></span></h3>
+    <div id="wrongList"></div>
+  </div>
+
+  <!-- Leaderboard View -->
+  <div id="view-leaderboard" class="view" style="display:none">
+    <h3 style="margin-bottom:16px;">🏆 本月排行榜</h3>
+    <div id="leaderboardList"></div>
+  </div>
+</div>
+
+<!-- Paywall Modal -->
+<div class="modal-overlay" id="paywallModal">
+  <div class="modal">
+    <div style="font-size:40px;margin-bottom:12px;">⛵</div>
+    <h2>解鎖完整題庫</h2>
+    <p>免費體驗20題已用完<br>升級PRO獲取全部<strong>770+</strong>題目及智能分析</p>
+    <div class="price-tag"><span class="currency">HK$</span>98<span class="period"> /永久</span></div>
+    <ul class="price-features">
+      <li>770+ 真題模擬題庫（持續更新）</li>
+      <li>完整模擬考試（還原真實計時）</li>
+      <li>智能薄弱點分析與推薦</li>
+      <li>錯題本無限容量 + 間隔重複</li>
+      <li>詳細題目解析與知識點關聯</li>
+      <li>考前衝刺高頻考點精選</li>
+      <li>離線模式 · 隨時隨地刷題</li>
+    </ul>
+    <div class="modal-actions">
+      <button class="btn btn-gold" onclick="handlePurchase()">立即購買 · HK$98</button>
+      <button class="btn btn-secondary" onclick="handleTrial()">繼續免費體驗</button>
+    </div>
+    <div class="modal-close" onclick="closePaywall()">稍後再說</div>
+  </div>
+</div>
+
+<!-- Confetti -->
+<div class="confetti-container" id="confetti"></div>
+
+<script>
+// ====================== DATA ======================
+const TOPICS_A = [
+  { id:'a1', icon:'🚤', title:'小型船只特性及限制', desc:'操縱特性、靠離泊、沖程、螺旋槳效應', questions:50, part:'A',
+    content:`<h2>🚤 小型船只特性及限制</h2>
+    <h3>一、操縱特性</h3>
+    <ul>
+      <li><strong>舵效：</strong>船速越快舵效越好；慢速時舵效差，需用引擎輔助</li>
+      <li><strong>橫向推力：</strong>右轉單螺旋槳船倒車時，船尾向<strong>左</strong>推（因螺旋槳反作用力）</li>
+      <li><strong>沖程：</strong>從全速前進到完全停止所需的距離，受排水量和船型影響</li>
+    </ul>
+    <div class="key-point">💡 記憶口訣：「右旋倒車尾向左」——右轉螺旋槳倒車，船尾被推向左</div>
+    <h3>二、靠離泊原則</h3>
+    <ul>
+      <li>原則上應<strong>頂風頂流</strong>靠泊</li>
+      <li>解纜前確保能安全離開泊位</li>
+      <li>使用碰墊保護船體</li>
+    </ul>
+    <h3>三、狹窄水域操船</h3>
+    <ul>
+      <li>右轉單螺旋槳船向<strong>右</strong>轉向更容易</li>
+      <li>慢速行駛，備好船錨</li>
+    </ul>
+    <div class="danger-box">⚠️ 大浪中：減速至20-30度角迎浪，所有人員穿救生衣，保持船體水密</div>` },
+  { id:'a2', icon:'⚓', title:'錨泊', desc:'選擇錨地、錨鏈長度、錨泊信號、爬錨處理', questions:40, part:'A',
+    content:`<h2>⚓ 錨泊</h2>
+    <h3>一、選擇錨地</h3>
+    <ul>
+      <li>水深適宜，海床抓力強（<strong>軟泥、沙泥</strong>最佳）</li>
+      <li>無障礙物、遠離航道</li>
+      <li>有足夠遮蔽</li>
+    </ul>
+    <h3>二、錨鏈長度</h3>
+    <div class="key-point">💡 一般為水深的 <strong>4倍或以上</strong>（如水深5米，放錨鏈≥20米）</div>
+    <h3>三、錨泊信號</h3>
+    <table class="data-table">
+      <tr><th>時段</th><th>信號</th></tr>
+      <tr><td>日間</td><td>船頭桅杆掛一<strong>黑球</strong></td></tr>
+      <tr><td>夜間</td><td>掛一盞<strong>白色環照燈</strong></td></tr>
+    </table>
+    <h3>四、爬錨（走錨）處理</h3>
+    <p>按優先順序處理：</p>
+    <ol>
+      <li>放長錨鏈</li>
+      <li>啟動引擎控制船位</li>
+      <li>拋後備錨</li>
+    </ol>
+    <div class="danger-box">⚠️ 爬錨時切勿收短錨鏈，會加劇走錨！</div>` },
+  { id:'a3', icon:'📋', title:'啟航與止航安全檢查', desc:'出發前及返港後安全檢查清單', questions:25, part:'A',
+    content:`<h2>📋 啟航與止航安全檢查</h2>
+    <h3>啟航前檢查</h3>
+    <ul>
+      <li>✅ 查看天氣預報和海況</li>
+      <li>✅ 檢查艙蓋密封性</li>
+      <li>✅ 救生設備齊全（救生衣、救生圈）</li>
+      <li>✅ 消防設備可用（滅火器在有效期內）</li>
+      <li>✅ 羅經、舵機、錨纜正常</li>
+      <li>✅ VHF無線電測試</li>
+      <li>✅ 航行燈正常</li>
+      <li>✅ 汙水泵運作正常</li>
+      <li>✅ 繫固物品穩固</li>
+      <li>✅ 規劃航線並告知親友</li>
+    </ul>
+    <h3>抵港後檢查</h3>
+    <ul>
+      <li>✅ 妥為繫泊</li>
+      <li>✅ 通知親友安全抵達</li>
+      <li>✅ 檢查並關好艙蓋</li>
+      <li>✅ 收好所有設備</li>
+      <li>✅ 關斷石油氣</li>
+      <li>✅ 檢查蓄電池狀態</li>
+    </ul>
+    <div class="info-box">📝 這部分考試常以「下列哪項不是啟航前檢查項目」形式出題，注意區分啟航和抵港的檢查項目</div>` },
+  { id:'a4', icon:'🗺️', title:'海圖作業與定位', desc:'識讀海圖、定位方法、羅經差、航向計算', questions:30, part:'A',
+    content:`<h2>🗺️ 海圖作業與定位</h2>
+    <h3>一、識讀海圖</h3>
+    <p>需掌握以下海圖符號：</p>
+    <ul>
+      <li>水深標記（米或拓）</li>
+      <li>浮標位置及類型</li>
+      <li>燈號（顏色、週期、射程）</li>
+      <li>海底管線、沉船、礁石標記</li>
+    </ul>
+    <h3>二、定位方法</h3>
+    <div class="key-point">💡 交叉方位法：取至少兩條方位線，夾角近 <strong>90°</strong> 時精度最高</div>
+    <h3>三、羅經差計算</h3>
+    <p><strong>羅經差 = 磁差 + 自差</strong></p>
+    <p>CADET規律：Compass Add East to get True</p>
+    <ul>
+      <li><strong>C</strong>ompass → 羅經航向/方位</li>
+      <li><strong>A</strong>dd → 加</li>
+      <li><strong>E</strong>ast → 東偏差</li>
+      <li><strong>T</strong>rue → 真航向/方位</li>
+    </ul>
+    <table class="data-table">
+      <tr><th>方向</th><th>操作</th></tr>
+      <tr><td>東偏差（E）</td><td>羅經 + 偏差 = 真</td></tr>
+      <tr><td>西偏差（W）</td><td>羅經 - 偏差 = 真</td></tr>
+    </table>
+    <div class="danger-box">⚠️ 考試必考計算題！熟練掌握CADET規律</div>` },
+  { id:'a5', icon:'🌊', title:'潮汐', desc:'使用潮汐表、水流圖、潮汐計算', questions:35, part:'A',
+    content:`<h2>🌊 潮汐</h2>
+    <h3>潮汐基礎</h3>
+    <ul>
+      <li>使用香港天文台提供的<strong>潮汐表</strong>和<strong>水流圖</strong></li>
+      <li>海圖上標有潮汐參考資料</li>
+      <li>漲潮（Flood）：水位上升；退潮（Ebb）：水位下降</li>
+    </ul>
+    <h3>潮汐對航行的影響</h3>
+    <ul>
+      <li>影響水深：淺水區需注意低潮時水深是否足夠</li>
+      <li>影響航向：潮流會使船偏離計劃航線</li>
+      <li>靠離泊時應利用潮流輔助</li>
+    </ul>
+    <div class="info-box">📝 考試中會給出潮汐表數據，要求計算某時刻的水深或流速</div>` },
+  { id:'a6', icon:'🌫️', title:'有限能見度駕駛', desc:'霧中航行規則、聲號、安全措施', questions:45, part:'A',
+    content:`<h2>🌫️ 有限能見度駕駛</h2>
+    <h3>核心規則</h3>
+    <ul>
+      <li>嚴格遵守《國際海上避碰規則》</li>
+      <li>使用<strong>安全航速</strong></li>
+      <li>派足人手瞭望</li>
+      <li>備錨應急</li>
+    </ul>
+    <h3>霧號規定</h3>
+    <table class="data-table">
+      <tr><th>狀態</th><th>聲號</th></tr>
+      <tr><td>機動船在航</td><td>每隔不超過2分鐘鳴一<strong>長聲</strong></td></tr>
+      <tr><td>停船（對水無移動）</td><td>每隔不超過2分鐘鳴<strong>兩長聲</strong></td></tr>
+      <tr><td>失控船</td><td>一長聲+兩短聲</td></tr>
+    </table>
+    <div class="danger-box">⚠️ 霧中不應高速行駛！應立即減速，必要時停船</div>` },
+  { id:'a7', icon:'🏙️', title:'本地知識', desc:'維港範圍、航道、禁區、限速區、浮標系統', questions:80, part:'A',
+    content:`<h2>🏙️ 本地知識（重點章節）</h2>
+    <div class="danger-box">⚠️ 本地知識是甲部佔分最高的章節，約佔25-30%題目！</div>
+    <h3>一、維多利亞港範圍</h3>
+    <p>東至鯉魚門，西至青洲，包括整個港島北岸和九龍南岸水域。</p>
+    <h3>二、航道與禁區</h3>
+    <ul>
+      <li><strong>主要航道：</strong>東博寮海峽、藍塘海峽、馬灣水道</li>
+      <li><strong>禁止碇泊區：</strong>航道內嚴禁拋錨</li>
+      <li><strong>限制區：</strong>青洲、橫瀾島100米內、城門河道</li>
+      <li><strong>淨空限制區：</strong>各橋樑通橋高度需注意</li>
+      <li><strong>機場限制區：</strong>啟德/赤鱲角機場附近高度限制</li>
+    </ul>
+    <h3>三、航速限制</h3>
+    <div class="key-point">💡 避風塘入口及內部限速 <strong>5節</strong>；維港特定水域有明確限速</div>
+    <h3>四、分道航行制</h3>
+    <p>藍塘海峽、東博寮海峽等實行分道航行，須遵守分隔帶規則。</p>
+    <h3>五、IALA A區浮標系統</h3>
+    <table class="data-table">
+      <tr><th>類型</th><th>左舷（進港）</th><th>右舷（進港）</th></tr>
+      <tr><td>側面標</td><td style="color:#ef4444">紅色</td><td style="color:#22c55e">綠色</td></tr>
+      <tr><td>形狀</td><td>罐形</td><td>錐形</td></tr>
+    </table>
+    <div class="key-point">💡 口訣：「紅罐左綠錐右」——進港時紅色罐形浮標在左，綠色錐形在右</div>
+    <h3>六、污染罰則</h3>
+    <div class="danger-box">⚠️ 排放入海最高罰 <strong>$200,000</strong>；港內拋垃圾可罰 $10,000 及監禁6個月</div>` },
+  { id:'a8', icon:'🚢', title:'國際海上避碰規則', desc:'對遇、交叉、追越、帆船規則、號燈號型', questions:100, part:'A',
+    content:`<h2>🚢 國際海上避碰規則（最重要）</h2>
+    <div class="danger-box">⚠️ 避碰規則是考試最大重點，甲部約佔30%題目！</div>
+    <h3>一、基本原則</h3>
+    <ul>
+      <li>隨時保持<strong>適當瞭望</strong></li>
+      <li>使用<strong>安全航速</strong></li>
+      <li>判斷碰撞危險</li>
+    </ul>
+    <h3>二、互見中的航行規則</h3>
+    <table class="data-table">
+      <tr><th>局面</th><th>讓路規則</th></tr>
+      <tr><td><strong>對遇局面</strong></td><td>各自向<strong>右</strong>轉向</td></tr>
+      <tr><td><strong>交叉局面</strong></td><td>有他船在本船<strong>右舷</strong>的船為讓路船</td></tr>
+      <tr><td><strong>追越</strong></td><td>追越船<strong>始終</strong>為讓路船</td></tr>
+      <tr><td><strong>帆船之間</strong></td><td>左舷受風讓右舷受風；同舷時上風讓下風</td></tr>
+    </table>
+    <h3>三、優先順序</h3>
+    <p>失去操控能力船 > 受限船 > 捕魚船 > 帆船 > 機動船</p>
+    <h3>四、號燈號型（必考）</h3>
+    <table class="data-table">
+      <tr><th>船舶狀態</th><th>日間號型</th><th>夜間號燈</th></tr>
+      <tr><td>錨泊</td><td>船頭黑球</td><td>白色環照燈</td></tr>
+      <tr><td>失控</td><td>兩個黑球</td><td>兩盞垂直紅燈</td></tr>
+      <tr><td>長度≤15米在航</td><td>—</td><td>白燈+側燈</td></tr>
+      <tr><td>帆船在航</td><td>—</td><td>上紅下綠側燈</td></tr>
+      <tr><td>擱淺</td><td>三個黑球</td><td>兩盞紅燈+錨燈</td></tr>
+    </table>
+    <div class="key-point">💡 記憶：「對遇右轉、交叉看右舷、追越永遠讓」</div>` },
+  { id:'a9', icon:'🦺', title:'安全設備', desc:'救生衣、救生圈、滅火器配備要求', questions:35, part:'A',
+    content:`<h2>🦺 安全設備</h2>
+    <h3>一、救生設備</h3>
+    <ul>
+      <li><strong>救生衣：</strong>每人一件，須放在易取位置</li>
+      <li><strong>救生圈：</strong>按船長配備數量</li>
+      <li><strong>漂浮救生索：</strong>船尾配備</li>
+    </ul>
+    <h3>二、消防設備</h3>
+    <table class="data-table">
+      <tr><th>滅火器類型</th><th>適用場景</th><th>注意事項</th></tr>
+      <tr><td>泡沫</td><td>油類火災</td><td>不可用於電器火</td></tr>
+      <tr><td>CO₂</td><td>電器火災</td><td>密閉空間慎用（缺氧）</td></tr>
+      <tr><td>乾粉</td><td>油類及電器</td><td>通用型</td></tr>
+    </table>
+    <div class="key-point">💡 按船長配備滅火器數量，並分佈於各艙室</div>
+    <h3>三、定期保養</h3>
+    <p>所有安全設備需定期檢查，確保隨時可用。過期設備須及時更換。</p>` },
+  { id:'a10', icon:'📻', title:'VHF無線電話', desc:'香港水域頻道、遇險信號程序', questions:27, part:'A',
+    content:`<h2>📻 VHF無線電話使用</h2>
+    <h3>香港水域常用頻道</h3>
+    <table class="data-table">
+      <tr><th>頻道</th><th>用途</th></tr>
+      <tr><td><strong>02</strong></td><td>海港東</td></tr>
+      <tr><td><strong>12</strong></td><td>東進口航道</td></tr>
+      <tr><td><strong>14</strong></td><td>海港</td></tr>
+      <tr><td><strong>16</strong></td><td>國際遇險頻道（緊急）</td></tr>
+      <tr><td><strong>63</strong></td><td>大嶼南</td></tr>
+      <tr><td><strong>67</strong></td><td>西進口航道</td></tr>
+    </table>
+    <h3>遇險信號發送程序</h3>
+    <ol>
+      <li>使用頻道16呼叫「<strong>MAYDAY</strong>」三次</li>
+      <li>報告船名</li>
+      <li>報告位置</li>
+      <li>說明遇險性質</li>
+      <li>說明所需援助</li>
+    </ol>
+    <div class="danger-box">⚠️ 頻道16是國際遇險頻道，非緊急情況嚴禁佔用！</div>` },
+  { id:'a11', icon:'🏗️', title:'海事處服務', desc:'航行監察、搜救協調、航海通告', questions:16, part:'A',
+    content:`<h2>🏗️ 海事處服務</h2>
+    <h3>一、船隻航行監察中心</h3>
+    <ul>
+      <li>發佈航行警告</li>
+      <li>監控維港交通</li>
+    </ul>
+    <h3>二、海上救援協調中心</h3>
+    <ul>
+      <li>統籌南海國際水域搜救</li>
+      <li>協調救援行動</li>
+    </ul>
+    <h3>三、航海通告與海事處佈告</h3>
+    <ul>
+      <li>公佈海圖改正資料</li>
+      <li>航標變動通知</li>
+      <li>海事工程資訊</li>
+    </ul>` },
+  { id:'a12', icon:'🌪️', title:'風暴信號與氣象', desc:'颱風信號、季候風、蒲福風級', questions:27, part:'A',
+    content:`<h2>🌪️ 風暴信號與氣象</h2>
+    <h3>颱風信號</h3>
+    <table class="data-table">
+      <tr><th>信號</th><th>意義</th></tr>
+      <tr><td><strong>一號</strong></td><td>戒備信號，有熱帶氣旋可能影響</td></tr>
+      <tr><td><strong>三號</strong></td><td>強風信號，風速41-62km/h</td></tr>
+      <tr><td><strong>八號</strong></td><td>烈風信號，風速63-117km/h</td></tr>
+      <tr><td><strong>九號</strong></td><td>烈風增強</td></tr>
+      <tr><td><strong>十號</strong></td><td>颶風信號，風速≥118km/h</td></tr>
+    </table>
+    <h3>蒲福風級（常考）</h3>
+    <table class="data-table">
+      <tr><th>等級</th><th>風速(km/h)</th><th>描述</th></tr>
+      <tr><td>0</td><td>&lt;1</td><td>無風</td></tr>
+      <tr><td>3</td><td>12-19</td><td>微風</td></tr>
+      <tr><td>6</td><td>39-49</td><td>強風</td></tr>
+      <tr><td>8</td><td>62-74</td><td>烈風</td></tr>
+      <tr><td>10</td><td>89-102</td><td>暴風</td></tr>
+      <tr><td>12</td><td>≥118</td><td>颶風</td></tr>
+    </table>
+    <div class="info-box">📝 三號信號掛起時不應出海；八號信號時所有船隻應到避風塘避風</div>` },
+  { id:'a13', icon:'🚨', title:'緊急事故應變', desc:'碰撞、擱淺、失火、漏水、人員落水處理', questions:35, part:'A',
+    content:`<h2>🚨 緊急事故應變</h2>
+    <h3>碰撞/擱淺</h3>
+    <ol>
+      <li>立即<strong>停車</strong></li>
+      <li>穿上救生衣</li>
+      <li>檢查損傷情況</li>
+      <li>泵走積水</li>
+      <li>報告海事處</li>
+    </ol>
+    <h3>失火</h3>
+    <ul>
+      <li>立即停車，關閉油路</li>
+      <li>使用適當滅火器</li>
+      <li>油類火用CO₂或乾粉，不用水</li>
+    </ul>
+    <h3>失控（失舵/失螺旋槳）</h3>
+    <table class="data-table">
+      <tr><th>時段</th><th>信號</th></tr>
+      <tr><td>日間</td><td>兩個<strong>黑球</strong></td></tr>
+      <tr><td>夜間</td><td>兩盞垂直<strong>紅燈</strong></td></tr>
+    </table>
+    <h3>人員落水（最重要）</h3>
+    <ol>
+      <li>立即拋救生圈</li>
+      <li>大聲呼叫</li>
+      <li><strong>向落水側轉舵</strong>（左落水轉左舵）</li>
+      <li>鳴放<strong>三長聲</strong>信號</li>
+    </ol>
+    <div class="danger-box">⚠️ 記憶口訣：「左落水轉左舵」——舵向落水側轉，把船尾甩開避免打到人</div>` },
+  { id:'a14', icon:'📝', title:'報告意外事故', desc:'報告要求、時限、書面報告', questions:25, part:'A',
+    content:`<h2>📝 報告意外事故</h2>
+    <h3>須報告的事故</h3>
+    <ul>
+      <li>碰撞</li>
+      <li>沉沒</li>
+      <li>傷亡</li>
+      <li>火警</li>
+      <li>導致損壞的事故</li>
+    </ul>
+    <h3>報告要求</h3>
+    <table class="data-table">
+      <tr><th>類型</th><th>時限</th></tr>
+      <tr><td>口頭報告</td><td><strong>立即</strong></td></tr>
+      <tr><td>書面報告</td><td><strong>24小時內</strong></td></tr>
+    </table>
+    <div class="key-point">💡 報告對象：海事處</div>` }
+];
+
+const TOPICS_B = [
+  { id:'b1', icon:'🔧', title:'基本原理與主機構造', desc:'柴油機/汽油機、四衝程、核心部件', questions:50, part:'B',
+    content:`<h2>🔧 基本原理與主機構造</h2>
+    <h3>引擎類型對比</h3>
+    <table class="data-table">
+      <tr><th>特性</th><th>柴油機（壓燃式）</th><th>汽油機（點燃式）</th></tr>
+      <tr><td>壓縮比</td><td>12:1 至 30:1（高）</td><td>7:1 至 10:1（低）</td></tr>
+      <tr><td>點火方式</td><td>壓縮自燃</td><td>火花塞點火</td></tr>
+      <tr><td>機件</td><td>厚重</td><td>較輕</td></tr>
+      <tr><td>閃火點</td><td>約 +63°C</td><td>約 -40°C</td></tr>
+      <tr><td>比重</td><td>0.84</td><td>0.73</td></tr>
+    </table>
+    <div class="danger-box">⚠️ 汽油閃火點極低(-40°C)，比柴油危險得多！兩者比重均&lt;1（比水輕），浮在水面</div>
+    <h3>四衝程循環</h3>
+    <ol>
+      <li><strong>進氣：</strong>活塞下行，進氣閥開</li>
+      <li><strong>壓縮：</strong>活塞上行，兩閥關閉</li>
+      <li><strong>動力：</strong>燃燒推動活塞下行</li>
+      <li><strong>排氣：</strong>活塞上行，排氣閥開</li>
+    </ol>
+    <h3>核心部件功能</h3>
+    <table class="data-table">
+      <tr><th>部件</th><th>功能</th></tr>
+      <tr><td>活塞環</td><td>密封、刮油</td></tr>
+      <tr><td>曲軸</td><td>往復運動→旋轉運動</td></tr>
+      <tr><td>飛輪</td><td>儲存動能，使運轉平穩</td></tr>
+      <tr><td>凸輪軸</td><td>控制氣門開閉（轉速為曲軸一半）</td></tr>
+    </table>` },
+  { id:'b2', icon:'⚙️', title:'輔機系統', desc:'操舵機、泵、電力系統、蓄電池保養', questions:40, part:'B',
+    content:`<h2>⚙️ 輔機系統</h2>
+    <h3>一、操舵機</h3>
+    <ul>
+      <li>常見為<strong>鏈條連桿式</strong></li>
+      <li>液壓舵機注意<strong>氣鎖</strong>處理（放氣）</li>
+      <li>保持應急手柄可用</li>
+    </ul>
+    <h3>二、泵的類型</h3>
+    <table class="data-table">
+      <tr><th>類型</th><th>特點</th></tr>
+      <tr><td>離心泵</td><td>需引水才能啟動</td></tr>
+      <tr><td>齒輪泵</td><td>正排量泵</td></tr>
+      <tr><td>往復泵</td><td>正排量泵</td></tr>
+    </table>
+    <h3>三、電線顏色代碼</h3>
+    <table class="data-table">
+      <tr><th>用途</th><th>顏色</th></tr>
+      <tr><td>三相（L1/L2/L3）</td><td>棕/黑/灰</td></tr>
+      <tr><td>地線</td><td>黃綠相間</td></tr>
+    </table>
+    <h3>四、蓄電池保養</h3>
+    <ul>
+      <li>定期檢查電解液比重（滿電約<strong>1.27</strong>）</li>
+      <li>保持液位</li>
+      <li>保持充電</li>
+    </ul>
+    <div class="key-point">💡 鉛酸電池滿電比重 = 1.27，考試必記數字！</div>` },
+  { id:'b3', icon:'🔍', title:'操作維修與故障排除', desc:'啟動前檢查、航行監控、排氣顏色判斷', questions:45, part:'B',
+    content:`<h2>🔍 操作維修與故障排除</h2>
+    <h3>啟動前檢查</h3>
+    <ul>
+      <li>燃油、潤滑油、冷卻液液位</li>
+      <li>皮帶張力</li>
+      <li>閥門狀態</li>
+    </ul>
+    <h3>航行中監控</h3>
+    <ul>
+      <li>定時檢查油壓、油溫、水溫</li>
+      <li>觀察排氣顏色（重要！）</li>
+    </ul>
+    <h3>排氣顏色判斷（必考）</h3>
+    <table class="data-table">
+      <tr><th>顏色</th><th>原因</th></tr>
+      <tr><td style="color:#666"><strong>黑煙</strong></td><td>油多氣少（燃燒不完全）</td></tr>
+      <tr><td style="color:#4488cc"><strong>藍煙</strong></td><td>燒機油</td></tr>
+      <tr><td style="color:#ccc"><strong>白煙</strong></td><td>有水（冷卻液洩漏）</td></tr>
+    </table>
+    <div class="key-point">💡 記憶：「黑油多、藍燒油、白有水」</div>
+    <h3>常見故障</h3>
+    <ul>
+      <li>啟動困難：檢查燃油、電池、噴油系統</li>
+      <li>過熱：檢查冷卻系統、水泵</li>
+      <li>動力不足：檢查燃油濾清器、空氣濾清器</li>
+    </ul>` },
+  { id:'b4', icon:'🔥', title:'防火與環保', desc:'滅火器使用、加油安全、環保法規', questions:30, part:'B',
+    content:`<h2>🔥 防火與環保</h2>
+    <h3>船上防火</h3>
+    <ul>
+      <li>船上<strong>嚴禁吸煙</strong></li>
+      <li>保持清潔，妥善維護油路電路</li>
+    </ul>
+    <h3>滅火器使用</h3>
+    <table class="data-table">
+      <tr><th>火災類型</th><th>適用滅火器</th></tr>
+      <tr><td>油類/電器火</td><td>CO₂ 或 乾粉</td></tr>
+      <tr><td>普通可燃物</td><td>泡沫 或 水劑</td></tr>
+    </table>
+    <div class="danger-box">⚠️ 密閉空間慎用CO₂滅火器（會導致缺氧窒息！）</div>
+    <h3>船舶損害控制</h3>
+    <ul>
+      <li>保持水密門關閉</li>
+      <li>機艙進水：啟動艙底泵，用軟木塞/木楔堵塞</li>
+    </ul>
+    <h3>加油安全</h3>
+    <ul>
+      <li>嚴禁明火吸煙</li>
+      <li>關閉門窗</li>
+      <li>使用防靜電措施</li>
+      <li>準備吸油棉</li>
+    </ul>
+    <h3>環保法規</h3>
+    <div class="danger-box">⚠️ 嚴禁在港內排放油污或垃圾，違者重罰！</div>` },
+  { id:'b5', icon:'🔥', title:'船上安全使用石油氣', desc:'石油氣特性、安全措施、氣瓶管理', questions:35, part:'B',
+    content:`<h2>🔥 船上安全使用石油氣</h2>
+    <h3>石油氣特性</h3>
+    <ul>
+      <li><strong>比空氣重</strong>，易積聚於艙底</li>
+      <li>高度易燃</li>
+    </ul>
+    <h3>安全措施</h3>
+    <ul>
+      <li>氣瓶應<strong>直立</strong>並牢固固定</li>
+      <li>置於通風良好的<strong>專用艙櫃</strong>內</li>
+      <li>艙櫃底部有<strong>通海排氣孔</strong></li>
+      <li>使用前用<strong>肥皂水</strong>檢查洩漏</li>
+      <li>離開時<strong>關閥</strong></li>
+    </ul>
+    <div class="key-point">💡 石油氣比空氣重，所以排氣孔必須在底部！通風口在上方無效</div>` }
+];
+
+// Questions bank
+const QUESTIONS = [
+{id:'q1', topic:'a1', part:'A', q:'右轉單螺旋槳船倒車時，船尾會向哪個方向推？', opts:['左','右','不動','視風向而定'], ans:0, explain:'右轉螺旋槳倒車時，反作用力把船尾推向左方。', ref:'考試手冊第一章'},
+{id:'q2', topic:'a1', part:'A', q:'靠泊的基本原則是什麼？', opts:['順風順流靠泊','頂風頂流靠泊','橫風靠泊','任意方向靠泊'], ans:1, explain:'原則上應頂風頂流靠泊，這樣最容易控制船位。', ref:'考試手冊第一章'},
+{id:'q3', topic:'a1', part:'A', q:'右轉單螺旋槳船在狹窄水域中，向哪邊轉向較容易？', opts:['左','右','一樣容易','無法轉向'], ans:1, explain:'右轉單螺旋槳船向右轉向更容易，因為螺旋槳的橫向推力輔助。', ref:'考試手冊第一章'},
+{id:'q4', topic:'a1', part:'A', q:'大浪中航行，船頭應以多少度角迎浪？', opts:['0度（正迎浪）','20-30度','45度','90度（橫浪）'], ans:1, explain:'大浪中應減速至20-30度角迎浪，避免船頭直插浪中或被橫浪打翻。', ref:'考試手冊第一章'},
+{id:'q5', topic:'a1', part:'A', q:'什麼是「沖程」？', opts:['船的總長度','從全速前進到完全停止的距離','螺旋槳每分鐘轉數','舵的轉動角度'], ans:1, explain:'沖程是指從全速前進到完全停止所需的距離。', ref:'考試手冊第一章'},
+{id:'q6', topic:'a1', part:'A', q:'影響沖程的主要因素是什麼？', opts:['船的顏色','排水量和船型','船上人數','天氣溫度'], ans:1, explain:'沖程主要受排水量和船型影響，排水量越大沖程越長。', ref:'考試手冊第一章'},
+{id:'q7', topic:'a1', part:'A', q:'右轉單螺旋槳船前進時，船尾會向哪邊偏？', opts:['左','右','不動','視水流而定'], ans:0, explain:'右轉螺旋槳前進時，螺旋槳的橫向分力把船尾推向左方。', ref:'考試手冊第一章'},
+{id:'q8', topic:'a1', part:'A', q:'船速對舵效有什麼影響？', opts:['船速越快舵效越差','船速越快舵效越好','船速與舵效無關','只有慢速時舵效好'], ans:1, explain:'船速越快，流過舵面的水流越多，舵效越好。慢速時舵效差。', ref:'考試手冊第一章'},
+{id:'q9', topic:'a1', part:'A', q:'慢速時如何改善舵效？', opts:['加大油門衝過去','用引擎輔助轉向','拋錨固定','等待風向改變'], ans:1, explain:'慢速時舵效差，需用引擎輔助（短暫進車配合打舵）來改善轉向。', ref:'考試手冊第一章'},
+{id:'q10', topic:'a1', part:'A', q:'什麼是「重心」對船舶操縱的影響？', opts:['重心越高越穩定','重心越低越穩定','重心位置不影響穩定性','重心只影響速度'], ans:1, explain:'重心越低，船舶越穩定。過高的重心會導致船舶容易傾覆。', ref:'考試手冊第一章'},
+{id:'q11', topic:'a1', part:'A', q:'小型船隻在淺水區航行時會出現什麼現象？', opts:['速度加快','船身下沉（坐底效應）','舵效變好','完全不受影響'], ans:1, explain:'淺水區會出現坐底效應（squat effect），船身下沉且舵效變差。', ref:'考試手冊第一章'},
+{id:'q12', topic:'a1', part:'A', q:'解纜離開泊位前應確認什麼？', opts:['船上有足夠食物','能安全離開泊位','已付泊位費','天氣晴朗'], ans:1, explain:'解纜前必須確保能安全離開泊位，考慮風流方向和周圍船隻。', ref:'考試手冊第一章'},
+{id:'q13', topic:'a1', part:'A', q:'靠泊時應使用什麼保護船體？', opts:['油漆','碰墊（靠把）','救生圈','繩索'], ans:1, explain:'靠泊時使用碰墊（fender）保護船體免受碰撞損傷。', ref:'考試手冊第一章'},
+{id:'q14', topic:'a1', part:'A', q:'風流對船舶操縱的影響，以下哪項正確？', opts:['風流只影響帆船','風流對所有船隻都有影響','只有順風才受影響','風流只在遠海有影響'], ans:1, explain:'風流對所有船隻都有影響，小型船隻受影響更為顯著。', ref:'考試手冊第一章'},
+{id:'q15', topic:'a1', part:'A', q:'單螺旋槳船與雙螺旋槳船在操縱上有什麼區別？', opts:['沒有區別','雙螺旋槳船操縱更靈活','單螺旋槳船更靈活','雙螺旋槳船不能倒退'], ans:1, explain:'雙螺旋槳船可以利用兩個螺旋槳的不同轉向來實現原地轉向，操縱更靈活。', ref:'考試手冊第一章'},
+{id:'q16', topic:'a1', part:'A', q:'船舶的「旋迴圈」是指什麼？', opts:['船的周長','船舶轉向360度所畫的圓','螺旋槳的直徑','舵的轉動範圍'], ans:1, explain:'旋迴圈是船舶從直線航行轉向360度所經過的圓形路徑。', ref:'考試手冊第一章'},
+{id:'q17', topic:'a1', part:'A', q:'旋迴圈的大小受什麼因素影響？', opts:['船的顏色','船速、舵角、排水量','船上人數','水深無關'], ans:1, explain:'旋迴圈大小主要受船速、舵角和排水量影響。', ref:'考試手冊第一章'},
+{id:'q18', topic:'a1', part:'A', q:'橫風靠泊時應如何操作？', opts:['直接衝向碼頭','以較大角度接近後減速','保持高速靠泊','不需任何特殊操作'], ans:1, explain:'橫風靠泊時應以較大角度接近，利用風力幫助靠泊，適時減速。', ref:'考試手冊第一章'},
+{id:'q19', topic:'a1', part:'A', q:'什麼是「船吸」效應？', opts:['船被水底吸住','兩船近距離平行航行時互相吸引','螺旋槳吸水','風把船吸走'], ans:1, explain:'船吸效應是兩船近距離平行航行時，由於水流壓力差產生的互相吸引現象，非常危險。', ref:'考試手冊第一章'},
+{id:'q20', topic:'a1', part:'A', q:'什麼是「岸推」效應？', opts:['靠岸時的推力','船靠近岸邊時船頭被推離岸壁','岸上的推進器','風吹向岸邊'], ans:1, explain:'岸推效應是船靠近岸邊時，由於船頭與岸壁之間水流加速，壓力降低，船頭被推離岸壁。', ref:'考試手冊第一章'},
+{id:'q21', topic:'a1', part:'A', q:'右轉單螺旋槳船在靜水中前進時，船頭偏向哪邊？', opts:['左','右','不動','視排水量而定'], ans:0, explain:'右轉螺旋槳前進時，橫向推力使船尾向左，船頭相應向右偏。但實際中因扭矩效應船頭傾向向左偏。', ref:'考試手冊第一章'},
+{id:'q22', topic:'a1', part:'A', q:'船舶在狹窄水道中行駛時應注意什麼？', opts:['加速通過','減速行駛並備好船錨','關閉引擎漂移','不需特別注意'], ans:1, explain:'狹窄水道中應減速行駛，備好船錨以備緊急使用。', ref:'考試手冊第一章'},
+{id:'q23', topic:'a1', part:'A', q:'什麼情況下船舶操縱性會明顯下降？', opts:['順風順流','大風浪中','平靜水面','晴天'], ans:1, explain:'大風浪中船舶操縱性會明顯下降，舵效變差，船速受影響。', ref:'考試手冊第一章'},
+{id:'q24', topic:'a1', part:'A', q:'離泊時應考慮哪些因素？', opts:['只需考慮風向','風向、水流、周圍船隻、障礙物','只需考慮水深','只需考慮時間'], ans:1, explain:'離泊時需綜合考慮風向、水流、周圍船隻和障礙物等因素。', ref:'考試手冊第一章'},
+{id:'q25', topic:'a1', part:'A', q:'小型船隻的盲區在哪裡？', opts:['船的正前方','船的正後方','船頭前方和兩側近距離','船的左右兩側'], ans:2, explain:'小型船隻的盲區主要在船頭前方和兩側近距離區域，需要額外瞭望。', ref:'考試手冊第一章'},
+{id:'q26', topic:'a1', part:'A', q:'船舶在強流中操縱應注意什麼？', opts:['順流航行最安全','逆流操縱更可控','強流中無法操縱','強流只影響大型船隻'], ans:1, explain:'逆流操縱更可控，因為船速相對水流較高，舵效較好。', ref:'考試手冊第一章'},
+{id:'q27', topic:'a1', part:'A', q:'雙螺旋槳船可以實現什麼特殊操縱？', opts:['原地轉向','無法倒退','只能直行','不能停船'], ans:0, explain:'雙螺旋槳船可以利用兩個螺旋槳一正一反實現原地轉向。', ref:'考試手冊第一章'},
+{id:'q28', topic:'a1', part:'A', q:'船隻在浪中行駛，橫浪的危險是什麼？', opts:['速度變慢','容易傾覆','油耗增加','無特別危險'], ans:1, explain:'橫浪航行最危險，容易導致船隻傾覆。應盡量避免橫浪航行。', ref:'考試手冊第一章'},
+{id:'q29', topic:'a1', part:'A', q:'「舵令」中「正舵」是什麼意思？', opts:['向左轉舵','向右轉舵','舵回到中心位置','最大舵角'], ans:2, explain:'「正舵」指令是將舵回到船的中心線位置（0度）。', ref:'考試手冊第一章'},
+{id:'q30', topic:'a1', part:'A', q:'緊急停車時應如何操作？', opts:['只關油門','全速倒車','先停車再慢慢減速','拋錨停船'], ans:1, explain:'緊急停車應全速倒車，利用螺旋槳反轉來盡快停止船隻前進。', ref:'考試手冊第一章'},
+{id:'q31', topic:'a1', part:'A', q:'船隻在波浪中的「埋首」現象是什麼？', opts:['船頭翹起','船頭插入浪中','船尾下沉','船身側傾'], ans:1, explain:'埋首是指船頭插入浪中的現象，通常因船速過快或迎浪角度不當造成。', ref:'考試手冊第一章'},
+{id:'q32', topic:'a1', part:'A', q:'什麼是「安全航速」？', opts:['最高速度','能及時採取有效避碰行動的速度','最慢速度','固定速度'], ans:1, explain:'安全航速是指能及時採取有效避碰行動並在適合當時環境的距離內把船停住的速度。', ref:'考試手冊第一章'},
+{id:'q33', topic:'a1', part:'A', q:'船隻在強風中下風岸靠泊應注意什麼？', opts:['高速靠泊','以較小角度緩慢接近','不需要特殊操作','從上風岸靠泊'], ans:1, explain:'強風中靠泊應以較小角度緩慢接近，避免風力把船吹離碼頭。', ref:'考試手冊第一章'},
+{id:'q34', topic:'a1', part:'A', q:'小型船隻在大浪中如何保護引擎？', opts:['關閉引擎','保持適當轉速避免進水','加速衝過浪區','不需要保護'], ans:1, explain:'大浪中應保持適當轉速，避免因船頭抬起螺旋槳露出水面或進水損壞引擎。', ref:'考試手冊第一章'},
+{id:'q35', topic:'a1', part:'A', q:'什麼是「吃水」？', opts:['船的長度','船體在水面以下的深度','船的寬度','船速'], ans:1, explain:'吃水是船體在水面以下的垂直深度，是判斷能否安全通過淺水區的重要數據。', ref:'考試手冊第一章'},
+{id:'q36', topic:'a1', part:'A', q:'船隻在強流中錨泊應注意什麼？', opts:['放下更多錨鏈','只需短錨鏈','不需要特殊操作','順流拋錨'], ans:0, explain:'強流中錨泊應放下更多錨鏈（增加scope），確保錨有足夠抓力。', ref:'考試手冊第一章'},
+{id:'q37', topic:'a1', part:'A', q:'右轉單螺旋槳船倒車時如何控制船頭方向？', opts:['無法控制','利用舵和螺旋槳橫向推力','只靠風力','拋纜繩'], ans:1, explain:'倒車時可利用舵和螺旋槳的橫向推力來控制船頭方向。', ref:'考試手冊第一章'},
+{id:'q38', topic:'a1', part:'A', q:'船舶「穩性」是指什麼？', opts:['船的速度穩定性','船抵抗傾覆的能力','船的方向穩定性','引擎運轉穩定性'], ans:1, explain:'穩性是指船舶抵抗傾覆的能力，與重心位置和船型有關。', ref:'考試手冊第一章'},
+{id:'q39', topic:'a1', part:'A', q:'為什麼小型船隻更需要注意天氣變化？', opts:['小型船不需要注意','小型船抗風浪能力較弱','小型船速度更快','小型船更安全'], ans:1, explain:'小型船隻抗風浪能力較弱，受天氣影響更大，因此更需要注意天氣變化。', ref:'考試手冊第一章'},
+{id:'q40', topic:'a1', part:'A', q:'船隻轉向時的「內傾」是什麼現象？', opts:['船向轉彎方向傾斜','船向轉彎相反方向傾斜','船身保持水平','船頭下沉'], ans:0, explain:'轉向時船會向轉彎方向傾斜（內傾），這是正常的物理現象。', ref:'考試手冊第一章'},
+{id:'q41', topic:'a1', part:'A', q:'靠泊時頂風頂流的好處是什麼？', opts:['節省燃料','更容易控制船位和速度','增加速度','美觀'], ans:1, explain:'頂風頂流靠泊時，風流幫助減速和控制船位，使靠泊更安全。', ref:'考試手冊第一章'},
+{id:'q42', topic:'a1', part:'A', q:'船舶在淺水區行駛時速度會怎樣變化？', opts:['加快','減慢','不變','無法航行'], ans:1, explain:'淺水區因坐底效應阻力增大，船速會減慢，同時舵效變差。', ref:'考試手冊第一章'},
+{id:'q43', topic:'a1', part:'A', q:'什麼是「船尾下坐」效應？', opts:['船尾下沉','船舶在淺水航行時船尾下沉','船頭下沉','船身側傾'], ans:1, explain:'船尾下坐是船舶在淺水航行時因水流壓力變化導致船尾下沉的現象。', ref:'考試手冊第一章'},
+{id:'q44', topic:'a1', part:'A', q:'小型船隻在狹窄水道中應靠哪一側航行？', opts:['左側','右側（國際慣例）','中間','隨意'], ans:1, explain:'國際慣例在狹窄水道中靠右側航行（類似道路交通規則）。', ref:'考試手冊第一章'},
+{id:'q45', topic:'a1', part:'A', q:'船舶在強風中航行，風壓對船位有什麼影響？', opts:['無影響','船向下風漂移','船向上風漂移','只影響帆船'], ans:1, explain:'強風中船舶（包括機動船）會向下風方向漂移，需要修正航向。', ref:'考試手冊第一章'},
+{id:'q46', topic:'a1', part:'A', q:'什麼是「舵角」？', opts:['船的轉向角度','舵葉與船中心線的夾角','船速','螺旋槳角度'], ans:1, explain:'舵角是指舵葉與船中心線之間的夾角，舵角越大轉向力越大。', ref:'考試手冊第一章'},
+{id:'q47', topic:'a1', part:'A', q:'船舶在流水中的「流壓差」是什麼？', opts:['水流速度','船的航向與實際軌跡的偏差','水深差異','溫度差異'], ans:1, explain:'流壓差是指船舶航向與實際軌跡之間的偏差，由水流橫向推動造成。', ref:'考試手冊第一章'},
+{id:'q48', topic:'a1', part:'A', q:'小型船隻在浪中如何保持穩定？', opts:['加速衝浪','保持適當速度和角度','關閉引擎漂流','所有人站一邊'], ans:1, explain:'保持適當速度和迎浪角度是保持穩定的關鍵。', ref:'考試手冊第一章'},
+{id:'q49', topic:'a1', part:'A', q:'船舶的「排水量」是指什麼？', opts:['船的重量','船排開水的重量','船的容量','船速'], ans:1, explain:'排水量是指船舶排開水的重量，等於船的總重量（阿基米德原理）。', ref:'考試手冊第一章'},
+{id:'q50', topic:'a1', part:'A', q:'什麼是「舵效航速」？', opts:['最高速度','能使舵產生有效轉向力的最低速度','最慢速度','平均速度'], ans:1, explain:'舵效航速是指能使舵產生足夠轉向力的最低航速，低於此速度舵效極差。', ref:'考試手冊第一章'},
+{id:'q51', topic:'a2', part:'A', q:'錨鏈一般應放多少倍水深？', opts:['2倍','3倍','4倍或以上','6倍'], ans:2, explain:'錨鏈長度一般為水深的4倍或以上，以確保足夠抓力。', ref:'考試手冊第二章'},
+{id:'q52', topic:'a2', part:'A', q:'日間錨泊時應顯示什麼信號？', opts:['一個黑球','兩個黑球','一面紅旗','一盞白燈'], ans:0, explain:'日間錨泊在船頭桅杆掛一個黑球。', ref:'考試手冊第二章'},
+{id:'q53', topic:'a2', part:'A', q:'夜間錨泊時應顯示什麼信號？', opts:['一盞紅燈','一盞綠燈','一盞白色環照燈','兩盞白燈'], ans:2, explain:'夜間錨泊掛一盞白色環照燈。', ref:'考試手冊第二章'},
+{id:'q54', topic:'a2', part:'A', q:'發現走錨（爬錨）時，首先應怎麼做？', opts:['收短錨鏈','放長錨鏈','拋後備錨','起錨離開'], ans:1, explain:'走錨時首先放長錨鏈，增加抓力。切勿收短錨鏈！', ref:'考試手冊第二章'},
+{id:'q55', topic:'a2', part:'A', q:'以下哪種海床抓力最強？', opts:['岩石','軟泥','珊瑚','碎石'], ans:1, explain:'軟泥和沙泥海床抓力最強，岩石和珊瑚抓力差。', ref:'考試手冊第二章'},
+{id:'q56', topic:'a2', part:'A', q:'以下哪種海床最不適合錨泊？', opts:['沙泥','軟泥','岩石/珊瑚','沙地'], ans:2, explain:'岩石和珊瑚海床抓力差，錨難以抓住，最不適合錨泊。', ref:'考試手冊第二章'},
+{id:'q57', topic:'a2', part:'A', q:'選擇錨地時應考慮哪些因素？', opts:['只需水深','水深、海床、遮蔽、遠離航道、無障礙物','只需風向','只需距離'], ans:1, explain:'選擇錨地需綜合考慮水深、海床類型、遮蔽條件、遠離航道和無障礙物等因素。', ref:'考試手冊第二章'},
+{id:'q58', topic:'a2', part:'A', q:'走錨的正確處理順序是什麼？', opts:['起錨離開→拋後備錨→放長錨鏈','放長錨鏈→啟動引擎→拋後備錨','拋後備錨→收短錨鏈→啟動引擎','不處理等待天氣好轉'], ans:1, explain:'走錨時正確順序：1.放長錨鏈增加抓力 2.啟動引擎控制船位 3.必要時拋後備錨。', ref:'考試手冊第二章'},
+{id:'q59', topic:'a2', part:'A', q:'錨泊時需要保持什麼值班？', opts:['不需要值班','定期檢查船位和錨鏈','只在夜間值班','只在風大時值班'], ans:1, explain:'錨泊時應定期值班，檢查船位是否移動、錨鏈狀態和周圍環境。', ref:'考試手冊第二章'},
+{id:'q60', topic:'a2', part:'A', q:'如何判斷是否走錨？', opts:['看風向','對照陸標或GPS檢查船位是否移動','聽聲音','看水色'], ans:1, explain:'通過對照陸標或GPS檢查船位是否移動來判斷是否走錨。', ref:'考試手冊第二章'},
+{id:'q61', topic:'a2', part:'A', q:'緊急錨泊是什麼情況下使用？', opts:['正常停船','緊急避險（如避碰、失舵）','釣魚時','睡覺時'], ans:1, explain:'緊急錨泊是在緊急避險情況下（如避碰、失舵）使用的緊急措施。', ref:'考試手冊第二章'},
+{id:'q62', topic:'a2', part:'A', q:'錨鏈長度為水深的4倍，水深5米時應放多少錨鏈？', opts:['10米','15米','20米或以上','25米'], ans:2, explain:'水深5米×4倍=20米或以上。', ref:'考試手冊第二章'},
+{id:'q63', topic:'a2', part:'A', q:'起錨時應注意什麼？', opts:['快速起錨','緩慢起錨並檢查錨鏈有無纏繞','不需要檢查','隨意操作'], ans:1, explain:'起錨時應緩慢操作，檢查錨鏈有無纏繞，確認錨離底後再行駛。', ref:'考試手冊第二章'},
+{id:'q64', topic:'a2', part:'A', q:'為什麼不能在航道內拋錨？', opts:['水太深','妨礙其他船隻航行','海床太硬','法律沒有禁止'], ans:1, explain:'航道內拋錨會妨礙其他船隻正常航行，造成碰撞危險，屬違法行為。', ref:'考試手冊第二章'},
+{id:'q65', topic:'a2', part:'A', q:'錨泊時風向改變應注意什麼？', opts:['不需要注意','檢查船位和錨鏈張力','立即起錨','關閉引擎'], ans:1, explain:'風向改變時應檢查船位是否移動，錨鏈張力是否正常，防止走錨。', ref:'考試手冊第二章'},
+{id:'q66', topic:'a2', part:'A', q:'「備錨」是什麼意思？', opts:['已經拋下錨','錨已準備好可隨時拋下','錨在維修中','錨已損壞'], ans:1, explain:'備錨是指將錨準備好，隨時可以在緊急情況下拋下。', ref:'考試手冊第二章'},
+{id:'q67', topic:'a2', part:'A', q:'夜間錨泊時除了顯示燈號，還應注意什麼？', opts:['不需要注意','保持值班並定期檢查船位','關閉所有燈光','加大音量播放音樂'], ans:1, explain:'夜間錨泊應保持值班，定期檢查船位、錨鏈狀態和周圍船隻動態。', ref:'考試手冊第二章'},
+{id:'q68', topic:'a2', part:'A', q:'錨鏈的材質通常是什麼？', opts:['鋁合金','鍍鋅鋼','塑膠','木頭'], ans:1, explain:'錨鏈通常由鍍鋅鋼製成，具有足夠的強度和耐腐蝕性。', ref:'考試手冊第二章'},
+{id:'q69', topic:'a2', part:'A', q:'什麼是「地中海式繫泊」？', opts:['在地中海錨泊','船尾朝向碼頭並用錨固定船頭','側面靠泊','浮筒繫泊'], ans:1, explain:'地中海式繫泊是船尾朝向碼頭，船頭用錨鏈固定的一種繫泊方式。', ref:'考試手冊第二章'},
+{id:'q70', topic:'a2', part:'A', q:'錨泊時如何減少搖擺？', opts:['加快引擎轉速','調整錨鏈長度和拋第二個錨','關閉引擎','移動所有物品到一側'], ans:1, explain:'可通過調整錨鏈長度或拋第二個錨（八字錨）來減少船隻搖擺。', ref:'考試手冊第二章'},
+{id:'q71', topic:'a2', part:'A', q:'什麼是「錨抓力」？', opts:['錨的重量','錨抓住海床後抵抗拉力的能力','錨鏈長度','水深'], ans:1, explain:'錨抓力是錨抓住海床後抵抗外力拉動的能力，受海床類型和錨鏈角度影響。', ref:'考試手冊第二章'},
+{id:'q72', topic:'a2', part:'A', q:'錨鏈角度對抓力有什麼影響？', opts:['角度越大抓力越強','角度越小（越平）抓力越強','角度不影響抓力','90度角抓力最強'], ans:1, explain:'錨鏈角度越小（越接近水平），向下的分力越大，錨的抓力越強。', ref:'考試手冊第二章'},
+{id:'q73', topic:'a2', part:'A', q:'拋錨時應如何操作？', opts:['全速前進拋錨','慢速後退時拋錨','快速倒車拋錨','隨意拋下'], ans:1, explain:'拋錨時應慢速後退，緩慢放出錨鏈，讓錨平穩落入海床。', ref:'考試手冊第二章'},
+{id:'q74', topic:'a2', part:'A', q:'錨泊時應與其他船隻保持多少距離？', opts:['不需要保持距離','至少保持足夠的迴旋距離','只要不碰撞就行','1米即可'], ans:1, explain:'錨泊時應與其他船隻保持足夠的迴旋距離，考慮風向和水流變化。', ref:'考試手冊第二章'},
+{id:'q75', topic:'a2', part:'A', q:'什麼是「錨泊燈」？', opts:['用來照明的燈','標示船隻正在錨泊的燈','裝飾燈','導航燈'], ans:1, explain:'錨泊燈是標示船隻正在錨泊狀態的燈號，夜間為白色環照燈。', ref:'考試手冊第二章'},
+{id:'q76', topic:'a2', part:'A', q:'錨泊前應檢查什麼？', opts:['只需檢查水深','錨、錨鏈、卸扣、連接處是否完好','只需檢查天氣','不需檢查'], ans:1, explain:'錨泊前應檢查錨、錨鏈、卸扣和連接處是否完好無損。', ref:'考試手冊第二章'},
+{id:'q77', topic:'a2', part:'A', q:'風暴來臨前錨泊應做什麼準備？', opts:['不需要準備','放長錨鏈、備好引擎、檢查繫泊','起錨離開','只等待風暴過去'], ans:1, explain:'風暴前應放長錨鏈增加抓力，備好引擎隨時啟動，檢查所有繫泊裝置。', ref:'考試手冊第二章'},
+{id:'q78', topic:'a2', part:'A', q:'什麼是「八字錨」？', opts:['用8個錨','兩個錨以八字形形拋下','錨鏈呈8字形','8倍水深'], ans:1, explain:'八字錨是同時拋下兩個錨，以八字形分開，減少船隻搖擺。', ref:'考試手冊第二章'},
+{id:'q79', topic:'a2', part:'A', q:'錨泊時船隻受潮汐影響會怎樣？', opts:['不受影響','船頭會隨潮流方向改變而轉動','只影響水深','只影響速度'], ans:1, explain:'潮汐方向改變時，船隻會隨潮流方向轉動，錨鏈受力方向也會改變。', ref:'考試手冊第二章'},
+{id:'q80', topic:'a2', part:'A', q:'起錨後應確認什麼？', opts:['不需確認','確認錨已完全離開水面並固定好','確認天氣','確認時間'], ans:1, explain:'起錨後應確認錨已完全離開水面，並妥善固定在錨架上。', ref:'考試手冊第二章'},
+{id:'q81', topic:'a2', part:'A', q:'什麼是「錨標」？', opts:['標示航道的浮標','標示錨位的浮標','錨上的裝飾','錨鏈標記'], ans:1, explain:'錨標是標示船隻錨位的浮標，讓其他船隻知道此處有錨。', ref:'考試手冊第二章'},
+{id:'q82', topic:'a2', part:'A', q:'錨鏈上的「轉環」有什麼作用？', opts:['裝飾用','防止錨鏈纏繞','增加重量','連接錨'], ans:1, explain:'轉環（swivel）安裝在錨鏈上，防止錨鏈因船隻旋轉而纏繞。', ref:'考試手冊第二章'},
+{id:'q83', topic:'a2', part:'A', q:'夜間發現鄰近船隻走錨應如何處理？', opts:['不理會','用VHF或聲號警告對方','自己起錨離開','鳴笛5短聲'], ans:1, explain:'發現鄰船走錨應嘗試用VHF或聲號警告對方，同時做好自己避險準備。', ref:'考試手冊第二章'},
+{id:'q84', topic:'a2', part:'A', q:'錨泊時為什麼要記錄錨位？', opts:['無實際用途','方便檢查是否走錨','計算距離','記錄天氣'], ans:1, explain:'記錄錨位（GPS坐標或陸標方位）方便定期檢查船位，及時發現走錨。', ref:'考試手冊第二章'},
+{id:'q85', topic:'a2', part:'A', q:'小型船隻最多可錨泊多久？', opts:['不能錨泊','視天氣和補給而定','只能錨泊1小時','只能錨泊1天'], ans:1, explain:'錨泊時間視天氣狀況、補給情況和海事規定而定。', ref:'考試手冊第二章'},
+{id:'q86', topic:'a2', part:'A', q:'錨鏈末端應有什麼安全措施？', opts:['不需措施','末端用細繩固定到船體（應急釋放）','焊接固定','綁在甲板上'], ans:1, explain:'錨鏈末端應用細繩（保險繩）固定到船體，緊急情況下可切斷釋放錨鏈。', ref:'考試手冊第二章'},
+{id:'q87', topic:'a2', part:'A', q:'拋錨後多久應檢查船位？', opts:['不需要檢查','立即檢查並定期重複','等到天亮再檢查','第二天檢查'], ans:1, explain:'拋錨後應立即檢查船位確認錨已抓穩，之後定期重複檢查。', ref:'考試手冊第二章'},
+{id:'q88', topic:'a2', part:'A', q:'什麼是「走錨」（爬錨）？', opts:['錨斷裂','錨失去抓力在海床上滑動','錨鏈纏繞','錨浮出水面'], ans:1, explain:'走錨是指錨失去對海床的抓力，被外力拖動在海床上滑動，船位開始漂移。', ref:'考試手冊第二章'},
+{id:'q89', topic:'a2', part:'A', q:'錨泊時遇到大浪應如何處理？', opts:['不需要處理','放長錨鏈並備好引擎','起錨離開','加速'], ans:1, explain:'大浪中應放長錨鏈增加抓力，備好引擎隨時應對走錨。', ref:'考試手冊第二章'},
+{id:'q90', topic:'a2', part:'A', q:'錨的類型中，以下哪種抓力最好？', opts:['蘑菇錨','丹福斯錨（燕尾錨）','固定爪錨','自製錨'], ans:1, explain:'丹福斯錨（Danforth）在沙泥底抓力優異，是小型船隻常用類型。', ref:'考試手冊第二章'},
+{id:'q91', topic:'a3', part:'A', q:'以下哪項不是啟航前檢查項目？', opts:['查看天氣預報','關斷石油氣','檢查救生設備','測試VHF'], ans:1, explain:'關斷石油氣是抵港後的檢查項目，不是啟航前。', ref:'考試手冊第三章'},
+{id:'q92', topic:'a3', part:'A', q:'啟航前應檢查什麼天氣信息？', opts:['只需看天空','天文台天氣預報和海況報告','只看溫度','不需檢查天氣'], ans:1, explain:'啟航前應查看天文台天氣預報和海況報告，確保航行安全。', ref:'考試手冊第三章'},
+{id:'q93', topic:'a3', part:'A', q:'啟航前應檢查救生衣的什麼？', opts:['顏色是否好看','數量是否足夠、是否在易取位置','品牌','價格'], ans:1, explain:'應檢查救生衣數量是否足夠（每人一件）、是否在易取位置。', ref:'考試手冊第三章'},
+{id:'q94', topic:'a3', part:'A', q:'啟航前測試VHF的目的是什麼？', opts:['播放音樂','確認通訊設備正常工作','裝飾用途','不需測試'], ans:1, explain:'測試VHF是確認通訊設備正常工作，確保緊急時能與外界聯繫。', ref:'考試手冊第三章'},
+{id:'q95', topic:'a3', part:'A', q:'啟航前應檢查滅火器的什麼？', opts:['顏色','是否在有效期內、壓力是否正常','重量','品牌'], ans:1, explain:'應檢查滅火器是否在有效期內、壓力表指針是否在綠色區域。', ref:'考試手冊第三章'},
+{id:'q96', topic:'a3', part:'A', q:'抵港後應做的第一件事是什麼？', opts:['關閉引擎','妥善繫泊','關斷石油氣','檢查蓄電池'], ans:1, explain:'抵港後第一件事是妥善繫泊，確保船隻安全固定。', ref:'考試手冊第三章'},
+{id:'q97', topic:'a3', part:'A', q:'抵港後為什麼要關斷石油氣？', opts:['節省氣體','防止洩漏引發火災或爆炸','法律規定必須關','無實際作用'], ans:1, explain:'關斷石油氣是防止在無人看管時發生洩漏，引發火災或爆炸。', ref:'考試手冊第三章'},
+{id:'q98', topic:'a3', part:'A', q:'啟航前應檢查航行燈的什麼？', opts:['顏色是否美觀','所有燈是否正常工作','燈罩是否乾淨','不需檢查'], ans:1, explain:'應檢查所有航行燈（前白燈、左紅右綠側燈、尾燈）是否正常工作。', ref:'考試手冊第三章'},
+{id:'q99', topic:'a3', part:'A', q:'啟航前檢查艙蓋密封性的目的是什麼？', opts:['防水進入船艙','防止漏水導致沉船','美觀','不需要檢查'], ans:1, explain:'檢查艙蓋密封性是防止水進入船艙，避免因進水導致沉船。', ref:'考試手冊第三章'},
+{id:'q100', topic:'a3', part:'A', q:'啟航前應檢查羅經的什麼？', opts:['顏色','讀數是否正常、有無偏差','重量','不需檢查'], ans:1, explain:'應檢查羅經讀數是否正常，確認有無異常偏差。', ref:'考試手冊第三章'},
+{id:'q101', topic:'a3', part:'A', q:'啟航前檢查繫固物品的目的是什麼？', opts:['美觀','防止物品在風浪中移動造成危險','節省空間','不需檢查'], ans:1, explain:'繫固物品是防止在風浪中物品移動，影響船隻穩定性或傷及人員。', ref:'考試手冊第三章'},
+{id:'q102', topic:'a3', part:'A', q:'啟航前為什麼要告知親友航行計劃？', opts:['無實際意義','以便失聯時能及時搜救','炫耀','不需要告知'], ans:1, explain:'告知親友航行計劃是安全措施，萬一失聯時搜救人員有據可查。', ref:'考試手冊第三章'},
+{id:'q103', topic:'a3', part:'A', q:'啟航前檢查污水泵的目的是什麼？', opts:['測試噪音','確保能排出船內積水','節約用水','不需要檢查'], ans:1, explain:'檢查污水泵是確保能正常排出船內積水，防止船隻因進水沉沒。', ref:'考試手冊第三章'},
+{id:'q104', topic:'a3', part:'A', q:'啟航前檢查燃油和潤滑油的目的是什麼', opts:['計算費用','確保足夠完成航行並引擎正常運轉','檢查油質','不需要檢查'], ans:1, explain:'確保燃油和潤滑油足夠完成航行，並確認液位正常以保護引擎。', ref:'考試手冊第三章'},
+{id:'q105', topic:'a3', part:'A', q:'抵港後應檢查什麼？', opts:['只需關閉引擎','繫泊、艙蓋、設備、石油氣、蓄電池','只需通知親友','只需付費'], ans:1, explain:'抵港後應檢查：妥善繫泊、關好艙蓋、收好設備、關斷石油氣、檢查蓄電池。', ref:'考試手冊第三章'},
+{id:'q106', topic:'a3', part:'A', q:'啟航前檢查舵機的目的是什麼？', opts:['測試噪音','確保舵機正常工作以便控制航向','檢查外觀','不需要檢查'], ans:1, explain:'舵機是控制航向的關鍵設備，啟航前必須確認正常工作。', ref:'考試手冊第三章'},
+{id:'q107', topic:'a3', part:'A', q:'啟航前檢查錨纜的目的是什麼？', opts:['計算重量','確保緊急情況下能正常使用','裝飾用途','不需要檢查'], ans:1, explain:'檢查錨纜是確保緊急情況下錨泊設備能正常使用。', ref:'考試手冊第三章'},
+{id:'q108', topic:'a3', part:'A', q:'什麼是「止航安全檢查」？', opts:['出發前的檢查','抵港後的安全檢查','航行中的檢查','引擎檢查'], ans:1, explain:'止航安全檢查是指抵港後的安全檢查程序，包括繫泊、設備歸位等。', ref:'考試手冊第三章'},
+{id:'q109', topic:'a3', part:'A', q:'啟航前為什麼要規劃航線？', opts:['無實際意義','確保安全航行並計算燃油需求','浪費時間','不需要規劃'], ans:1, explain:'規劃航線可確保安全航行，避開危險區域，並計算燃油是否足夠。', ref:'考試手冊第三章'},
+{id:'q110', topic:'a3', part:'A', q:'啟航前檢查清單的順序重要嗎？', opts:['不重要','重要，應按系統順序檢查','隨意檢查即可','只需檢查一半'], ans:1, explain:'按照系統順序檢查可確保不遺漏任何項目，養成良好習慣。', ref:'考試手冊第三章'},
+{id:'q111', topic:'a3', part:'A', q:'抵港後為什麼要通知親友安全到達？', opts:['無實際意義','讓親友放心並完成安全閉環','炫耀','不需要通知'], ans:1, explain:'通知親友安全到達是完成安全閉環的重要步驟，萬一失聯可及時報警。', ref:'考試手冊第三章'},
+{id:'q112', topic:'a3', part:'A', q:'啟航前檢查蓄電池的目的是什麼？', opts:['計算電費','確保電力充足供應引擎啟動和設備使用','檢查外觀','不需要檢查'], ans:1, explain:'蓄電池為引擎啟動和電子設備供電，必須確認電量充足。', ref:'考試手冊第三章'},
+{id:'q113', topic:'a3', part:'A', q:'啟航前如果發現設備故障應如何處理？', opts:['忽略繼續出航','修復後才能出航','記錄下來回來再修','只報告不修理'], ans:1, explain:'發現設備故障應修復後才能出航，確保航行安全。', ref:'考試手冊第三章'},
+{id:'q114', topic:'a3', part:'A', q:'抵港後檢查艙蓋的目的是什麼？', opts:['美觀','確保防水密封防止進水','通風','不需要檢查'], ans:1, explain:'檢查艙蓋是確保防水密封，防止雨水或波浪水進入船艙。', ref:'考試手冊第三章'},
+{id:'q115', topic:'a3', part:'A', q:'啟航前應檢查什麼通風設備？', opts:['不需檢查','機艙和船艙通風是否正常','只需檢查窗戶','只需檢查空調'], ans:1, explain:'應檢查機艙和船艙通風是否正常，防止有害氣體積聚。', ref:'考試手冊第三章'},
+{id:'q116', topic:'a4', part:'A', q:'使用交叉方位法定位時，兩條方位線夾角為多少度時精度最高？', opts:['30°','45°','90°','180°'], ans:2, explain:'兩條方位線夾角近90°時，交叉定位的精度最高。', ref:'考試手冊第四章'},
+{id:'q117', topic:'a4', part:'A', q:'羅經差等於什麼？', opts:['磁差×自差','磁差+自差','磁差-自差','磁差÷自差'], ans:1, explain:'羅經差 = 磁差 + 自差。', ref:'考試手冊第四章'},
+{id:'q118', topic:'a4', part:'A', q:'根據CADET規律，羅經航向加東偏差等於什麼？', opts:['磁航向','真航向','羅經航向','偏航角'], ans:1, explain:'CADET = Compass Add East to get True。羅經航向 + 東偏差 = 真航向。', ref:'考試手冊第四章'},
+{id:'q119', topic:'a4', part:'A', q:'根據CADET規律，羅經航向減西偏差等於什麼？', opts:['磁航向','真航向','羅經航向','偏航角'], ans:1, explain:'CADET：西偏差則減。羅經航向 - 西偏差 = 真航向。', ref:'考試手冊第四章'},
+{id:'q120', topic:'a4', part:'A', q:'海圖上的水深單位通常是什麼？', opts:['米','英尺','碼','公里'], ans:0, explain:'香港海圖水深單位為米。', ref:'考試手冊第四章'},
+{id:'q121', topic:'a4', part:'A', q:'海圖上紅色浮標代表什麼（IALA A區）？', opts:['右舷側面標','左舷側面標','安全水域標','孤立危險標'], ans:1, explain:'IALA A區：進港時紅色為左舷側面標（紅罐左）。', ref:'考試手冊第四章'},
+{id:'q122', topic:'a4', part:'A', q:'什麼是「磁差」？', opts:['羅經的誤差','真北與磁北之間的夾角','風的偏差','水流偏差'], ans:1, explain:'磁差（Variation）是真北與磁北之間的夾角，因地理位置而異。', ref:'考試手冊第四章'},
+{id:'q123', topic:'a4', part:'A', q:'什麼是「自差」？', opts:['天氣誤差','船上磁場對羅經造成的偏差','水深差異','風速差異'], ans:1, explain:'自差（Deviation）是船上鐵質物品和電氣設備的磁場對羅經造成的偏差。', ref:'考試手冊第四章'},
+{id:'q124', topic:'a4', part:'A', q:'真航向轉換為羅經航向的公式是什麼？', opts:['真航向+東偏差','真航向-東偏差','真航向×偏差','真航向÷偏差'], ans:1, explain:'真航向-東偏差=羅經航向（CADET反推）。', ref:'考試手冊第四章'},
+{id:'q125', topic:'a4', part:'A', q:'海圖上「⊕」符號代表什麼？', opts:['危險物','孤立危險物（水面以下）','燈塔','浮標'], ans:1, explain:'「⊕」符號代表水面以下的孤立危險物（如暗礁）。', ref:'考試手冊第四章'},
+{id:'q126', topic:'a4', part:'A', q:'什麼是「航向」？', opts:['船的實際路徑','船頭指向的方向','風的方向','水流方向'], ans:1, explain:'航向是船頭指向的方向，與實際航跡可能因風流影響而不同。', ref:'考試手冊第四章'},
+{id:'q127', topic:'a4', part:'A', q:'什麼是「航跡」？', opts:['船頭方向','船在水面上的實際路徑','風的方向','羅經讀數'], ans:1, explain:'航跡是船在水面上的實際運動路徑，受風流影響可能偏離航向。', ref:'考試手冊第四章'},
+{id:'q128', topic:'a4', part:'A', q:'海圖上紅白直條浮標代表什麼？', opts:['左舷標','右舷標','安全水域標','禁航區標'], ans:2, explain:'紅白直條浮標是安全水域標，表示可以從任何方向接近。', ref:'考試手冊第四章'},
+{id:'q129', topic:'a4', part:'A', q:'ETA的計算需要什麼數據？', opts:['只需距離','距離÷速度=時間','只需速度','不需計算'], ans:1, explain:'ETA（預計到達時間）= 剩餘距離 ÷ 航速。', ref:'考試手冊第四章'},
+{id:'q130', topic:'a4', part:'A', q:'什麼是「推算船位」（DR）？', opts:['GPS定位','根據航向、航速和時間推算的船位','雷達定位','目測定位'], ans:1, explain:'推算船位是根據最後已知船位，加上航向、航速和時間推算出的預估船位。', ref:'考試手冊第四章'},
+{id:'q131', topic:'a4', part:'A', q:'交叉定位法至少需要幾條方位線？', opts:['1條','2條','3條','4條'], ans:1, explain:'交叉定位法至少需要2條方位線，3條以上更精確。', ref:'考試手冊第四章'},
+{id:'q132', topic:'a4', part:'A', q:'海圖上的等深線有什麼作用？', opts:['裝飾用','顯示水深相同的區域','顯示風向','顯示洋流'], ans:1, explain:'等深線連接水深相同的點，幫助判斷水深和淺水區域。', ref:'考試手冊第四章'},
+{id:'q133', topic:'a4', part:'A', q:'海圖上燈塔的符號旁通常標示什麼信息？', opts:['價格','燈高、射程、燈質（閃爍週期）','建造年份','維護電話'], ans:1, explain:'燈塔符號旁標示燈高、射程和燈質（如每10秒閃1次）等信息。', ref:'考試手冊第四章'},
+{id:'q134', topic:'a4', part:'A', q:'什麼是「導標」？', opts:['導遊的標誌','兩個標誌連線指示安全航線的標誌','禁止進入的標的標誌','漁業標誌'], ans:1, explain:'導標是兩個前後設置的標誌，船舶沿其連線航行可保持在安全航道上。', ref:'考試手冊第四章'},
+{id:'q135', topic:'a4', part:'A', q:'海圖上「Wk」標記代表什麼？', opts:['水','沉船（wreck）','風','警告'], ans:1, explain:'「Wk」代表沉船（wreck），航行時應避開。', ref:'考試手冊第四章'},
+{id:'q136', topic:'a4', part:'A', q:'使用羅經定位時，為什麼要修正羅經差？', opts:['不需要修正','因為羅經讀數包含磁差和自差誤差','提高精度','美觀'], ans:1, explain:'羅經讀數包含磁差和自差，必須修正才能得到準確的真方位。', ref:'考試手冊第四章'},
+{id:'q137', topic:'a4', part:'A', q:'海圖上的「禁止碇泊區」用什麼表示？', opts:['紅色區域','文字標記「禁止碇泊」','特定符號','以上都有可能'], ans:3, explain:'禁止碇泊區可能用紅色區域、文字標記或特定符號表示。', ref:'考試手冊第四章'},
+{id:'q138', topic:'a4', part:'A', q:'海圖比例尺越大代表什麼？', opts:['範圍越大','顯示的細節越多','水深越深','越不準確'], ans:1, explain:'比例尺越大（如1:10,000），顯示的區域越小但細節越多，精度越高。', ref:'考試手冊第四章'},
+{id:'q139', topic:'a4', part:'A', q:'航行中如何確認推算船位的準確性？', opts:['不需要確認','通過陸標、GPS或雷達定位對比','看天色','估計即可'], ans:1, explain:'應定期用陸標、GPS或雷達定位來校正推算船位的累積誤差。', ref:'考試手冊第四章'},
+{id:'q140', topic:'a4', part:'A', q:'海圖上的水流箭頭表示什麼？', opts:['風向','潮流方向和速度','航線','魚群方向'], ans:1, explain:'水流箭頭表示潮流的方向和速度，對航行計劃有重要影響。', ref:'考試手冊第四章'},
+{id:'q141', topic:'a4', part:'A', q:'什麼是「海圖基準面」？', opts:['海圖的底色','測量水深的參考面','海圖的價格基準','船的吃水線'], ans:1, explain:'海圖基準面是測量水深的參考面，通常取最低天文潮面（LAT）。', ref:'考試手冊第四章'},
+{id:'q142', topic:'a4', part:'A', q:'航行時為什麼要經常定位？', opts:['無實際意義','確認船位在計劃航線上，及時發現偏航','練習技能','浪費時間'], ans:1, explain:'經常定位可確認船位在計劃航線上，及時發現偏航並修正。', ref:'考試手冊第四章'},
+{id:'q143', topic:'a4', part:'A', q:'海圖上虛線表示什麼？', opts:['電纜','推薦航線或限制線','沉船','浮標'], ans:1, explain:'虛線通常表示推薦航線或限制線。', ref:'考試手冊第四章'},
+{id:'q144', topic:'a4', part:'A', q:'如何在海圖上畫出計劃航線？', opts:['隨意畫','用平行尺從出發點到目的點畫直線，標注航向和距離','用鉛筆隨意標記','不需要畫'], ans:1, explain:'應使用平行尺畫出航線，標注每個航段的真航向和距離。', ref:'考試手冊第四章'},
+{id:'q145', topic:'a4', part:'A', q:'海圖上「Obstn」標記代表什麼？', opts:['觀測站','障礙物','海洋研究所','漁場'], ans:1, explain:'「Obstn」代表障礙物（Obstruction），航行時應避開。', ref:'考試手冊第四章'},
+{id:'q146', topic:'a5', part:'A', q:'漲潮是指什麼？', opts:['水位下降','水位上升','水流停止','風向改變'], ans:1, explain:'漲潮（Flood）是指水位逐漸上升的過程。', ref:'考試手冊第五章'},
+{id:'q147', topic:'a5', part:'A', q:'退潮是指什麼？', opts:['水位上升','水位下降','水流停止','風向改變'], ans:1, explain:'退潮（Ebb）是指水位逐漸下降的過程。', ref:'考試手冊第五章'},
+{id:'q148', topic:'a5', part:'A', q:'大潮（Spring Tide）發生在什麼時候？', opts:['滿月時','新月或滿月時（日月同線）','上弦月時','任何時候'], ans:1, explain:'大潮發生在新月和滿月時，太陽和月球的引力疊加。', ref:'考試手冊第五章'},
+{id:'q149', topic:'a5', part:'A', q:'小潮（Neap Tide）發生在什麼時候？', opts:['新月時','上弦月或下弦月時（日月成直角）','滿月時','任何時候'], ans:1, explain:'小潮發生在上弦月和下弦月時，太陽和月球的引力互相抵消。', ref:'考試手冊第五章'},
+{id:'q150', topic:'a5', part:'A', q:'潮汐表的主要用途是什麼？', opts:['預測天氣','預測某地某時的潮高和潮時','計算距離','測量水溫'], ans:1, explain:'潮汐表用於預測某地某時的潮高和潮時，對航行安全至關重要。', ref:'考試手冊第五章'},
+{id:'q151', topic:'a5', part:'A', q:'淺水區在低潮時應注意什麼？', opts:['不需要注意','確認水深是否足夠船隻通過','加速通過','拋錨等待'], ans:1, explain:'淺水區低潮時應確認水深是否大於船隻吃水深度，防止擱淺。', ref:'考試手冊第五章'},
+{id:'q152', topic:'a5', part:'A', q:'潮流對航行有什麼影響？', opts:['無影響','影響船速和航向','只影響帆船','只影響錨泊'], ans:1, explain:'潮流會影響船速（順流加、逆流減）和航向（橫流推移）。', ref:'考試手冊第五章'},
+{id:'q153', topic:'a5', part:'A', q:'什麼是「潮差」？', opts:['潮流速度','高潮與低潮之間的水位差','水深','溫度差'], ans:1, explain:'潮差是高潮與低潮之間的水位差。', ref:'考試手冊第五章'},
+{id:'q154', topic:'a5', part:'A', q:'航行時如何利用潮流？', opts:['不需要利用','順流航行節省燃料和時間','逆流航行','關閉引擎隨流漂移'], ans:1, explain:'計劃航行時應考慮潮流方向，盡量順流航行以節省燃料和時間。', ref:'考試手冊第五章'},
+{id:'q155', topic:'a5', part:'A', q:'水流圖有什麼作用？', opts:['顯示水溫','顯示潮流方向和速度','顯示風向','顯示水深'], ans:1, explain:'水流圖顯示不同地點的潮流方向和速度，幫助航行計劃。', ref:'考試手冊第五章'},
+{id:'q156', topic:'a5', part:'A', q:'香港天文台提供什麼潮汐信息？', opts:['只提供天氣','潮汐表、水流圖和實時潮高','只提供風速','不提供潮汐信息'], ans:1, explain:'香港天文台提供潮汐表、水流圖和實時潮高數據。', ref:'考試手冊第五章'},
+{id:'q157', topic:'a5', part:'A', q:'靠泊時如何利用潮汐？', opts:['不需要利用','漲潮時靠泊更容易','退潮時靠泊','潮汐不影響靠泊'], ans:1, explain:'漲潮時水位上升，船隻更容易進入泊位，可利用漲潮流輔助靠泊。', ref:'考試手冊第五章'},
+{id:'q158', topic:'a5', part:'A', q:'什麼是「高潮」和「低潮」？', opts:['風大和風小','潮水最高和最低的時刻','浪大和浪小','溫度高和低'], ans:1, explain:'高潮是潮水漲到最高的時刻，低潮是潮水退到最低的時刻。', ref:'考試手冊第五章'},
+{id:'q159', topic:'a5', part:'A', q:'航行中計算水深時需要考慮什麼？', opts:['只需海圖水深','海圖水深加上潮高','只需潮高','不需要計算'], ans:1, explain:'實際水深 = 海圖水深 + 潮高（相對海圖基準面）。', ref:'考試手冊第五章'},
+{id:'q160', topic:'a5', part:'A', q:'什麼是「海圖基準面」與潮高的關係？', opts:['無關係','潮高是相對於海圖基準面的水位變化','潮高等於水深','基準面等於海平面'], ans:1, explain:'潮高是相對於海圖基準面（通常為最低天文潮面）的水位變化值。', ref:'考試手冊第五章'},
+{id:'q161', topic:'a5', part:'A', q:'大潮時潮差通常怎樣？', opts:['潮差小','潮差大','潮差不變','無法預測'], ans:1, explain:'大潮時日月引力疊加，潮差通常比平均潮差大。', ref:'考試手冊第五章'},
+{id:'q162', topic:'a5', part:'A', q:'橫流對航行中的船有什麼影響？', opts:['無影響','使船向下流方向偏移','加快船速','減慢船速'], ans:1, explain:'橫流會推動船向下流方向偏移，需要修正航向以保持計劃航線。', ref:'考試手冊第五章'},
+{id:'q163', topic:'a5', part:'A', q:'什麼是「潮汐流」？', opts:['河水流動','因潮汐漲退引起的水平方向水流','風吹動的水流','船行引起的水流'], ans:1, explain:'潮汐流是因潮汐漲退引起的水平方向水流。', ref:'考試手冊第五章'},
+{id:'q164', topic:'a5', part:'A', q:'錨泊時為什麼要考慮潮汐？', opts:['不需要考慮','潮汐改變會影響錨鏈張力和船位','只影響水深','只影響溫度'], ans:1, explain:'潮汐方向和強度改變會影響錨鏈張力和船位，可能導致走錨。', ref:'考試手冊第五章'},
+{id:'q165', topic:'a5', part:'A', q:'如何從潮汐表得知某時刻的潮高？', opts:['無法得知','查閱潮汐表對應日期和時間的數據','計算風速','測量水溫'], ans:1, explain:'查閱潮汐表中對應地點、日期和時間的數據即可得知潮高。', ref:'考試手冊第五章'},
+{id:'q166', topic:'a5', part:'A', q:'潮流在海峽和水道中通常怎樣？', opts:['不流動','比開闊水域更強','比開闊水域更弱','完全靜止'], ans:1, explain:'海峽和水道因地形收窄，潮流速度通常比開闊水域更強。', ref:'考試手冊第五章'},
+{id:'q167', topic:'a5', part:'A', q:'什麼是「轉流」？', opts:['船轉向','潮流方向從漲潮變為退潮或反之','風向改變','船速改變'], ans:1, explain:'轉流是指潮流方向從漲潮流變為退潮流或反之的時刻。', ref:'考試手冊第五章'},
+{id:'q168', topic:'a5', part:'A', q:'航行中如何修正潮流造成的偏移？', opts:['不需要修正','調整航向以補償橫流的推移','加速衝過去','拋錨等待'], ans:1, explain:'應調整航向（向上流方向偏轉）以補償橫流的推移。', ref:'考試手冊第五章'},
+{id:'q169', topic:'a5', part:'A', q:'海圖上標注的水深基準面是什麼？', opts:['海平面','最低天文潮面（LAT）','平均海面','最高潮面'], ans:1, explain:'海圖水深基準面通常為最低天文潮面（LAT），確保實際水深通常大於海圖標示值。', ref:'考試手冊第五章'},
+{id:'q170', topic:'a5', part:'A', q:'什麼時候潮流最強？', opts:['低潮時','高潮和低潮之間（轉流前後）','高潮時','無規律'], ans:1, explain:'潮流在高潮和低潮之間的中間時段最強，轉流時刻流速最弱。', ref:'考試手冊第五章'},
+{id:'q171', topic:'a5', part:'A', q:'計算航行時間時需要考慮什麼潮汐因素？', opts:['不需考慮','順流/逆流對船速的影響','只考慮水深','只考慮風向'], ans:1, explain:'順流會增加實際船速，逆流會減慢，計算航行時間時必須考慮。', ref:'考試手冊第五章'},
+{id:'q172', topic:'a5', part:'A', q:'什麼是「潮流圖」？', opts:['天氣圖','顯示潮流方向和速度的航海圖','水深圖','風向圖'], ans:1, explain:'潮流圖顯示不同地點和時間的潮流方向和速度，是航行計劃的重要參考。', ref:'考試手冊第五章'},
+{id:'q173', topic:'a5', part:'A', q:'擱淺時為什麼要知道潮汐情況？', opts:['不需要知道','判斷何時水位最高以便脫淺','計算費用','報告天氣'], ans:1, explain:'了解潮汐情況可判斷下一個高潮時間，利用最高水位嘗試脫淺。', ref:'考試手冊第五章'},
+{id:'q174', topic:'a5', part:'A', q:'潮汐受什麼天文因素影響？', opts:['只受月球影響','月球和太陽引力','只受太陽影響','不受天文因素影響'], ans:1, explain:'潮汐主要受月球和太陽引力影響，月球影響最大。', ref:'考試手冊第五章'},
+{id:'q175', topic:'a5', part:'A', q:'淺水區在高潮時與低潮時的水深差異取決於什麼？', opts:['風速','潮差','水溫','鹽度'], ans:1, explain:'水深差異取決於潮差，潮差越大高低潮水深差異越大。', ref:'考試手冊第五章'},
+{id:'q176', topic:'a5', part:'A', q:'航行計劃中如何使用潮汐數據？', opts:['不需要使用','選擇最佳出發時間和航線','只用於錨泊','只用於靠泊'], ans:1, explain:'利用潮汐數據選擇最佳出發時間、航線和預計到達時間。', ref:'考試手冊第五章'},
+{id:'q177', topic:'a5', part:'A', q:'潮汐對港口作業有什麼影響？', opts:['無影響','影響泊位水深和船隻進出港時間','只影響漁船','只影響大型船隻'], ans:1, explain:'潮汐影響港口水深和船隻進出港的最佳時間。', ref:'考試手冊第五章'},
+{id:'q178', topic:'a5', part:'A', q:'什麼是「感潮河段」？', opts:['任何河流','受潮汐影響的河段','深水河段','淺水河段'], ans:1, explain:'感潮河段是指河流下游受潮汐漲退影響的河段。', ref:'考試手冊第五章'},
+{id:'q179', topic:'a5', part:'A', q:'潮汐預報的準確性受什麼影響？', opts:['不受影響','天氣（風和氣壓）會影響實際潮高','只受月球影響','完全準確'], ans:1, explain:'強風和氣壓變化會影響實際潮高，使預報與實際有偏差。', ref:'考試手冊第五章'},
+{id:'q180', topic:'a5', part:'A', q:'航行中如何實時了解當前潮高？', opts:['無法了解','查看岸上潮標或使用潮位儀','估算即可','看天色判斷'], ans:1, explain:'可通過岸上潮標或船上安裝的潮位儀實時了解當前潮高。', ref:'考試手冊第五章'},
+{id:'q181', topic:'a6', part:'A', q:'有限能見度時，機動船在航應每隔多久鳴放聲號？', opts:['1分鐘','不超過2分鐘','3分鐘','5分鐘'], ans:1, explain:'機動船在航時，每隔不超過2分鐘鳴一長聲。', ref:'考試手冊第六章'},
+{id:'q182', topic:'a6', part:'A', q:'霧中停船（對水無移動）的機動船應鳴放什麼聲號？', opts:['一長聲','兩長聲','三短聲','一長兩短'], ans:1, explain:'停船（對水無移動）的機動船每隔不超過2分鐘鳴兩長聲。', ref:'考試手冊第六章'},
+{id:'q183', topic:'a6', part:'A', q:'霧中在航但已停車且不對水移動的船應鳴放什麼？', opts:['一長聲','兩長聲','三短聲','五短聲'], ans:1, explain:'已停車且不對水移動的船每隔不超過2分鐘鳴兩長聲。', ref:'考試手冊第六章'},
+{id:'q184', topic:'a6', part:'A', q:'霧中航行應使用什麼速度？', opts:['全速','安全航速（能及時停船的速度）','最慢速度','固定速度'], ans:1, explain:'霧中應使用安全航速，能及時採取有效避碰行動。', ref:'考試手冊第六章'},
+{id:'q185', topic:'a6', part:'A', q:'霧中航行時不應做的事是什麼？', opts:['減速','鳴放聲號','使用雷達','高速航行'], ans:3, explain:'霧中不應高速航行，應減速並使用雷達和聲號。', ref:'考試手冊第六章'},
+{id:'q186', topic:'a6', part:'A', q:'霧中航行時應派什麼人值班？', opts:['不需要值班','足夠人手加強瞭望','只派一人','自動駕駛即可'], ans:1, explain:'霧中應派足夠人手加強瞭望，聽覺和視覺並用。', ref:'考試手冊第六章'},
+{id:'q187', topic:'a6', part:'A', q:'霧中聽到前方有船鳴放聲號應怎麼做？', opts:['加速通過','減速或停船，備好好錨','鳴笛回應後繼續','不理會'], ans:1, explain:'聽到前方有船應立即減速或停船，備好錨，謹慎判斷。', ref:'考試手冊第六章'},
+{id:'q188', topic:'a6', part:'A', q:'霧中錨泊的船應鳴放什麼聲號？', opts:['一長聲','急敲錨鐘約5秒','三短聲','五短聲'], ans:1, explain:'霧中錨泊的船應急敲錨鐘約5秒，每隔不超過2分鐘。', ref:'考試手冊第六章'},
+{id:'q189', topic:'a6', part:'A', q:'霧中航行使用雷達的目的是什麼？', opts:['娛樂','探測周圍船隻和陸地','測量水深','測量風速'], ans:1, explain:'雷達可在能見度不良時探測周圍船隻和陸地，幫助避碰和定位。', ref:'考試手冊第六章'},
+{id:'q190', topic:'a6', part:'A', q:'霧中航行應如何使用VHF？', opts:['播放音樂','在適當頻道廣播船位和意圖','關閉省電','只用頻道16'], ans:1, explain:'應在適當頻道廣播船位和航行意圖，但不可佔用頻道16（緊急頻道）。', ref:'考試手冊第六章'},
+{id:'q191', topic:'a6', part:'A', q:'霧中航行時應備好什麼？', opts:['食物','船錨','漁具','收音機'], ans:1, explain:'霧中應備好船錨，必要時可緊急錨泊避免碰撞。', ref:'考試手冊第六章'},
+{id:'q192', topic:'a6', part:'A', q:'什麼是「能見度不良」？', opts:['只有黑夜','霧、霾、大雨、沙塵等導致能見度受限','只有下雨','只有大風'], ans:1, explain:'能見度不良包括霧、霾、大雨、沙塵暴等任何導致能見度受限的情況。', ref:'考試手冊第六章'},
+{id:'q193', topic:'a6', part:'A', q:'霧中航行時碰撞風險如何判斷？', opts:['無法判斷','通過雷達觀測和聲號判斷','只靠視覺','靠感覺'], ans:1, explain:'通過雷達觀測和聆聽聲號來判斷碰撞風險。', ref:'考試手冊第六章'},
+{id:'q194', topic:'a6', part:'A', q:'霧中什麼船隻有優先權？', opts:['大型船','無法確定時應當停船讓路','快速船','所有船都讓路'], ans:1, explain:'霧中能見度不良，無法確定局面時，應當停船讓路是最安全的做法。', ref:'考試手冊第六章'},
+{id:'q195', topic:'a6', part:'A', q:'霧中航行時應檢查什麼設備？', opts:['只需檢查引擎','雷達、羅經、VHF、聲號設備','只需檢查燈光','不需檢查'], ans:1, explain:'霧中應確保雷達、羅經、VHF和聲號設備正常工作。', ref:'考試手冊第六章'},
+{id:'q196', topic:'a6', part:'A', q:'霧號的鳴放間隔是多久？', opts:['1分鐘','不超過2分鐘','5分鐘','10分鐘'], ans:1, explain:'霧號的鳴放間隔不超過2分鐘。', ref:'考試手冊第六章'},
+{id:'q197', topic:'a6', part:'A', q:'霧中受限於吃水的船應鳴放什麼？', opts:['一長聲','一長聲+兩短聲','兩長聲','三短聲'], ans:1, explain:'受限於吃水的船霧中鳴放一長聲加兩短聲。', ref:'考試手冊第六章'},
+{id:'q198', topic:'a6', part:'A', q:'霧中帆船在航應鳴放什麼聲號？', opts:['一長聲','每隔不超過2分鐘鳴一長聲加兩短聲','兩長聲','三短聲'], ans:1, explain:'帆船在航霧中每隔不超過2分鐘鳴一長聲加兩短聲。', ref:'考試手冊第六章'},
+{id:'q199', topic:'a6', part:'A', q:'霧中從事捕魚的船應鳴放什麼聲號？', opts:['一長聲','一長聲加兩短聲','兩長聲加一短聲','三短聲'], ans:2, explain:'從事捕魚的船霧中鳴放兩長聲加一短聲。', ref:'考試手冊第六章'},
+{id:'q200', topic:'a6', part:'A', q:'霧中引水船應鳴放什麼聲號？', opts:['一長聲','四短聲','一長聲加一短聲','兩長聲'], ans:1, explain:'引水船霧中鳴放四短聲。', ref:'考試手冊第六章'},
+{id:'q201', topic:'a6', part:'A', q:'霧中航行時如何確認自己船位？', opts:['無法確認','GPS、雷達和羅經配合使用','只靠估算','看天色'], ans:1, explain:'霧中應配合GPS、雷達和羅經確認船位。', ref:'考試手冊第六章'},
+{id:'q202', topic:'a6', part:'A', q:'霧中為什麼不能高速航行？', opts:['節省燃料','能見度低無法及時發現障礙物和船隻','法律禁止','引擎不能高速運轉'], ans:1, explain:'霧中能見度低，高速航行無法及時發現障礙物和船隻，無法及時停船。', ref:'考試手冊第六章'},
+{id:'q203', topic:'a6', part:'A', q:'霧中航行時應保持什麼狀態？', opts:['全速前進','高度警戒、減速、備錨','關閉引擎漂移','正常航行'], ans:1, explain:'霧中應保持高度警戒，減速航行，備好船錨。', ref:'考試手冊第六章'},
+{id:'q204', topic:'a6', part:'A', q:'霧中如何判斷前方是否有船？', opts:['無法判斷','通過雷達和聆聽聲號','只靠視覺','靠直覺'], ans:1, explain:'通過雷達掃描和聆聽霧號來判斷前方是否有船。', ref:'考試手冊第六章'},
+{id:'q205', topic:'a6', part:'A', q:'霧中航行時可以追越其他船嗎？', opts:['可以','不應追越','視情況而定','只有大型船可以'], ans:1, explain:'霧中不應追越其他船隻，應減速保持安全距離。', ref:'考試手冊第六章'},
+{id:'q206', topic:'a6', part:'A', q:'霧中航行時所有船隻都應鳴放聲號嗎？', opts:['只有機動船需要','是的，所有船隻都應鳴放','只有大型船需要','只有帆船需要'], ans:1, explain:'霧中所有在航或錨泊的船隻都應鳴放規定的聲號。', ref:'考試手冊第六章'},
+{id:'q207', topic:'a6', part:'A', q:'霧中航行時應記錄什麼？', opts:['不需要記錄','航向、船速、時間、聲號聽到時間','只記錄天氣','只記錄位置'], ans:1, explain:'應記錄航向、船速、時間和聽到其他船聲號的時間，便於事後分析。', ref:'考試手冊第六章'},
+{id:'q208', topic:'a6', part:'A', q:'霧中聽到正前方一長聲表示什麼？', opts:['有船在錨泊','有機動船在航向你駛來','有帆船','有漁船'], ans:1, explain:'一長聲表示有機動船在航，霧中每2分鐘鳴放。', ref:'考試手冊第六章'},
+{id:'q209', topic:'a6', part:'A', q:'霧中如何確定是否可以安全通過？', opts:['無法確定','根據雷達距離和對方聲號綜合判斷','直接通過','等霧散'], ans:1, explain:'根據雷達顯示的距離、對方聲號和航行方向綜合判斷是否可以安全通過。', ref:'考試手冊第六章'},
+{id:'q210', topic:'a6', part:'A', q:'霧中航行時備錨的目的是什麼？', opts:['裝飾用','緊急時拋錨停船避免碰撞','測量水深','固定船位'], ans:1, explain:'備錨是為了在緊急情況下能迅速拋錨停船，避免碰撞。', ref:'考試手冊第六章'},
+{id:'q211', topic:'a6', part:'A', q:'霧中航行時應在什麼頻道保持守聽？', opts:['只有頻道16','頻道16和當地航行頻道','只有音樂頻道','不需守聽'], ans:1, explain:'應在頻道16和當地航行安全頻道保持守聽。', ref:'考試手冊第六章'},
+{id:'q212', topic:'a6', part:'A', q:'霧中航行小型船隻特別需要注意什麼？', opts:['不需要注意','因船小雷達回波弱，不易被大型船發現','小型船不受霧影響','小型船可以高速航行'], ans:1, explain:'小型船隻雷達回波弱，不易被大型船發現，應加強聲號和VHF通報。', ref:'考試手冊第六章'},
+{id:'q213', topic:'a6', part:'A', q:'霧中航行時應如何使用燈號？', opts:['關閉所有燈','顯示規定的航行燈','只開前燈','閃爍燈光'], ans:1, explain:'霧中應顯示規定的航行燈，但主要依靠聲號而非燈號。', ref:'考試手冊第六章'},
+{id:'q214', topic:'a6', part:'A', q:'霧中航行遇到漁船應怎麼做？', opts:['加速繞過','減速避讓，漁船有優先權','鳴笛讓漁船讓路','不理會'], ans:1, explain:'霧中遇到從事捕魚的船應減速避讓，捕魚船在船舶優先順序中高於普通機動船。', ref:'考試手冊第六章'},
+{id:'q215', topic:'a6', part:'A', q:'霧中航行時聽到兩長聲表示什麼？', opts:['有船在航','有機動船已停車不對水移動','有帆船','有漁船'], ans:1, explain:'兩長聲表示有機動船已停車且不對水移動。', ref:'考試手冊第六章'},
+{id:'q216', topic:'a6', part:'A', q:'霧中航行時聽到一長兩短表示什麼？', opts:['有機動船在航','有失控船或受限船','有帆船','有漁船'], ans:1, explain:'一長兩短表示有失控船、受限船或受限於吃水的船。', ref:'考試手冊第六章'},
+{id:'q217', topic:'a6', part:'A', q:'霧中航行時如何報告自己的位置？', opts:['不需要報告','用VHF在適當頻道報告船名、位置和航向','只報告船名','只報告目的地'], ans:1, explain:'用VHF在適當頻道報告船名、位置、航向和意圖。', ref:'考試手冊第六章'},
+{id:'q218', topic:'a6', part:'A', q:'霧中航行時應避免什麼區域？', opts:['開闊水域','航道交叉處和繁忙水域','避風塘','淺水區'], ans:1, explain:'霧中應盡量避開航道交叉處和繁忙水域，減少碰撞風險。', ref:'考試手冊第六章'},
+{id:'q219', topic:'a6', part:'A', q:'霧中航行時可以使用手機代替VHF嗎？', opts:['可以','不可以，應使用VHF','視情況而定','都可以'], ans:1, explain:'應使用VHF而非手機，因為VHF是航海標準通訊設備，其他船隻能收到。', ref:'考試手冊第六章'},
+{id:'q220', topic:'a6', part:'A', q:'霧中航行時發現前方有障礙物應怎麼做？', opts:['加速衝過去','立即停車，鳴放聲號，備錨','轉向90度','不理會'], ans:1, explain:'發現前方有障礙物應立即停車，鳴放聲號警告，備好船錨。', ref:'考試手冊第六章'},
+{id:'q221', topic:'a6', part:'A', q:'霧中航行應在什麼時候開始減速？', opts:['看到船時','進入霧區前','等碰撞時','不需要減速'], ans:1, explain:'應在進入霧區前就開始減速，保持安全航速。', ref:'考試手冊第六章'},
+{id:'q222', topic:'a6', part:'A', q:'霧中航行時如何保持航線？', opts:['無法保持','依靠雷達和GPS','靠感覺','靠風向'], ans:1, explain:'依靠雷達識別陸標和GPS定位來保持計劃航線。', ref:'考試手冊第六章'},
+{id:'q223', topic:'a6', part:'A', q:'霧中航行時雷達應設在什麼模式？', opts:['關閉','開啟並設在適當距離範圍','只開短距離','自動模式'], ans:1, explain:'應開啟雷達並設在適當距離範圍，配合聲號使用。', ref:'考試手冊第六章'},
+{id:'q224', topic:'a6', part:'A', q:'霧中航行時小型船隻可以進入航道嗎？', opts:['可以','應盡量避開航道','必須進入航道','視心情而定'], ans:1, explain:'霧中應盡量避開主要航道，減少與大型船隻的碰撞風險。', ref:'考試手冊第六章'},
+{id:'q225', topic:'a6', part:'A', q:'霧中航行時應在什麼時候決定不繼續航行？', opts:['霧散後','能見度極低且無法安全導航時','天黑後','等別人先走'], ans:1, explain:'當能見度極低且無法安全導航時，應考慮就近錨泊等待霧散。', ref:'考試手冊第六章'},
+{id:'q226', topic:'a7', part:'A', q:'香港浮標系統屬於IALA哪個區域？', opts:['A區','B區','C區','D區'], ans:0, explain:'香港採用IALA A區浮標系統。', ref:'考試手冊第七章'},
+{id:'q227', topic:'a7', part:'A', q:'在IALA A區系統中，進港時左舷側面標是什麼顏色？', opts:['紅色','綠色','黃色','黑色'], ans:0, explain:'IALA A區：進港時左紅右綠（紅罐左綠錐右）。', ref:'考試手冊第七章'},
+{id:'q228', topic:'a7', part:'A', q:'在港內排放污染物入海，最高可罰多少？', opts:['$50,000','$100,000','$200,000','$500,000'], ans:2, explain:'排放入海最高可罰$200,000。', ref:'考試手冊第七章'},
+{id:'q229', topic:'a7', part:'A', q:'避風塘入口及內部的航速限制是多少？', opts:['3節','5節','8節','10節'], ans:1, explain:'避風塘入口及內部限速5節。', ref:'考試手冊第七章'},
+{id:'q230', topic:'a7', part:'A', q:'在港內拋垃圾，最高可處什麼刑罰？', opts:['罰款$5,000','罰款$10,000','罰款$10,000及監禁6個月','罰款$50,000及監禁1年'], ans:2, explain:'港內拋垃圾可罰$10,000及監禁6個月。', ref:'考試手冊第七章'},
+{id:'q231', topic:'a7', part:'A', q:'維多利亞港的東界是什麼？', opts:['青洲','鯉魚門','馬灣','南丫島'], ans:1, explain:'維港東界是鯉魚門。', ref:'考試手冊第七章'},
+{id:'q232', topic:'a7', part:'A', q:'維多利亞港的西界是什麼？', opts:['鯉魚門','青洲','汲水門','藍巴勒海峽'], ans:1, explain:'維港西界是青洲。', ref:'考試手冊第七章'},
+{id:'q233', topic:'a7', part:'A', q:'海岸公園內的航速限制是多少？', opts:['5節','8節','10節','15節'], ans:2, explain:'海岸公園內限速10節。', ref:'考試手冊第七章'},
+{id:'q234', topic:'a7', part:'A', q:'東博寮海峽是什麼類型的航道？', opts:['單向航道','分道航行航道','禁止通行航道','漁業專用航道'], ans:1, explain:'東博寮海峽實行分道航行制。', ref:'考試手冊第七章'},
+{id:'q235', topic:'a7', part:'A', q:'什麼是「分道航行制」（TSS）？', opts:['禁止航行','將航道分為進出港兩個方向的分隔航道','漁業管理','停船區域'], ans:1, explain:'分道航行制是將航道分為進出港兩個方向的分隔航道，減少碰撞風險。', ref:'考試手冊第七章'},
+{id:'q236', topic:'a7', part:'A', q:'馬灣水道有什麼航行限制？', opts:['無限制','大型船隻優先，小型船應避讓','禁止通行','只有漁船可通行'], ans:1, explain:'馬灣水道是重要航道，大型船隻優先，小型船應注意避讓。', ref:'考試手冊第七章'},
+{id:'q237', topic:'a7', part:'A', q:'IALA A區的右舷側面標是什麼顏色和形狀？', opts:['紅色罐形','綠色錐形','黃色菱形','黑色球形'], ans:1, explain:'IALA A區進港時右舷為綠色錐形浮標。', ref:'考試手冊第七章'},
+{id:'q238', topic:'a7', part:'A', q:'IALA A區的左舷側面標是什麼顏色和形狀？', opts:['綠色錐形','紅色罐形','黃色菱形','黑色球形'], ans:1, explain:'IALA A區進港時左舷為紅色罐形浮標。', ref:'考試手冊第七章'},
+{id:'q239', topic:'a7', part:'A', q:'安全水域標的外觀是什麼？', opts:['紅色','紅白直條，球形頂標','綠色','黃色'], ans:1, explain:'安全水域標為紅白直條，頂標為球形，白光。', ref:'考試手冊第七章'},
+{id:'q240', topic:'a7', part:'A', q:'孤立危險物標的外觀是什麼？', opts:['紅色','黑色帶紅色橫帶，兩個黑球頂標','綠色','黃色'], ans:1, explain:'孤立危險物標為黑色帶紅色橫帶，頂標為兩個黑球。', ref:'考試手冊第七章'},
+{id:'q241', topic:'a7', part:'A', q:'特殊用途浮標是什麼顏色？', opts:['紅色','綠色','黃色','白色'], ans:2, explain:'特殊用途浮標為黃色，頂標為X形。', ref:'考試手冊第七章'},
+{id:'q242', topic:'a7', part:'A', q:'進入維多利亞港時應遵循什麼浮標規則？', opts:['左紅右綠','左綠右紅（IALA A區）','隨意通過','看風向決定'], ans:1, explain:'IALA A區進港時左紅右綠（紅罐左綠錐右）。', ref:'考試手冊第七章'},
+{id:'q243', topic:'a7', part:'A', q:'香港水域的VHF頻道14用於什麼？', opts:['遇險頻道','海港通訊','天氣預報','音樂頻道'], ans:1, explain:'頻道14是香港海港通訊頻道。', ref:'考試手冊第七章'},
+{id:'q244', topic:'a7', part:'A', q:'香港水域的VHF頻道2用於什麼？', opts:['遇險頻道','海港東','西進口航道','大嶼南'], ans:1, explain:'頻道2是海港東通訊頻道。', ref:'考試手冊第七章'},
+{id:'q245', topic:'a7', part:'A', q:'香港水域的VHF頻道12用於什麼？', opts:['遇險頻道','海港','東進口航道','西進口航道'], ans:2, explain:'頻道12是東進口航道通訊頻道。', ref:'考試手冊第七章'},
+{id:'q246', topic:'a7', part:'A', q:'香港水域的VHF頻道63用於什麼？', opts:['遇險頻道','海港','東進口航道','大嶼南'], ans:3, explain:'頻道63是大嶼南通訊頻道。', ref:'考試手冊第七章'},
+{id:'q247', topic:'a7', part:'A', q:'香港水域的VHF頻道67用於什麼？', opts:['遇險頻道','海港','東進口航道','西進口航道'], ans:3, explain:'頻道67是西進口航道通訊頻道。', ref:'考試手冊第七章'},
+{id:'q248', topic:'a7', part:'A', q:'VHF頻道20用於什麼？', opts:['遇險頻道','航行安全通告','海港','音樂'], ans:1, explain:'頻道20用於航行安全通告。', ref:'考試手冊第七章'},
+{id:'q249', topic:'a7', part:'A', q:'進入機場進口航道區有什麼限制？', opts:['無限制','未經許可不得進入','只有漁船可進入','只有白天可進入'], ans:1, explain:'機場進口航道區未經許可不得進入。', ref:'考試手冊第七章'},
+{id:'q250', topic:'a7', part:'A', q:'違反航速限制的最高罰則是什麼？', opts:['警告','第3級罰款（$10,000）及監禁6個月','$1,000罰款','吊銷牌照'], ans:1, explain:'違反航速限制可處第3級罰款$10,000及監禁6個月。', ref:'考試手冊第七章'},
+{id:'q251', topic:'a7', part:'A', q:'什麼是「禁止碇泊區」？', opts:['可以錨泊的區域','禁止拋錨的區域','漁業區域','休閒區域'], ans:1, explain:'禁止碇泊區是禁止拋錨的區域，通常在航道內。', ref:'考試手冊第七章'},
+{id:'q252', topic:'a7', part:'A', q:'小型船隻在維港內應注意什麼？', opts:['不需要注意','避讓大型船隻、遵守航道規則','可以隨意航行','只在白天航行'], ans:1, explain:'小型船隻應避讓大型船隻、遵守航道規則、保持安全航速。', ref:'考試手冊第七章'},
+{id:'q253', topic:'a7', part:'A', q:'香港的避風塘主要在哪裡？', opts:['只在港島','港島和九龍多處','只有新界','只有離島'], ans:1, explain:'香港有多個避風塘分布在港島（銅鑼灣、香港仔等）和九龍。', ref:'考試手冊第七章'},
+{id:'q254', topic:'a7', part:'A', q:'避風塘的航行規則是什麼？', opts:['無規則','限速5節、注意避讓','可以高速航行','禁止進入'], ans:1, explain:'避風塘內限速5節，應注意避讓其他船隻。', ref:'考試手冊第七章'},
+{id:'q255', topic:'a7', part:'A', q:'什麼是「淨空限制區」？', opts:['空氣清潔區','橋樑下方有高度限制的區域','風力最小的區域','禁止飛行的區域'], ans:1, explain:'淨空限制區是指橋樑下方有通航高度限制的區域。', ref:'考試手冊第七章'},
+{id:'q256', topic:'a7', part:'A', q:'赤鱲角機場附近的航行限制是什麼？', opts:['無限制','有高度和區域限制','只有白天可航行','只有大型船可航行'], ans:1, explain:'赤鱲角機場附近有高度限制和特定區域限制。', ref:'考試手冊第七章'},
+{id:'q257', topic:'a7', part:'A', q:'香港水域的緊急求助電話是什麼？', opts:['999','992','112','119'], ans:0, explain:'香港緊急求助電話是999，可接通海事處。', ref:'考試手冊第七章'},
+{id:'q258', topic:'a7', part:'A', q:'航行中看到黃色X形頂標的浮標代表什麼？', opts:['安全水域','孤立危險物','特殊用途浮標','航道標'], ans:2, explain:'黃色X形頂標的浮標是特殊用途浮標。', ref:'考試手冊第七章'},
+{id:'q259', topic:'a7', part:'A', q:'航行中看到紅白直條浮標應如何行駛？', opts:['只能從左側通過','可從任何方向通過','只能從右側通過','不能通過'], ans:1, explain:'紅白直條是安全水域標，可從任何方向通過。', ref:'考試手冊第七章'},
+{id:'q260', topic:'a7', part:'A', q:'香港海事處的職責是什麼？', opts:['只管漁船','管理香港水域所有船舶安全和航行','只管天氣','只管港口'], ans:1, explain:'海事處負責管理香港水域所有船舶安全、航行秩序和海洋環境保護。', ref:'考試手冊第七章'},
+{id:'q261', topic:'a7', part:'A', q:'什麼是「海事處佈告」？', opts:['商業廣告','海事處發佈的航行安全和港口信息','天氣預報','法律條文'], ans:1, explain:'海事處佈告是發佈航行安全信息、港口規則和臨時通知的文件。', ref:'考試手冊第七章'},
+{id:'q262', topic:'a7', part:'A', q:'香港的「檢疫錨地」在哪裡？', opts:['銅鑼灣','油麻地避風塘附近','香港仔','啟德'], ans:1, explain:'檢疫錨地位於油麻地避風塘附近水域。', ref:'考試手冊第七章'},
+{id:'q263', topic:'a7', part:'A', q:'在維港內航行小型船隻應顯示什麼？', opts:['不需顯示','規定的航行燈和號型','紅旗','白旗'], ans:1, explain:'應顯示規定的航行燈和號型，讓其他船隻能識別。', ref:'考試手冊第七章'},
+{id:'q264', topic:'a7', part:'A', q:'什麼是「船隻航行監察中心」？', opts:['旅遊中心','監控和管理船舶交通的機構','售票處','漁業管理處'], ans:1, explain:'船隻航行監察中心負責監控和管理香港水域的船舶交通。', ref:'考試手冊第七章'},
+{id:'q265', topic:'a7', part:'A', q:'航行中遇到水警應注意什麼？', opts:['不需要注意','配合檢查並出示證件','加速離開','不理會'], ans:1, explain:'應配合水警檢查，出示相關證件和船舶文件。', ref:'考試手冊第七章'},
+{id:'q266', topic:'a7', part:'A', q:'香港水域的「通航分隔帶」是什麼？', opts:['漁業區域','分隔相反方向航道的區域','停船區域','釣魚區域'], ans:1, explain:'通航分隔帶是分隔相反方向航道的區域，船隻不應進入。', ref:'考試手冊第七章'},
+{id:'q267', topic:'a7', part:'A', q:'什麼是「航海通告」？', opts:['天氣預報','航行安全信息和海圖改正資料','商業廣告','法律條文'], ans:1, explain:'航海通告公佈航行安全信息、海圖改正資料和航標變動通知。', ref:'考試手冊第七章'},
+{id:'q268', topic:'a7', part:'A', q:'香港水域中哪些區域禁止游泳？', opts:['所有水域','航道和禁區內','只有避風塘','沒有禁區'], ans:1, explain:'航道和禁區內禁止游泳。', ref:'考試手冊第七章'},
+{id:'q269', topic:'a7', part:'A', q:'小型船隻在航道中遇到大型船隻應怎麼做？', opts:['加速通過','盡早避讓，大型船隻操縱受限','鳴笛警告','不需要避讓'], ans:1, explain:'小型船隻應盡早避讓大型船隻，因為大型船隻操縱受限、視野盲區大。', ref:'考試手冊第七章'},
+{id:'q270', topic:'a7', part:'A', q:'香港的海岸公園有哪些航行限制？', opts:['無限制','限速10節、禁止污染、保護生態','禁止進入','只有漁船可進入'], ans:1, explain:'海岸公園限速10節、禁止污染、保護生態環境。', ref:'考試手冊第七章'},
+{id:'q271', topic:'a7', part:'A', q:'什麼是「限制區」？', opts:['可以自由進入的區域','未經許可不得進入的區域','漁業區域','旅遊區域'], ans:1, explain:'限制區是未經許可不得進入的區域，如軍事區、機場附近等。', ref:'考試手冊第七章'},
+{id:'q272', topic:'a7', part:'A', q:'香港水域的「航行警告」如何發佈？', opts:['報紙','VHF廣播、海事處佈告和航海通告','電視','不發佈'], ans:1, explain:'航行警告通過VHF廣播、海事處佈告和航海通告發佈。', ref:'考試手冊第七章'},
+{id:'q273', topic:'a7', part:'A', q:'小型船隻夜間在維港航行應注意什麼？', opts:['不需要注意','顯示正確燈號、注意大型船隻動態','關閉燈光','只在避風塘內行駛'], ans:1, explain:'應顯示正確航行燈號，注意大型船隻動態，保持安全航速。', ref:'考試手冊第七章'},
+{id:'q274', topic:'a7', part:'A', q:'在港內進行水上活動需要什麼？', opts:['不需要任何許可','遵守相關規則並注意安全','只需要救生衣','只在白天進行'], ans:1, explain:'應遵守相關規則、注意安全並讓開航道。', ref:'考試手冊第七章'},
+{id:'q275', topic:'a7', part:'A', q:'香港水域的污染投訴應向誰報告？', opts:['環保署','海事處','警方','天文台'], ans:1, explain:'水上污染應向海事處報告。', ref:'考試手冊第七章'},
+{id:'q276', topic:'a7', part:'A', q:'什麼是「碇泊區」？', opts:['禁止停船的區域','指定可以錨泊的區域','漁業區域','遊樂區域'], ans:1, explain:'碇泊區是海事處指定的可以錨泊的區域。', ref:'考試手冊第七章'},
+{id:'q277', topic:'a7', part:'A', q:'小型船隻可以使用維港的主要航道嗎？', opts:['不可以','可以但應避讓大型船隻','只有白天可以','需要許可'], ans:1, explain:'小型船隻可以使用主要航道，但應注意避讓大型船隻。', ref:'考試手冊第七章'},
+{id:'q278', topic:'a7', part:'A', q:'香港水域的航行規則以什麼為基礎？', opts:['美國規則','國際海上避碰規則','英國規則','自行制定'], ans:1, explain:'香港水域以《國際海上避碰規則》為基礎。', ref:'考試手冊第七章'},
+{id:'q279', topic:'a7', part:'A', q:'航行中看到紅色罐形浮標應如何處理？', opts:['從右側通過','從左側通過（進港時）','不理會','從上方通過'], ans:1, explain:'IALA A區進港時紅色罐形浮標在左舷，應從左側通過。', ref:'考試手冊第七章'},
+{id:'q280', topic:'a7', part:'A', q:'航行中看到綠色錐形浮標應如何處理？', opts:['從左側通過','從右側通過（進港時）','不理會','從上方通過'], ans:1, explain:'IALA A區進港時綠色錐形浮標在右舷，應從右側通過。', ref:'考試手冊第七章'},
+{id:'q281', topic:'a7', part:'A', q:'什麼是「燈質」？', opts:['燈的亮度','燈光的閃爍模式和週期','燈的顏色','燈的大小'], ans:1, explain:'燈質是指燈光的閃爍模式和週期，如「Fl(2)10s」表示每10秒閃2次。', ref:'考試手冊第七章'},
+{id:'q282', topic:'a7', part:'A', q:'海圖上「Fl」標記代表什麼？', opts:['浮標','閃光','漂流物','漁網'], ans:1, explain:'「Fl」代表閃光（Flash），是燈質的一種。', ref:'考試手冊第七章'},
+{id:'q283', topic:'a7', part:'A', q:'香港的「臨時航行通知」如何獲取？', opts:['報紙','VHF頻道20','電視','不需要獲取'], ans:1, explain:'臨時航行通知可通過VHF頻道20獲取。', ref:'考試手冊第七章'},
+{id:'q284', topic:'a7', part:'A', q:'在維港內拋錨有什麼限制？', opts:['無限制','禁止在航道內拋錨','只能在夜間拋錨','只能在避風塘拋錨'], ans:1, explain:'禁止在航道內拋錨，只能在指定碇泊區拋錨。', ref:'考試手冊第七章'},
+{id:'q285', topic:'a7', part:'A', q:'香港水域的緊急救助頻率是什麼？', opts:['頻道1','頻道16','頻道72','頻道88'], ans:1, explain:'頻道16是國際遇險和緊急救助頻率。', ref:'考試手冊第七章'},
+{id:'q286', topic:'a7', part:'A', q:'什麼是「航行燈」？', opts:['裝飾燈','標示船隻位置和航行狀態的燈','照明燈','漁業燈'], ans:1, explain:'航行燈是標示船隻位置和航行狀態的燈，讓其他船隻能識別。', ref:'考試手冊第七章'},
+{id:'q287', topic:'a7', part:'A', q:'小型船隻的航行燈包括哪些？', opts:['只需前燈','前白燈、左紅右綠側燈、尾燈','只需側燈','只需尾燈'], ans:1, explain:'小型船隻航行燈包括前白燈、左紅右綠側燈和尾燈。', ref:'考試手冊第七章'},
+{id:'q288', topic:'a7', part:'A', q:'香港水域的「限速區」有哪些？', opts:['只有避風塘','維港部分水域、避風塘、海岸公園','全港水域','只有海岸公園'], ans:1, explain:'限速區包括維港部分水域、避風塘入口及內部和海岸公園。', ref:'考試手冊第七章'},
+{id:'q289', topic:'a7', part:'A', q:'小型船隻在分道航行制中應如何行駛？', opts:['隨意行駛','在規定的航道方向內行駛','在分隔帶內行駛','在航道外行駛'], ans:1, explain:'應在規定的航道方向內行駛，不可進入分隔帶。', ref:'考試手冊第七章'},
+{id:'q290', topic:'a7', part:'A', q:'什麼是「頂標」？', opts:['最高點','浮標頂部的標誌，用於識別浮標類型','裝飾物','燈光'], ans:1, explain:'頂標是浮標頂部的標誌（如球形、錐形、罐形），用於識別浮標類型。', ref:'考試手冊第七章'},
+{id:'q291', topic:'a7', part:'A', q:'IALA A區的罐形頂標代表什麼？', opts:['右舷標','左舷標（進港時）','安全水域標','危險標'], ans:1, explain:'IALA A區罐形頂標代表左舷側面標（進港時在左側）。', ref:'考試手冊第七章'},
+{id:'q292', topic:'a7', part:'A', q:'IALA A區的錐形頂標代表什麼？', opts:['左舷標','右舷標（進港時）','安全水域標','危險標'], ans:1, explain:'IALA A區錐形頂標代表右舷側面標（進港時在右側）。', ref:'考試手冊第七章'},
+{id:'q293', topic:'a7', part:'A', q:'香港水域的航行安全由誰負責？', opts:['警方','海事處','消防處','天文台'], ans:1, explain:'海事處負責香港水域的航行安全和船舶管理。', ref:'考試手冊第七章'},
+{id:'q294', topic:'a7', part:'A', q:'什麼是「航道」？', opts:['任何水域','供船隻航行的指定水域通道','漁業區域','休閒區域'], ans:1, explain:'航道是供船隻航行的指定水域通道，通常有浮標標示。', ref:'考試手冊第七章'},
+{id:'q295', topic:'a7', part:'A', q:'小型船隻為什麼不應在航道中停留？', opts:['可以停留','妨礙大型船隻通行造成危險','法律允許','無實際原因'], ans:1, explain:'在航道中停留會妨礙大型船隻通行，造成碰撞危險。', ref:'考試手冊第七章'},
+{id:'q296', topic:'a7', part:'A', q:'香港的「海事緊急」應如何報告？', opts:['發郵件','VHF頻道16呼叫或撥打999','發短信','不用報告'], ans:1, explain:'海事緊急應通過VHF頻道16呼叫或撥打999報告。', ref:'考試手冊第七章'},
+{id:'q297', topic:'a7', part:'A', q:'香港水域的「航行安全區」是什麼？', opts:['旅遊區域','為航行安全設立的特定管理區域','漁業區域','軍事區域'], ans:1, explain:'航行安全區是為保障航行安全設立的特定管理區域。', ref:'考試手冊第七章'},
+{id:'q298', topic:'a7', part:'A', q:'什麼是「燈光射程」？', opts:['燈光的顏色','燈光在晴朗天氣可見的最遠距離','燈光的亮度','燈光的大小'], ans:1, explain:'燈光射程是指燈光在晴朗天氣下可見的最遠距離（海里）。', ref:'考試手冊第七章'},
+{id:'q299', topic:'a7', part:'A', q:'香港水域中哪些是「禁止進入區」？', opts:['沒有','機場進口航道區、軍事區等','只有機場區域','只有避風塘'], ans:1, explain:'禁止進入區包括機場進口航道區、軍事區等未經許可不得進入的區域。', ref:'考試手冊第七章'},
+{id:'q300', topic:'a7', part:'A', q:'小型船隻在惡劣天氣下應如何應對？', opts:['繼續航行','到避風塘避風或返回安全港口','加速衝過','拋錨等待'], ans:1, explain:'惡劣天氣下應到避風塘避風或返回安全港口。', ref:'考試手冊第七章'},
+{id:'q301', topic:'a7', part:'A', q:'什麼是「航行通告」與「海事處佈告」的區別？', opts:['相同','航行通告是臨時的，佈告是長期規則','佈告是臨時的','兩者沒有區別'], ans:1, explain:'航行通告通常是臨時性的安全信息，海事處佈告是較長期的規則和通知。', ref:'考試手冊第七章'},
+{id:'q302', topic:'a7', part:'A', q:'香港水域的航行規則適用於什麼船隻？', opts:['只適用於大型船','所有船隻','只適用於機動船','只適用於帆船'], ans:1, explain:'航行規則適用於所有在香港水域航行的船隻。', ref:'考試手冊第七章'},
+{id:'q303', topic:'a7', part:'A', q:'在維港內進行水上運動應注意什麼？', opts:['不需要注意','避開航道、穿戴救生衣、注意大型船隻','只在白天進行','只在避風塘內'], ans:1, explain:'應避開航道、穿戴救生衣、注意大型船隻動態。', ref:'考試手冊第七章'},
+{id:'q304', topic:'a7', part:'A', q:'香港的「海事處海上救援協調中心」負責什麼？', opts:['只管漁船','統籌南海國際水域搜救','只管天氣預報','只管港口管理'], ans:1, explain:'海上救援協調中心統籌南海國際水域的搜救行動。', ref:'考試手冊第七章'},
+{id:'q305', topic:'a7', part:'A', q:'航行中遇到浮標不在預期位置應怎麼做？', opts:['不理會','可能已移位，應謹慎航行並報告海事處','加速通過','拋錨等待'], ans:1, explain:'浮標可能已移位或燈光故障，應謹慎航行並向海事處報告。', ref:'考試手冊第七章'},
+{id:'q306', topic:'a8', part:'A', q:'兩艘機動船對遇時，應如何轉向？', opts:['各向左轉','各向右轉','保持航向','鳴笛後再決定'], ans:1, explain:'對遇局面：各自向右轉向。', ref:'避碰規則第十四條'},
+{id:'q307', topic:'a8', part:'A', q:'交叉相遇局面中，哪艘船是讓路船？', opts:['左舷有他船的船','右舷有他船的船','較大的船','較快的船'], ans:1, explain:'交叉局面：有他船在本船右舷的船為讓路船。', ref:'避碰規則第十五條'},
+{id:'q308', topic:'a8', part:'A', q:'追越局面中，讓路船是哪艘？', opts:['被追越船','追越船','兩船共同讓路','視情況而定'], ans:1, explain:'追越船始終為讓路船。', ref:'避碰規則第十三條'},
+{id:'q309', topic:'a8', part:'A', q:'失去操控能力的船舶在日間應顯示什麼號型？', opts:['一個黑球','兩個黑球','三個黑球','一面紅旗'], ans:1, explain:'失控船日間顯示兩個黑球。', ref:'避碰規則第二十七條'},
+{id:'q310', topic:'a8', part:'A', q:'失控船夜間應顯示什麼號燈？', opts:['兩盞垂直白燈','兩盞垂直紅燈','兩盞垂直綠燈','一紅一白'], ans:1, explain:'失控船夜間顯示兩盞垂直紅燈。', ref:'避碰規則第二十七條'},
+{id:'q311', topic:'a8', part:'A', q:'帆船之間，左舷受風和右舷受風的船相遇，誰讓路？', opts:['右舷受風讓左舷','左舷受風讓右舷','兩船各讓一半','上風船讓'], ans:1, explain:'左舷受風船讓右舷受風船。', ref:'避碰規則第十二條'},
+{id:'q312', topic:'a8', part:'A', q:'船舶擱淺時日間應顯示什麼號型？', opts:['一個黑球','兩個黑球','三個黑球','一面紅旗'], ans:2, explain:'擱淺船日間顯示三個黑球。', ref:'避碰規則第三十條'},
+{id:'q313', topic:'a8', part:'A', q:'船舶優先順序，以下哪個正確？（由高到低）', opts:['機動船>帆船>捕魚船','失控船>帆船>機動船','帆船>機動船>捕魚船','捕魚船>帆船>機動船'], ans:1, explain:'優先順序：失去操控能力船 > 受限船 > 捕魚船 > 帆船 > 機動船。', ref:'避碰規則'},
+{id:'q314', topic:'a8', part:'A', q:'對遇局面的判斷標準是什麼？', opts:['兩船距離近','兩船在相反或接近相反航向上對駛','兩船速度相同','兩船大小相同'], ans:1, explain:'對遇局面是兩艘機動船在相反或接近相反的航向上對駛。', ref:'避碰規則第十四條'},
+{id:'q315', topic:'a8', part:'A', q:'交叉相遇局面中，直航船應如何行動？', opts:['立即轉向','保持航向和航速','加速離開','鳴笛警告'], ans:1, explain:'直航船（有優先權的船）應保持航向和航速。', ref:'避碰規則第十七條'},
+{id:'q316', topic:'a8', part:'A', q:'直航船在什麼情況下可以獨自採取避碰行動？', opts:['任何時候','讓路船顯然沒有採取適當行動時','只有碰撞後','只有在VHF聯繫後'], ans:1, explain:'當讓路船顯然沒有採取適當行動時，直航船可獨自採取避碰行動。', ref:'避碰規則第十七條'},
+{id:'q317', topic:'a8', part:'A', q:'一短聲笛號代表什麼？', opts:['我正在向左轉','我正在向右轉','我正在倒車','危險'], ans:1, explain:'一短聲表示本船正在向右轉向。', ref:'避碰規則第三十四條'},
+{id:'q318', topic:'a8', part:'A', q:'兩短聲笛號代表什麼？', opts:['我正在向右轉','我正在向左轉','我正在倒車','危險'], ans:1, explain:'兩短聲表示本船正在向左轉向。', ref:'避碰規則第三十四條'},
+{id:'q319', topic:'a8', part:'A', q:'三短聲笛號代表什麼？', opts:['我正在前進','我正在倒車（引擎正開後退）','危險','讓路'], ans:1, explain:'三短聲表示本船引擎正在後退。', ref:'避碰規則第三十四條'},
+{id:'q320', topic:'a8', part:'A', q:'五短聲笛號代表什麼？', opts:['你好','危險，你的意圖不明確','讓路','停船'], ans:1, explain:'五短聲表示危險，或對對方意圖不明確的警告。', ref:'避碰規則第三十四條'},
+{id:'q321', topic:'a8', part:'A', q:'追越他船時應從哪一側通過？', opts:['左側','右側或左側均可','只能右側','看風向'], ans:1, explain:'追越可從被追越船的任一側通過，但應保持安全距離。', ref:'避碰規則第十三條'},
+{id:'q322', topic:'a8', part:'A', q:'什麼是「讓路船」？', opts:['有優先權的船','應採取行動讓路的船','大型船','快速船'], ans:1, explain:'讓路船是應採取行動讓路以避免碰撞的船。', ref:'避碰規則'},
+{id:'q323', topic:'a8', part:'A', q:'什麼是「直航船」？', opts:['直行的船','有優先權應保持航向和航速的船','大型船','快速船'], ans:1, explain:'直航船是有優先權的船，應保持航向和航速。', ref:'避碰規則'},
+{id:'q324', topic:'a8', part:'A', q:'帆船在航時夜間應顯示什麼燈？', opts:['白燈','上紅下綠側燈','全白燈','紅燈'], ans:1, explain:'帆船在航夜間顯示上紅下綠側燈。', ref:'避碰規則第二十五條'},
+{id:'q325', topic:'a8', part:'A', q:'機動船在航時夜間應顯示什麼燈？', opts:['只有白燈','前白燈+左紅右綠側燈+尾燈','只有側燈','只有尾燈'], ans:1, explain:'機動船在航夜間顯示前白燈、左紅右綠側燈和尾燈。', ref:'避碰規則第二十三條'},
+{id:'q326', topic:'a8', part:'A', q:'什麼是「安全航速」？', opts:['最高速度','能及時採取有效避碰行動的速度','最慢速度','固定速度'], ans:1, explain:'安全航速是能及時採取有效避碰行動並在安全距離內停船的速度。', ref:'避碰規則第六條'},
+{id:'q327', topic:'a8', part:'A', q:'如何判斷是否存在碰撞危險？', opts:['看距離','用羅經觀察他船方位是否變化','看速度','靠直覺'], ans:1, explain:'如果他船的羅經方位沒有明顯變化，說明存在碰撞危險。', ref:'避碰規則第七條'},
+{id:'q328', topic:'a8', part:'A', q:'他船方位不變表示什麼？', opts:['安全','存在碰撞危險','他船在遠離','無意義'], ans:1, explain:'他船方位不變表示兩船正在接近同一點，存在碰撞危險。', ref:'避碰規則第七條'},
+{id:'q329', topic:'a8', part:'A', q:'他船方位向右移動表示什麼？', opts:['碰撞危險','他船將從你船前方通過','他船在靠近','需要讓路'], ans:1, explain:'他船方位向右移動表示他船將從你船前方通過，相對安全。', ref:'避碰規則第七條'},
+{id:'q330', topic:'a8', part:'A', q:'讓路船應如何讓路？', opts:['鳴笛即可','大幅度轉向使他船能明顯看到','小幅度轉向','減速即可'], ans:1, explain:'讓路船應大幅度轉向或減速，使他船能明顯看到避讓行動。', ref:'避碰規則第八條'},
+{id:'q331', topic:'a8', part:'A', q:'讓路時為什麼不能只減速？', opts:['可以只減速','可能無法有效避免碰撞','節省燃料','法律規定必須轉向'], ans:1, explain:'只減速可能無法有效避免碰撞，應結合轉向和減速。', ref:'避碰規則第八條'},
+{id:'q332', topic:'a8', part:'A', q:'在狹窄水道中應靠哪側航行？', opts:['左側','右側','中間','隨意'], ans:1, explain:'在狹窄水道中應靠右側航行。', ref:'避碰規則第九條'},
+{id:'q333', topic:'a8', part:'A', q:'在分道航行制中，應在分隔帶的哪側行駛？', opts:['左側','右側（與分道方向一致）','中間','隨意'], ans:1, explain:'應在分隔帶的右側，與分道方向一致行駛。', ref:'避碰規則第十條'},
+{id:'q334', topic:'a8', part:'A', q:'帆船同舷受風時，誰讓路？', opts:['下風船讓','上風船讓下風船','兩船各讓一半','看大小'], ans:1, explain:'同舷受風時，上風船讓下風船。', ref:'避碰規則第十二條'},
+{id:'q335', topic:'a8', part:'A', q:'什麼是「互見」？', opts:['用雷達看到','能用目視互相看見','用VHF聯繫','用燈光'], ans:1, explain:'互見是指兩船能用目視互相看見。', ref:'避碰規則'},
+{id:'q336', topic:'a8', part:'A', q:'能見度不良時的避碰規則適用於什麼情況？', opts:['只適用於霧','霧、霾、大雨等能見度受限時','只適用於夜間','只適用於風暴'], ans:1, explain:'適用於霧、霾、大雨、沙塵暴等任何能見度受限的情況。', ref:'避碰規則第十九條'},
+{id:'q337', topic:'a8', part:'A', q:'能見度不良時，機動船應鳴放什麼聲號？', opts:['一短聲','一長聲（不超過2分鐘間隔）','兩短聲','三短聲'], ans:1, explain:'能見度不良時，機動船在航每隔不超過2分鐘鳴一長聲。', ref:'避碰規則第三十五條'},
+{id:'q338', topic:'a8', part:'A', q:'捕魚船在船舶優先順序中排第幾？', opts:['第一','第三（在失控船和受限船之後）','最後','與機動船相同'], ans:1, explain:'優先順序：失控船 > 受限船 > 捕魚船 > 帆船 > 機動船。', ref:'避碰規則第十八條'},
+{id:'q339', topic:'a8', part:'A', q:'受限船是指什麼？', opts:['任何船','因工作性質無法正常避讓的船','小型船','漁船'], ans:1, explain:'受限船是指因工作性質（如疏浚、測量）無法正常避讓的船。', ref:'避碰規則第三條'},
+{id:'q340', topic:'a8', part:'A', q:'讓路行動應什麼時候採取？', opts:['碰撞前一刻','及早採取，並大幅度進行','等對方先讓','鳴笛後'], ans:1, explain:'讓路行動應及早採取，並大幅度進行，讓對方能明顯察覺。', ref:'避碰規則第八條'},
+{id:'q341', topic:'a8', part:'A', q:'交叉相遇中，讓路船應避免從直航船的哪側通過？', opts:['前方','正前方橫穿','後方','任何側'], ans:1, explain:'讓路船不應從直航船的正前方橫穿。', ref:'避碰規則第十五條'},
+{id:'q342', topic:'a8', part:'A', q:'航行中應保持什麼值班？', opts:['不需要值班','持續的視覺和聽覺瞭望','只需視覺','只需聽覺'], ans:1, explain:'應保持持續的視覺和聽覺瞭望，包括雷達觀測。', ref:'避碰規則第五條'},
+{id:'q343', topic:'a8', part:'A', q:'什麼是「威廉臣回航法」？', opts:['普通轉向','人員落水後的緊急回航方法','避碰方法','錨泊方法'], ans:1, explain:'威廉臣回航法是人員落水後的緊急回航方法，通過特定轉向回到落水點。', ref:'考試手冊第十三章'},
+{id:'q344', topic:'a8', part:'A', q:'小型船隻遇到大型船時應注意什麼？', opts:['不需要注意','大型船有盲區，應盡早顯示自己位置','加速通過','鳴笛警告'], ans:1, explain:'大型船有盲區，小型船應盡早顯示自己位置，必要時鳴笛或VHF聯繫。', ref:'避碰規則'},
+{id:'q345', topic:'a8', part:'A', q:'夜間看到一盞白色燈光接近，代表什麼？', opts:['帆船','船尾朝你行駛的機動船（追越）','錨泊船','漁船'], ans:1, explain:'只看到尾燈表示有船正從後方接近你（追越局面）。', ref:'避碰規則第二十三條'},
+{id:'q346', topic:'a8', part:'A', q:'夜間看到紅綠兩燈並排，代表什麼？', opts:['帆船','機動船正對你駛來（對遇）','錨泊船','漁船'], ans:1, explain:'看到紅綠兩燈並排表示有機動船正對你駛來（對遇局面）。', ref:'避碰規則第二十三條'},
+{id:'q347', topic:'a8', part:'A', q:'夜間只看到紅燈，代表什麼？', opts:['機動船','帆船（你看到其左舷燈）','錨泊船','漁船'], ans:1, explain:'只看到紅燈表示帆船在你左側，你看到其左舷燈。', ref:'避碰規則第二十五條'},
+{id:'q348', topic:'a8', part:'A', q:'夜間看到上紅下綠兩燈，代表什麼？', opts:['機動船','帆船在航','錨泊船','漁船'], ans:1, explain:'上紅下綠是帆船在航的燈號。', ref:'避碰規則第二十五條'},
+{id:'q349', topic:'a8', part:'A', q:'讓路時為什麼要大幅度轉向？', opts:['節省燃料','讓對方能通過羅經觀測發現你在讓路','顯示技術','法律要求'], ans:1, explain:'大幅度轉向使對方能通過羅經觀測方位變化發現你在讓路。', ref:'避碰規則第八條'},
+{id:'q350', topic:'a8', part:'A', q:'什麼是「對遇局面」？', opts:['兩船同向航行','兩船在相反或接近相反航向上對駛','兩船交叉航行','一船追越另一船'], ans:1, explain:'對遇局面是兩艘機動船在相反或接近相反的航向上對駛。', ref:'避碰規則第十四條'},
+{id:'q351', topic:'a8', part:'A', q:'什麼是「交叉相遇局面」？', opts:['兩船同向航行','兩船航向交叉且有碰撞危險','兩船對遇','一船追越另一船'], ans:1, explain:'交叉相遇是兩艘機動船航向交叉且存在碰撞危險的局面。', ref:'避碰規則第十五條'},
+{id:'q352', topic:'a8', part:'A', q:'什麼是「追越局面」？', opts:['兩船對遇','一船從後方追上並超越另一船','兩船交叉','兩船同速航行'], ans:1, explain:'追越局面是一船從後方追上並試圖超越另一船。', ref:'避碰規則第十三條'},
+{id:'q353', topic:'a8', part:'A', q:'擱淺船夜間應顯示什麼燈？', opts:['兩盞紅燈','兩盞紅燈加錨燈','三盞紅燈','一盞紅燈'], ans:1, explain:'擱淺船夜間顯示兩盞紅燈加錨燈。', ref:'避碰規則第三十條'},
+{id:'q354', topic:'a8', part:'A', q:'船舶在什麼情況下應鳴放緊急信號？', opts:['任何時候','碰撞、擱淺或其他緊急情況','只有碰撞時','只有失火時'], ans:1, explain:'在碰撞、擱淺或其他緊急情況下應鳴放緊急信號。', ref:'避碰規則'},
+{id:'q355', topic:'a8', part:'A', q:'航行燈應在什麼時候開啟？', opts:['只在霧中','日落到日出','只在夜間','只在能見度不良時'], ans:1, explain:'航行燈應在日落到日出期間開啟，能見度不良時白天也應開啟。', ref:'避碰規則第二十條'},
+{id:'q356', topic:'a8', part:'A', q:'什麼船隻不應妨礙他船通過？', opts:['大型船','在狹窄水道或航道中不能安全航行的船','帆船','所有船'], ans:1, explain:'不能安全通過狹窄水道或航道的船不應妨礙能安全通過的船。', ref:'避碰規則第九條'},
+{id:'q357', topic:'a8', part:'A', q:'在航道中航行時，什麼船有優先權？', opts:['小型船','只能在航道中航行的船','漁船','帆船'], ans:1, explain:'只能在航道中安全航行的船有優先權。', ref:'避碰規則第九條'},
+{id:'q358', topic:'a8', part:'A', q:'避碰規則中的「瞭望」要求是什麼？', opts:['偶爾看一下','持續有效的視覺和聽覺瞭望','只用雷達','不需要瞭望'], ans:1, explain:'應隨時保持持續有效的視覺和聽覺瞭望。', ref:'避碰規則第五條'},
+{id:'q359', topic:'a8', part:'A', q:'避碰行動應盡量滿足什麼條件？', opts:['盡量小幅度','大幅度、及早、寬裕地讓清他船','只減速','只鳴笛'], ans:1, explain:'避碰行動應大幅度、及早、寬裕地讓清他船。', ref:'避碰規則第八條'},
+{id:'q360', topic:'a8', part:'A', q:'讓路船和直航船同時採取行動會怎樣？', opts:['沒問題','可能造成混亂，應遵守規則','更安全','法律允許'], ans:1, explain:'直航船不應在不必要時改變航向，以免與讓路船的行動衝突。', ref:'避碰規則第十七條'},
+{id:'q361', topic:'a8', part:'A', q:'在分道航行制中應避免什麼？', opts:['高速航行','進入分隔帶或在分隔帶附近航行','使用雷達','鳴笛'], ans:1, explain:'應避免進入分隔帶或在分隔帶附近航行。', ref:'避碰規則第十條'},
+{id:'q362', topic:'a8', part:'A', q:'對遇局面中為什麼要向右轉？', opts:['隨意選擇','國際慣例，兩船各向右轉可安全通過','風向原因','法律規定'], ans:1, explain:'國際慣例兩船各向右轉，這樣兩船可以安全通過。', ref:'避碰規則第十四條'},
+{id:'q363', topic:'a8', part:'A', q:'他船方位向左移動表示什麼？', opts:['安全','他船將從你船後方通過','碰撞危險','他船在靠近'], ans:1, explain:'他船方位向左移動表示他船將從你船後方通過。', ref:'避碰規則第七條'},
+{id:'q364', topic:'a8', part:'A', q:'讓路行動中什麼是「不應橫越他船前方」？', opts:['不能從前方通過','不能從讓路船正前方橫穿','不能看到前方','前方有障礙'], ans:1, explain:'讓路船不應從直航船正前方橫穿過去。', ref:'避碰規則第十五條'},
+{id:'q365', topic:'a8', part:'A', q:'什麼是「緊迫局面」？', opts:['距離很近','兩船距離太近，單獨一方的行動無法避免碰撞','任何碰撞風險','風浪大'], ans:1, explain:'緊迫局面是兩船距離太近，單獨一方的行動已無法有效避免碰撞。', ref:'避碰規則'},
+{id:'q366', topic:'a8', part:'A', q:'避免緊迫局面的關鍵是什麼？', opts:['加速','及早採取避碰行動','鳴笛','等對方讓路'], ans:1, explain:'及早採取避碰行動是避免緊迫局面的關鍵。', ref:'避碰規則第八條'},
+{id:'q367', topic:'a8', part:'A', q:'什麼是「正橫」？', opts:['船頭方向','船的正側面方向（90度）','船尾方向','斜前方'], ans:1, explain:'正橫是指船的正側面方向，即與船中心線成90度角。', ref:'避碰規則'},
+{id:'q368', topic:'a8', part:'A', q:'看到他船在正前方且方位不變，應如何行動？', opts:['保持航向','立即採取避讓行動','加速通過','鳴笛'], ans:1, explain:'他船在正前方且方位不變表示存在碰撞危險，應立即避讓。', ref:'避碰規則第七條'},
+{id:'q369', topic:'a8', part:'A', q:'避碰規則中的「機動船」是指什麼？', opts:['任何船','用機械推進的船','大型船','快速船'], ans:1, explain:'機動船是指用機械推進的船（不包括帆船使用引擎的情況）。', ref:'避碰規則第三條'},
+{id:'q370', topic:'a8', part:'A', q:'避碰規則中的「帆船」是指什麼？', opts:['任何船','僅依靠風力航行的船','小型船','漁船'], ans:1, explain:'帆船是指僅依靠風力航行的船。如果同時使用引擎，則視為機動船。', ref:'避碰規則第三條'},
+{id:'q371', topic:'a8', part:'A', q:'避碰規則中的「從事捕魚」是指什麼？', opts:['任何釣魚','使用漁網、漁具等捕魚作業的船','休閒釣魚','觀光船'], ans:1, explain:'從事捕魚是指使用漁網、漁具、漁繩等進行捕魚作業的船。', ref:'避碰規則第三條'},
+{id:'q372', topic:'a8', part:'A', q:'避碰規則適用於什麼水域？', opts:['只適用於公海','一切水域','只適用於港口','只適用於內河'], ans:1, explain:'避碰規則適用於一切水域，包括公海、港口和內河。', ref:'避碰規則第一條'},
+{id:'q373', topic:'a8', part:'A', q:'什麼情況下不應妨礙他船通行？', opts:['任何時候','當你的船不能安全通過時','只有夜間','只有霧中'], ans:1, explain:'當你的船不能安全通過航道或狹窄水道時，不應妨礙能安全通過的船。', ref:'避碰規則第九條'},
+{id:'q374', topic:'a8', part:'A', q:'追越船應注意什麼？', opts:['不需要注意','保持安全距離，追越船始終讓路','鳴笛即可','加速通過'], ans:1, explain:'追越船應保持安全距離，追越船始終為讓路船。', ref:'避碰規則第十三條'},
+{id:'q375', topic:'a8', part:'A', q:'避碰規則中的「行動」包括哪些？', opts:['只轉向','轉向和/或變速','只減速','只鳴笛'], ans:1, explain:'避碰行動包括轉向和/或變速。', ref:'避碰規則第八條'},
+{id:'q376', topic:'a8', part:'A', q:'避碰規則中的「碰撞危險」如何判斷？', opts:['看距離','羅經方位持續不變表示有碰撞危險','看速度','看船大小'], ans:1, explain:'如果用羅經觀察他船方位持續不變，表示存在碰撞危險。', ref:'避碰規則第七條'},
+{id:'q377', topic:'a8', part:'A', q:'避碰規則中的「讓清」是什麼意思？', opts:['讓路即可','在安全距離通過，不造成碰撞危險','鳴笛','減速'], ans:1, explain:'讓清是指在安全距離通過，不造成碰撞危險。', ref:'避碰規則第八條'},
+{id:'q378', topic:'a8', part:'A', q:'避碰規則中的「號型」是什麼？', opts:['船的名字','日間顯示的形狀標誌','燈光','聲音'], ans:1, explain:'號型是日間顯示的形狀標誌（如黑球、黑錐形等），表示船隻狀態。', ref:'避碰規則'},
+{id:'q379', topic:'a8', part:'A', q:'避碰規則中的「聲號」是什麼？', opts:['音樂','用汽笛或號角發出的聲音信號','VHF通訊','燈光'], ans:1, explain:'聲號是用汽笛或號角發出的聲音信號，用於表示船隻意圖。', ref:'避碰規則第三十四條'},
+{id:'q380', topic:'a8', part:'A', q:'避碰規則中的「燈號」是什麼？', opts:['裝飾燈','夜間顯示的航行燈','手電筒','探照燈'], ans:1, explain:'燈號是夜間顯示的航行燈，用於表示船隻類型和狀態。', ref:'避碰規則第二十條'},
+{id:'q381', topic:'a8', part:'A', q:'什麼是「有限能見度」？', opts:['只有黑夜','霧、霾、大雨等導致能見度受限','只有下雨','只有大風'], ans:1, explain:'有限能見度是指霧、霾、大雨、沙塵暴等導致能見度受限的情況。', ref:'避碰規則'},
+{id:'q382', topic:'a8', part:'A', q:'避碰規則中的「分道航行制」是什麼？', opts:['漁業管理','將航道分為進出港兩個方向的分隔航道','停船區域','旅遊路線'], ans:1, explain:'分道航行制是將航道分為進出港兩個方向的分隔航道。', ref:'避碰規則第十條'},
+{id:'q383', topic:'a8', part:'A', q:'在交叉相遇局面中，什麼船是讓路船？', opts:['左舷有他船的船','右舷有他船的船','較大的船','較快的船'], ans:1, explain:'有他船在本船右舷的船為讓路船。', ref:'避碰規則第十五條'},
+{id:'q384', topic:'a8', part:'A', q:'對遇局面中兩船應如何行動？', opts:['一船讓路','各自向右轉向','保持航向','鳴笛等待'], ans:1, explain:'對遇局面中兩船應各自向右轉向。', ref:'避碰規則第十四條'},
+{id:'q385', topic:'a8', part:'A', q:'避碰規則中的「船舶」包括什麼？', opts:['只包括大型船','各種類型的船艇和水上飛機','只包括機動船','只包括帆船'], ans:1, explain:'船舶包括各種類型的船艇和水面上的水上飛機。', ref:'避碰規則第三條'},
+{id:'q386', topic:'a8', part:'A', q:'什麼是「航向」在避碰規則中的含義？', opts:['GPS顯示的方向','船頭指向的方向','風的方向','水流方向'], ans:1, explain:'航向是船頭指向的方向。', ref:'避碰規則'},
+{id:'q387', topic:'a8', part:'A', q:'避碰規則要求什麼時候開始讓路？', opts:['碰撞前一刻','及早、大幅度、寬裕地讓清','等對方先讓','鳴笛後'], ans:1, explain:'應及早、大幅度、寬裕地讓清他船。', ref:'避碰規則第八條'},
+{id:'q388', topic:'a8', part:'A', q:'避碰規則中的「能見度不良」規則與「互見」規則有什麼不同？', opts:['相同','能見度不良規則更謹慎，要求停船讓路','互見規則更謹慎','沒有不同'], ans:1, explain:'能見度不良時無法確定他船類型和位置，規則要求更謹慎。', ref:'避碰規則第十九條'},
+{id:'q389', topic:'a8', part:'A', q:'避碰規則中的「不應橫越他船前方」適用於什麼局面？', opts:['對遇','交叉相遇','追越','所有局面'], ans:1, explain:'「不應橫越他船前方」主要適用於交叉相遇局面。', ref:'避碰規則第十五條'},
+{id:'q390', topic:'a8', part:'A', q:'避碰規則中的「安全距離」是多少？', opts:['固定距離','視情況而定的足夠距離','100米','1海里'], ans:1, explain:'安全距離視情況而定，應足以避免碰撞危險。', ref:'避碰規則'},
+{id:'q391', topic:'a8', part:'A', q:'避碰規則中的「保持航向和航速」是什麼意思？', opts:['不能改變','直航船不應改變航向和航速','只能改變航向','只能改變航速'], ans:1, explain:'直航船應保持航向和航速不變，除非有緊迫危險。', ref:'避碰規則第十七條'},
+{id:'q392', topic:'a8', part:'A', q:'避碰規則中的「獨自行動」是什麼意思？', opts:['一個人','直航船在讓路船未採取行動時獨自避讓','不需要讓路','不需要鳴笛'], ans:1, explain:'當讓路船顯然沒有採取適當行動時，直航船可獨自採取避碰行動。', ref:'避碰規則第十七條'},
+{id:'q393', topic:'a8', part:'A', q:'避碰規則中的「最晚行動」是什麼意思？', opts:['最後才行動','在碰撞危險已無法避免時最後的行動','不需要行動','加速行動'], ans:1, explain:'最晚行動是指在碰撞危險已迫在眉睫時最後的緊急避讓行動。', ref:'避碰規則第十七條'},
+{id:'q394', topic:'a8', part:'A', q:'避碰規則中的「注意」燈號是什麼？', opts:['不需要注意','航行燈和號燈','裝飾燈','手電筒'], ans:1, explain:'應注意他船顯示的航行燈和號燈，以判斷船隻類型和狀態。', ref:'避碰規則'},
+{id:'q395', topic:'a8', part:'A', q:'避碰規則中的「碰撞後」應做什麼？', opts:['離開','停車、檢查傷亡、交換船隻信息、報告','繼續航行','不需行動'], ans:1, explain:'碰撞後應停車、檢查傷亡、交換船隻信息、向海事處報告。', ref:'避碰規則'},
+{id:'q396', topic:'a8', part:'A', q:'避碰規則中什麼船隻應讓路給帆船？', opts:['所有船','機動船','失控船','漁船'], ans:1, explain:'機動船應讓路給帆船（帆船優先於機動船）。', ref:'避碰規則第十八條'},
+{id:'q397', topic:'a8', part:'A', q:'避碰規則中帆船應讓路給什麼船？', opts:['機動船','漁船和失控船','所有船','不需要讓路'], ans:1, explain:'帆船應讓路給漁船和失控船。', ref:'避碰規則第十八條'},
+{id:'q398', topic:'a8', part:'A', q:'避碰規則中的「操縱能力受限」船是指什麼？', opts:['任何船','因作業需要無法正常避讓的船','小型船','漁船'], ans:1, explain:'操縱能力受限船是指因作業需要（如疏浚、測量）無法正常避讓的船。', ref:'避碰規則第三條'},
+{id:'q399', topic:'a8', part:'A', q:'避碰規則中的「吃水受限」船是指什麼？', opts:['任何船','因吃水深無法偏離航道的船','小型船','漁船'], ans:1, explain:'吃水受限船是指因吃水深無法偏離航道行駛的船。', ref:'避碰規則第三條'},
+{id:'q400', topic:'a8', part:'A', q:'避碰規則中的「水上飛機」應如何避讓？', opts:['不需要避讓','應盡可能讓清所有船隻','所有船讓路給水上飛機','與普通船相同'], ans:1, explain:'水上飛機應盡可能讓清所有船隻。', ref:'避碰規則第十八條'},
+{id:'q401', topic:'a8', part:'A', q:'避碰規則中的「地效船」是指什麼？', opts:['普通船','在水面附近利用地效飛行的船','潛艇','氣墊船'], ans:1, explain:'地效船是指貼近水面利用地面效應飛行的船。', ref:'避碰規則第三條'},
+{id:'q402', topic:'a8', part:'A', q:'避碰規則中的「氣墊船」應注意什麼？', opts:['不需要注意','應顯示特定燈號和號型','與普通船相同','不需要避讓'], ans:1, explain:'氣墊船應顯示特定燈號和號型，並在操縱上給予特別考慮。', ref:'避碰規則'},
+{id:'q403', topic:'a8', part:'A', q:'避碰規則中的「水翼船」應注意什麼？', opts:['不需要注意','高速航行時應特別注意避讓','與普通船相同','只有大型船需避讓'], ans:1, explain:'水翼船高速航行時應特別注意避讓，並顯示特定燈號。', ref:'避碰規則'},
+{id:'q404', topic:'a8', part:'A', q:'避碰規則中的「兩船對遇」如何確定？', opts:['看距離','兩船在相反航向上，且看到對方紅綠燈並排','看速度','看大小'], ans:1, explain:'看到對方紅綠燈並排表示兩船正在對遇。', ref:'避碰規則第十四條'},
+{id:'q405', topic:'a8', part:'A', q:'避碰規則中的「交叉相遇」如何確定？', opts:['看距離','看到他船的側燈（只看到紅燈或只看到綠燈）','看速度','看大小'], ans:1, explain:'只看到他船的紅燈或綠燈（不是並排）表示交叉相遇。', ref:'避碰規則第十五條'},
+{id:'q406', topic:'a9', part:'A', q:'救生衣應每人配備多少件？', opts:['每2人1件','每人1件','每船至少5件','視船長而定'], ans:1, explain:'救生衣每人一件，須放在易取位置。', ref:'考試手冊第九章'},
+{id:'q407', topic:'a9', part:'A', q:'電器火災應使用什麼滅火器？', opts:['水劑滅火器','泡沫滅火器','CO₂或乾粉滅火器','沙桶'], ans:2, explain:'電器火災用CO₂或乾粉滅火器，不能用水或泡沫（會導電）。', ref:'考試手冊第九章'},
+{id:'q408', topic:'a9', part:'A', q:'油類火災應使用什麼滅火器？', opts:['水劑滅火器','泡沫滅火器','CO₂或乾粉滅火器','沙桶'], ans:1, explain:'油類火災用泡沫滅火器效果最佳，CO₂或乾粉也可以。', ref:'考試手冊第九章'},
+{id:'q409', topic:'a9', part:'A', q:'船長<12米的遊樂船最少需要幾個滅火器？', opts:['1個','2個','3個','4個'], ans:1, explain:'船長<12米最少需要2個滅火器。', ref:'考試手冊第九章'},
+{id:'q410', topic:'a9', part:'A', q:'救生圈在船長<12米時需要幾個？', opts:['0個','1個','2個','3個'], ans:1, explain:'船長<12米需1個救生圈。', ref:'考試手冊第九章'},
+{id:'q411', topic:'a9', part:'A', q:'救生圈在12米≤船長<21米時需要幾個？', opts:['1個','2個','3個','4個'], ans:1, explain:'12米≤船長<21米需2個救生圈。', ref:'考試手冊第九章'},
+{id:'q412', topic:'a9', part:'A', q:'救生衣應放在什麼位置？', opts:['隨意放置','易取位置','鎖在櫃裡','甲板上'], ans:1, explain:'救生衣應放在易取位置，緊急時能迅速取用。', ref:'考試手冊第九章'},
+{id:'q413', topic:'a9', part:'A', q:'泡沫滅火器不能用於什麼火災？', opts:['油類火','電器火','普通火','都可以用'], ans:1, explain:'泡沫滅火器不能用於電器火災（泡沫導電）。', ref:'考試手冊第九章'},
+{id:'q414', topic:'a9', part:'A', q:'CO₂滅火器在密閉空間使用有什麼危險？', opts:['爆炸','觸電','導致缺氧窒息','無危險'], ans:2, explain:'CO₂滅火器在密閉空間使用會排擠氧氣，導致缺氧窒息。', ref:'考試手冊第九章'},
+{id:'q415', topic:'a9', part:'A', q:'滅火器應多久檢查一次？', opts:['每天','每月','每年','不需要檢查'], ans:1, explain:'應定期（至少每月）檢查滅火器，確保在有效期內且壓力正常。', ref:'考試手冊第九章'},
+{id:'q416', topic:'a9', part:'A', q:'遇險信號彈應放在什麼位置？', opts:['隨意放置','易取且安全的位置','鎖在櫃裡','引擎艙內'], ans:1, explain:'遇險信號彈應放在易取且安全的位置。', ref:'考試手冊第九章'},
+{id:'q417', topic:'a9', part:'A', q:'救生圈應配備什麼附屬設備？', opts:['不需要','燈光和浮索','哨子','無附屬設備'], ans:1, explain:'救生圈應配備燈光和浮索，方便夜間使用和救援。', ref:'考試手冊第九章'},
+{id:'q418', topic:'a9', part:'A', q:'什麼是「漂浮救生索」？', opts:['普通繩索','船尾配備的可漂浮繩索','游泳用的繩','釣魚線'], ans:1, explain:'漂浮救生索是船尾配備的可漂浮繩索，落水人員可抓住。', ref:'考試手冊第九章'},
+{id:'q419', topic:'a9', part:'A', q:'安全設備保養記錄應保留多久？', opts:['不需要記錄','保留至下次檢查','1年','永久保留'], ans:1, explain:'應保留保養記錄至下次檢查。', ref:'考試手冊第九章'},
+{id:'q420', topic:'a9', part:'A', q:'過期的滅火器應如何處理？', opts:['繼續使用','及時更換','放到一邊','丟棄'], ans:1, explain:'過期滅火器應及時更換，確保緊急時能正常使用。', ref:'考試手冊第九章'},
+{id:'q421', topic:'a10', part:'A', q:'國際遇險頻道是VHF頻道幾？', opts:['02','12','14','16'], ans:3, explain:'VHF頻道16是國際遇險頻道。', ref:'考試手冊第十章'},
+{id:'q422', topic:'a10', part:'A', q:'香港海港的VHF通訊頻道是幾號？', opts:['02','12','14','16'], ans:2, explain:'VHF頻道14是海港頻道。', ref:'考試手冊第十章'},
+{id:'q423', topic:'a10', part:'A', q:'發送遇險信號時，應先呼叫什麼？', opts:['HELP三次','SOS三次','MAYDAY三次','PAN三次'], ans:2, explain:'遇險信號使用VHF頻道16呼叫「MAYDAY」三次。', ref:'考試手冊第十章'},
+{id:'q424', topic:'a10', part:'A', q:'MAYDAY信號表示什麼？', opts:['一般求助','緊急求助（生命受到威脅）','安全信息','商業通訊'], ans:1, explain:'MAYDAY表示生命受到威脅的緊急求助。', ref:'考試手冊第十章'},
+{id:'q425', topic:'a10', part:'A', q:'PAN PAN信號表示什麼？', opts:['遇險','緊急（但無生命危險）','安全信息','一般通訊'], ans:1, explain:'PAN PAN表示緊急但無生命危險的情況。', ref:'考試手冊第十章'},
+{id:'q426', topic:'a10', part:'A', q:'SECURITÉ信號表示什麼？', opts:['遇險','緊急','安全信息（航行安全警告）','一般通訊'], ans:2, explain:'SECURITÉ表示航行安全警告信息。', ref:'考試手冊第十章'},
+{id:'q427', topic:'a10', part:'A', q:'發送MAYDAY後應報告什麼信息？', opts:['只需船名','船名、位置、遇險性質、所需援助、人數','只需位置','只需遇險性質'], ans:1, explain:'應報告船名、位置、遇險性質、所需援助和船上人數。', ref:'考試手冊第十章'},
+{id:'q428', topic:'a10', part:'A', q:'發送MAYDAY時應以什麼結束？', opts:['END','OVER','OUT','BYE'], ans:1, explain:'以「OVER」結束，表示等待對方回覆。', ref:'考試手冊第十章'},
+{id:'q429', topic:'a10', part:'A', q:'什麼是DSC（數碼選擇性呼叫）？', opts:['普通通訊','數碼化的遇險和安全通訊系統','電話系統','廣播系統'], ans:1, explain:'DSC是VHF的數碼化遇險和安全通訊系統。', ref:'考試手冊第十章'},
+{id:'q430', topic:'a10', part:'A', q:'VHF頻道16上可以進行一般通訊嗎？', opts:['可以','不可以，只用於遇險和緊急通訊','視情況而定','只有大型船可以用'], ans:1, explain:'頻道16只用於遇險和緊急通訊，不應用於一般通訊。', ref:'考試手冊第十章'},
+{id:'q431', topic:'a10', part:'A', q:'收到MAYDAY信號後應如何回應？', opts:['不理會','確認收到並提供必要協助','關閉VHF','轉頻道'], ans:1, explain:'應確認收到MAYDAY並根據情況提供必要協助。', ref:'考試手冊第十章'},
+{id:'q432', topic:'a10', part:'A', q:'VHF通訊的基本程序是什麼？', opts:['隨意說話','先呼叫對方、等待回覆、說明身份和意圖','直接說話','不需要程序'], ans:1, explain:'先呼叫對方名稱、等待回覆、說明自己身份和通訊意圖。', ref:'考試手冊第十章'},
+{id:'q433', topic:'a11', part:'A', q:'統籌南海國際水域搜救的是哪個機構？', opts:['消防處','海事處海上救援協調中心','水警','飛行服務隊'], ans:1, explain:'海事處海上救援協調中心統籌南海國際水域搜救。', ref:'考試手冊第十一章'},
+{id:'q434', topic:'a11', part:'A', q:'船隻航行監察中心的主要職能是什麼？', opts:['售票','監控和管理船舶交通','漁業管理','天氣預報'], ans:1, explain:'船隻航行監察中心負責監控和管理香港水域的船舶交通。', ref:'考試手冊第十一章'},
+{id:'q435', topic:'a11', part:'A', q:'「航海通告」的作用是什麼？', opts:['商業廣告','公佈航行安全信息和海圖改正資料','天氣預報','法律條文'], ans:1, explain:'航海通告公佈航行安全信息、海圖改正資料和航標變動通知。', ref:'考試手冊第十一章'},
+{id:'q436', topic:'a11', part:'A', q:'海事處佈告的內容通常是什麼？', opts:['商業廣告','港口規則和航行安全通知','天氣預報','新聞'], ans:1, explain:'海事處佈告公佈港口規則和航行安全通知。', ref:'考試手冊第十一章'},
+{id:'q437', topic:'a11', part:'A', q:'遇到海上緊急情況應聯繫誰？', opts:['旅行社','海事處或撥打999','報社','航空公司'], ans:1, explain:'應聯繫海事處或撥打緊急電話999。', ref:'考試手冊第十一章'},
+{id:'q438', topic:'a11', part:'A', q:'海事處的「港口國監督」是什麼？', opts:['港口管理','對進入香港水域的外國船舶進行安全檢查','售票','旅遊服務'], ans:1, explain:'港口國監督是對進入香港水域的外國船舶進行安全檢查。', ref:'考試手冊第十一章'},
+{id:'q439', topic:'a12', part:'A', q:'香港三號颱風信號代表什麼風速範圍？', opts:['12-40km/h','41-62km/h','63-80km/h','81-100km/h'], ans:1, explain:'三號強風信號代表風速41-62km/h。', ref:'考試手冊第十二章'},
+{id:'q440', topic:'a12', part:'A', q:'八號烈風信號代表的風速是多少？', opts:['41-62km/h','63-117km/h','118-150km/h','150km/h以上'], ans:1, explain:'八號烈風信號代表風速63-117km/h。', ref:'考試手冊第十二章'},
+{id:'q441', topic:'a12', part:'A', q:'蒲福風級中，「烈風」是幾級？', opts:['6級','7級','8級','9級'], ans:2, explain:'蒲福風級8級為烈風（62-74km/h）。', ref:'考試手冊第十二章'},
+{id:'q442', topic:'a12', part:'A', q:'十號颶風信號代表什麼風速？', opts:['63-117km/h','118km/h或以上','41-62km/h','200km/h以上'], ans:1, explain:'十號颶風信號代表風速達118km/h或以上。', ref:'考試手冊第十二章'},
+{id:'q443', topic:'a12', part:'A', q:'一號戒備信號代表什麼？', opts:['風速很大','有熱帶氣旋可能影響香港','颶風來臨','可以出海'], ans:1, explain:'一號戒備信號表示有熱帶氣旋可能影響香港。', ref:'考試手冊第十二章'},
+{id:'q444', topic:'a12', part:'A', q:'三號信號掛起時小型船隻應怎麼做？', opts:['繼續出海','不應出海，留在安全港口','不需要注意','加速航行'], ans:1, explain:'三號信號掛起時小型船隻不應出海。', ref:'考試手冊第十二章'},
+{id:'q445', topic:'a12', part:'A', q:'八號信號掛起時所有船隻應怎麼做？', opts:['繼續航行','到避風塘避風','出海觀浪','不需要注意'], ans:1, explain:'八號信號時所有船隻應到避風塘避風。', ref:'考試手冊第十二章'},
+{id:'q446', topic:'a12', part:'A', q:'蒲福風級0級代表什麼？', opts:['強風','無風（<1km/h）','微風','烈風'], ans:1, explain:'蒲福風級0級為無風，風速小於1km/h。', ref:'考試手冊第十二章'},
+{id:'q447', topic:'a12', part:'A', q:'蒲福風級6級代表什麼？', opts:['微風','強風（39-49km/h）','烈風','颶風'], ans:1, explain:'蒲福風級6級為強風，風速39-49km/h。', ref:'考試手冊第十二章'},
+{id:'q448', topic:'a12', part:'A', q:'什麼是「吹程」？', opts:['風的強度','風吹過無遮蔽水面的距離','風的方向','風的溫度'], ans:1, explain:'吹程是指風吹過無遮蔽水面的距離，吹程越長浪越大。', ref:'考試手冊第十二章'},
+{id:'q449', topic:'a12', part:'A', q:'什麼是「季候風」？', opts:['任何風','隨季節變化的盛行風','陣風','海風'], ans:1, explain:'季候風是隨季節變化的盛行風，香港冬季多吹北風，夏季多吹南風。', ref:'考試手冊第十二章'},
+{id:'q450', topic:'a12', part:'A', q:'如何獲取香港天氣信息？', opts:['看報紙','香港天文台網站和VHF天氣廣播','看電視','問路人'], ans:1, explain:'可通過天文台網站、VHF天氣廣播和手機App獲取天氣信息。', ref:'考試手冊第十二章'},
+{id:'q451', topic:'a13', part:'A', q:'有人從船的左邊落水，舵應轉向哪邊？', opts:['右','左','不轉','先停車再說'], ans:1, explain:'左落水轉左舵——舵向落水側轉，把船尾甩開避免打到人。', ref:'考試手冊第十三章'},
+{id:'q452', topic:'a13', part:'A', q:'發現人員落水後，應鳴放什麼聲號？', opts:['一短聲','兩短聲','三短聲','三長聲'], ans:3, explain:'人員落水鳴放三長聲信號。', ref:'考試手冊第十三章'},
+{id:'q453', topic:'a13', part:'A', q:'碰撞後第一步應做什麼？', opts:['報告海事處','穿上救生衣','立即停車','檢查損傷'], ans:2, explain:'碰撞後第一步是立即停車，然後穿救生衣、檢查損傷。', ref:'考試手冊第十三章'},
+{id:'q454', topic:'a13', part:'A', q:'碰撞後應做什麼？', opts:['離開現場','停車、檢查傷亡、檢查損傷、泵水、報告','繼續航行','不需行動'], ans:1, explain:'碰撞後：1.停車 2.檢查傷亡 3.穿救生衣 4.檢查損傷 5.泵水 6.報告海事處。', ref:'考試手冊第十三章'},
+{id:'q455', topic:'a13', part:'A', q:'擱淺後第一步應做什麼？', opts:['倒車脫淺','停車，檢查船體損傷','拋錨','報告海事處'], ans:1, explain:'擱淺後應先停車，檢查船體有無損傷和進水。', ref:'考試手冊第十三章'},
+{id:'q456', topic:'a13', part:'A', q:'船隻失火時第一步應做什麼？', opts:['用水滅火','停車，關閉油路','跳船逃生','繼續航行'], ans:1, explain:'失火時應立即停車並關閉油路，切斷燃料供應。', ref:'考試手冊第十三章'},
+{id:'q457', topic:'a13', part:'A', q:'船體漏水時應做什麼？', opts:['不管它','使用堵漏器材止水，並用泵排水','跳船','繼續航行'], ans:1, explain:'應使用堵漏器材止水，同時用泵排水。', ref:'考試手冊第十三章'},
+{id:'q458', topic:'a13', part:'A', q:'人員落水後拋救生圈應注意什麼？', opts:['隨意拋','朝落水者方向拋，並注意不擊中人','不需拋','拋向遠處'], ans:1, explain:'應朝落水者方向拋救生圈，注意不要擊中落水者。', ref:'考試手冊第十三章'},
+{id:'q459', topic:'a13', part:'A', q:'人員落水後失去蹤影應如何搜索？', opts:['放棄','使用威廉臣回航法','繼續前進','鳴笛等待'], ans:1, explain:'使用威廉臣回航法返回最後看到落水者的位置進行搜索。', ref:'考試手冊第十三章'},
+{id:'q460', topic:'a13', part:'A', q:'什麼是「威廉臣回航法」？', opts:['普通轉向','向落水側轉20-30度，然後反向轉回的方法','直接掉頭','鳴笛回航'], ans:1, explain:'威廉臣回航法：向落水側轉20-30度，航行約15-20秒，然後反向轉60-90度回航。', ref:'考試手冊第十三章'},
+{id:'q461', topic:'a13', part:'A', q:'碰撞後交換什麼信息？', opts:['不需要交換','船名、船籍港、目的地','只需船名','只需道歉'], ans:1, explain:'碰撞後應交換船名、船籍港、目的地等船舶信息。', ref:'考試手冊第十三章'},
+{id:'q462', topic:'a13', part:'A', q:'船隻進水應使用什麼設備排水？', opts:['水桶','污水泵','帆布','不需排水'], ans:1, explain:'應使用污水泵排水，必要時用水桶輔助。', ref:'考試手冊第十三章'},
+{id:'q463', topic:'a13', part:'A', q:'緊急情況下應在VHF頻道幾求助？', opts:['頻道1','頻道16','頻道72','頻道88'], ans:1, explain:'緊急情況在VHF頻道16呼叫MAYDAY求助。', ref:'考試手冊第十三章'},
+{id:'q464', topic:'a13', part:'A', q:'失舵時應如何應對？', opts:['無法操縱','使用應急舵或引擎輔助轉向','等待救援','跳船'], ans:1, explain:'應使用應急舵柄或利用引擎輔助轉向。', ref:'考試手冊第十三章'},
+{id:'q465', topic:'a13', part:'A', q:'什麼是「堵漏器材」？', opts:['水泥','用於堵住船體破洞的專用器材','木頭','鐵板'], ans:1, explain:'堵漏器材是專用於堵住船體破洞、防止進水的器材。', ref:'考試手冊第十三章'},
+{id:'q466', topic:'a14', part:'A', q:'發生海上事故後，書面報告須在多少小時內提交？', opts:['12小時','24小時','48小時','72小時'], ans:1, explain:'書面報告須在24小時內提交海事處。', ref:'考試手冊第十四章'},
+{id:'q467', topic:'a14', part:'A', q:'海上事故的口頭報告應何時提交？', opts:['24小時內','12小時內','6小時內','立即'], ans:3, explain:'口頭報告須立即向海事處報告。', ref:'考試手冊第十四章'},
+{id:'q468', topic:'a14', part:'A', q:'以下哪種事故需要報告？', opts:['輕微刮傷','碰撞、沉沒、傷亡、火警','只需報告沉船','不需報告'], ans:1, explain:'碰撞、沉沒、傷亡、火警和導致損壞的事故都需要報告。', ref:'考試手冊第十四章'},
+{id:'q469', topic:'a14', part:'A', q:'海上事故報告應提交給誰？', opts:['警方','海事處','消防處','天文台'], ans:1, explain:'海上事故報告應提交給海事處。', ref:'考試手冊第十四章'},
+{id:'q470', topic:'a14', part:'A', q:'書面報告應包含什麼內容？', opts:['只需船名','事故經過、時間、地點、損傷情況、傷亡情況','只需時間地點','只需天氣信息'], ans:1, explain:'書面報告應包含事故經過、時間、地點、損傷情況和傷亡情況。', ref:'考試手冊第十四章'},
+{id:'q471', topic:'a14', part:'A', q:'口頭報告可以用什麼方式提交？', opts:['只能書面','電話、VHF或親自到海事處','只能VHF','只能親自到場'], ans:1, explain:'口頭報告可以通過電話、VHF或親自到海事處提交。', ref:'考試手冊第十四章'},
+{id:'q472', topic:'a14', part:'A', q:'什麼是「海上事故」？', opts:['任何事件','碰撞、擱淺、沉沒、火警、傷亡等','只有沉船','只有碰撞'], ans:1, explain:'海上事故包括碰撞、擱淺、沉沒、火警、傷亡、漏水等。', ref:'考試手冊第十四章'},
+{id:'q473', topic:'a14', part:'A', q:'不報告海上事故有什麼後果？', opts:['無後果','法律責任和處罰','警告','記錄'], ans:1, explain:'不報告海上事故會承擔法律責任和處罰。', ref:'考試手冊第十四章'},
+{id:'q474', topic:'a14', part:'A', q:'事故報告中應如何描述事故經過？', opts:['隨意描述','客觀、準確、詳細','簡單描述','不需描述'], ans:1, explain:'應客觀、準確、詳細地描述事故經過。', ref:'考試手冊第十四章'},
+{id:'q475', topic:'a14', part:'A', q:'事故中有人受傷應如何報告？', opts:['不需報告','在報告中說明傷者情況和救治措施','只報告船損','延後報告'], ans:1, explain:'應在報告中詳細說明傷者情況和已採取的救治措施。', ref:'考試手冊第十四章'},
+{id:'q476', topic:'a14', part:'A', q:'報告中的「事故時間」應如何填寫？', opts:['估計時間','盡量準確的時間','不需填寫','隨意填寫'], ans:1, explain:'應填寫盡量準確的事故發生時間。', ref:'考試手冊第十四章'},
+{id:'q477', topic:'a14', part:'A', q:'報告中的「事故地點」應如何填寫？', opts:['大致位置','GPS坐標或明顯陸標方位','不需填寫','隨意填寫'], ans:1, explain:'應填寫GPS坐標或相對明顯陸標的方位和距離。', ref:'考試手冊第十四章'},
+{id:'q478', topic:'a14', part:'A', q:'事故後船舶受損但無人傷亡需要報告嗎？', opts:['不需要','需要報告','只需修理','只需通知保險'], ans:1, explain:'即使無人傷亡，導致船舶損壞的事故也需要報告。', ref:'考試手冊第十四章'},
+{id:'q479', topic:'a14', part:'A', q:'事故報告可以用英文提交嗎？', opts:['不可以','可以，中英文均可','只能中文','只能英文'], ans:1, explain:'事故報告中英文均可。', ref:'考試手冊第十四章'},
+{id:'q480', topic:'a14', part:'A', q:'事故報告的副本應保留嗎？', opts:['不需要','應保留副本備查','交給對方','丟棄'], ans:1, explain:'應保留報告副本備查。', ref:'考試手冊第十四章'},
+{id:'q481', topic:'b1', part:'B', q:'柴油機的壓縮比大約是多少？', opts:['5:1至8:1','7:1至10:1','12:1至30:1','20:1至40:1'], ans:2, explain:'柴油機壓縮比高，約12:1至30:1。', ref:'考試手冊乙部第一章'},
+{id:'q482', topic:'b1', part:'B', q:'汽油的閃火點大約是多少？', opts:['+63°C','-40°C','+100°C','0°C'], ans:1, explain:'汽油閃火點約-40°C，非常低，極易燃。', ref:'考試手冊乙部第一章'},
+{id:'q483', topic:'b1', part:'B', q:'柴油的比重是多少？', opts:['0.73','0.84','1.00','1.27'], ans:1, explain:'柴油比重0.84，汽油0.73，均比水輕（比重<1）。', ref:'考試手冊乙部第一章'},
+{id:'q484', topic:'b1', part:'B', q:'四衝程引擎中，凸輪軸的轉速是曲軸的多少？', opts:['相同','一半','兩倍','四分之一'], ans:1, explain:'凸輪軸轉速為曲軸的一半（四衝程引擎每兩轉完成一個工作循環）。', ref:'考試手冊乙部第一章'},
+{id:'q485', topic:'b1', part:'B', q:'活塞環的主要功能是什麼？', opts:['散熱','密封和刮油','潤滑','減震'], ans:1, explain:'活塞環的主要功能是密封燃燒室和刮除多餘機油。', ref:'考試手冊乙部第一章'},
+{id:'q486', topic:'b1', part:'B', q:'曲軸的作用是什麼？', opts:['控制氣門','將往復運動轉為旋轉運動','點火','噴油'], ans:1, explain:'曲軸將活塞的往復運動轉換為旋轉運動。', ref:'考試手冊乙部第一章'},
+{id:'q487', topic:'b1', part:'B', q:'四衝程引擎的四個衝程是什麼？', opts:['進氣→排氣→壓縮→動力','進氣→壓縮→動力→排氣','壓縮→進氣→排氣→動力','動力→進氣→壓縮→排氣'], ans:1, explain:'四衝程循環：進氣→壓縮→動力（膨脹）→排氣。', ref:'考試手冊乙部第一章'},
+{id:'q488', topic:'b1', part:'B', q:'柴油機的點火方式是什麼？', opts:['火花塞點火','壓縮自燃','電熱塞點火','磁電機點火'], ans:1, explain:'柴油機是壓燃式（compression ignition），靠壓縮空氣產生高溫使柴油自燃。', ref:'考試手冊乙部第一章'},
+{id:'q489', topic:'b1', part:'B', q:'汽油機的點火方式是什麼？', opts:['壓縮自燃','火花塞點火','電熱塞點火','磁電機點火'], ans:1, explain:'汽油機是點燃式（spark ignition），靠火花塞點火。', ref:'考試手冊乙部第一章'},
+{id:'q490', topic:'b1', part:'B', q:'汽油的比重是多少？', opts:['0.73','0.84','1.00','1.27'], ans:0, explain:'汽油比重約0.73，比水輕，浮在水面。', ref:'考試手冊乙部第一章'},
+{id:'q491', topic:'b1', part:'B', q:'柴油的閃火點大約是多少？', opts:['-40°C','+63°C','+100°C','+200°C'], ans:1, explain:'柴油閃火點約+63°C，比汽油安全得多。', ref:'考試手冊乙部第一章'},
+{id:'q492', topic:'b1', part:'B', q:'汽油機的壓縮比大約是多少？', opts:['5:1至8:1','7:1至10:1','12:1至30:1','20:1至40:1'], ans:1, explain:'汽油機壓縮比低，約7:1至10:1。', ref:'考試手冊乙部第一章'},
+{id:'q493', topic:'b1', part:'B', q:'飛輪的作用是什麼？', opts:['儲存動能使運轉平穩','控制氣門','點火','散熱'], ans:0, explain:'飛輪儲存動能，使引擎運轉平穩。', ref:'考試手冊乙部第一章'},
+{id:'q494', topic:'b1', part:'B', q:'活塞在氣缸內的運動方式是什麼？', opts:['旋轉','往復運動','螺旋運動','振動'], ans:1, explain:'活塞在氣缸內做往復運動。', ref:'考試手冊乙部第一章'},
+{id:'q495', topic:'b1', part:'B', q:'氣缸蓋的作用是什麼？', opts:['散熱','密封氣缸頂部並安裝氣門和噴油嘴','潤滑','減震'], ans:1, explain:'氣缸蓋密封氣缸頂部，並安裝進排氣門、噴油嘴等。', ref:'考試手冊乙部第一章'},
+{id:'q496', topic:'b1', part:'B', q:'什麼是「氣門正時」？', opts:['氣門的顏色','氣門開閉的精確時間','氣門的數量','氣門的大小'], ans:1, explain:'氣門正時是指進排氣門開閉的精確時間，影響引擎效率。', ref:'考試手冊乙部第一章'},
+{id:'q497', topic:'b1', part:'B', q:'引擎的「排量」是指什麼？', opts:['排氣量','所有氣缸工作容積的總和','油箱容量','重量'], ans:1, explain:'排量是所有氣缸工作容積的總和，通常以cc或升表示。', ref:'考試手冊乙部第一章'},
+{id:'q498', topic:'b1', part:'B', q:'柴油機和汽油機哪個效率更高？', opts:['汽油機','柴油機','一樣','視情況而定'], ans:1, explain:'柴油機效率更高，因為壓縮比更高，燃燒更充分。', ref:'考試手冊乙部第一章'},
+{id:'q499', topic:'b1', part:'B', q:'為什麼汽油比柴油更危險？', opts:['汽油更重','汽油閃火點極低，極易燃','汽油更難燃','柴油有毒'], ans:1, explain:'汽油閃火點約-40°C，極易揮發和燃燒。', ref:'考試手冊乙部第一章'},
+{id:'q500', topic:'b1', part:'B', q:'進氣衝程中進氣門和排氣門的狀態是什麼？', opts:['都關閉','進氣門開排氣門關','都開','進氣門關排氣門開'], ans:1, explain:'進氣衝程：進氣門開啟，排氣門關閉。', ref:'考試手冊乙部第一章'},
+{id:'q501', topic:'b1', part:'B', q:'壓縮衝程中進氣門和排氣門的狀態是什麼？', opts:['都關閉','進氣門開排氣門關','都開','進氣門關排氣門開'], ans:0, explain:'壓縮衝程：進排氣門都關閉。', ref:'考試手冊乙部第一章'},
+{id:'q502', topic:'b1', part:'B', q:'排氣衝程中哪個氣門開啟？', opts:['進氣門','排氣門','都開','都關'], ans:1, explain:'排氣衝程：排氣門開啟，進氣門關閉。', ref:'考試手冊乙部第一章'},
+{id:'q503', topic:'b1', part:'B', q:'動力衝程中進氣門和排氣門的狀態是什麼？', opts:['都開','都關閉','進氣門開排氣門關','進氣門關排氣門開'], ans:1, explain:'動力衝程：進排氣門都關閉，燃燒壓力推動活塞下行。', ref:'考試手冊乙部第一章'},
+{id:'q504', topic:'b1', part:'B', q:'引擎的「壓縮比」定義是什麼？', opts:['氣缸長度÷寬度','氣缸總容積÷燃燒室容積','燃燒室容積÷氣缸總容積','活塞面積÷氣缸面積'], ans:1, explain:'壓縮比 = 氣缸總容積（活塞在下止點時）÷ 燃燒室容積（活塞在上止點時）。', ref:'考試手冊乙部第一章'},
+{id:'q505', topic:'b1', part:'B', q:'引擎的「上止點」（TDC）是什麼？', opts:['活塞最低位置','活塞最高位置','活塞中間位置','氣缸頂部'], ans:1, explain:'上止點是活塞在氣缸內的最高位置。', ref:'考試手冊乙部第一章'},
+{id:'q506', topic:'b1', part:'B', q:'引擎的「下止點」（BDC）是什麼？', opts:['活塞最高位置','活塞最低位置','活塞中間位置','氣缸底部'], ans:1, explain:'下止點是活塞在氣缸內的最低位置。', ref:'考試手冊乙部第一章'},
+{id:'q507', topic:'b1', part:'B', q:'引擎的「衝程」是指什麼？', opts:['氣缸直徑','活塞從上止點到下止點的距離','曲軸轉速','氣門開度'], ans:1, explain:'衝程是活塞從上止點到下止點的距離。', ref:'考試手冊乙部第一章'},
+{id:'q508', topic:'b1', part:'B', q:'柴油機燃油系統的主要部件是什麼？', opts:['化油器','噴油泵和噴油嘴','火花塞','點火線圈'], ans:1, explain:'柴油機使用噴油泵和噴油嘴將燃油噴入氣缸。', ref:'考試手冊乙部第一章'},
+{id:'q509', topic:'b1', part:'B', q:'汽油機燃油系統的主要部件是什麼？', opts:['噴油泵','化油器或電噴系統','噴油嘴','高壓油管'], ans:1, explain:'汽油機使用化油器或電噴系統混合空氣和汽油。', ref:'考試手冊乙部第一章'},
+{id:'q510', topic:'b1', part:'B', q:'什麼是「化油器」？', opts:['排氣裝置','混合空氣和汽油的裝置','點火裝置','潤滑裝置'], ans:1, explain:'化油器是混合空氣和汽油形成可燃混合氣的裝置。', ref:'考試手冊乙部第一章'},
+{id:'q511', topic:'b1', part:'B', q:'柴油和汽油哪個比水輕？', opts:['只有柴油','只有汽油','兩者都比水輕','兩者都比水重'], ans:2, explain:'柴油比重0.84，汽油比重0.73，都比水輕（比重<1），浮在水面。', ref:'考試手冊乙部第一章'},
+{id:'q512', topic:'b1', part:'B', q:'什麼是「渦輪增壓器」？', opts:['排氣裝置','利用排氣驅動增加進氣壓力的裝置','點火裝置','冷卻裝置'], ans:1, explain:'渦輪增壓器利用排氣驅動壓縮機增加進氣壓力，提高引擎功率。', ref:'考試手冊乙部第一章'},
+{id:'q513', topic:'b1', part:'B', q:'引擎的「機油」主要作用是什麼？', opts:['燃燒','潤滑、冷卻、密封、清潔','點火','排氣'], ans:1, explain:'機油的主要作用是潤滑、冷卻、密封和清潔。', ref:'考試手冊乙部第一章'},
+{id:'q514', topic:'b1', part:'B', q:'引擎「散熱器」的作用是什麼？', opts:['加熱','散發冷卻液的熱量','儲存燃油','點火'], ans:1, explain:'散熱器（水箱）散發冷卻液吸收的引擎熱量。', ref:'考試手冊乙部第一章'},
+{id:'q515', topic:'b1', part:'B', q:'引擎「節溫器」的作用是什麼？', opts:['測量溫度','控制冷卻液流向散熱器或旁通','調節油量','控制氣門'], ans:1, explain:'節溫器根據水溫控制冷卻液是流向散熱器還是走旁通。', ref:'考試手冊乙部第一章'},
+{id:'q516', topic:'b1', part:'B', q:'引擎的「額定功率」是指什麼？', opts:['最大速度','引擎在規定條件下能持續輸出的最大功率','瞬時最大功率','最低功率'], ans:1, explain:'額定功率是引擎在規定條件下能持續輸出的最大功率。', ref:'考試手冊乙部第一章'},
+{id:'q517', topic:'b1', part:'B', q:'引擎的「怠速」是指什麼？', opts:['最高速度','引擎空轉不帶負荷的最低穩定轉速','關閉引擎','中速運轉'], ans:1, explain:'怠速是引擎空轉不帶負荷的最低穩定轉速。', ref:'考試手冊乙部第一章'},
+{id:'q518', topic:'b1', part:'B', q:'引擎「水套」是什麼？', opts:['外殼','氣缸周圍的冷卻水通道','油路','排氣管'], ans:1, explain:'水套是氣缸周圍的冷卻水通道，冷卻液在其中循環帶走熱量。', ref:'考試手冊乙部第一章'},
+{id:'q519', topic:'b1', part:'B', q:'引擎「曲軸箱」的作用是什麼？', opts:['儲存燃油','容納和保護曲軸','冷卻','排氣'], ans:1, explain:'曲軸箱容納和保護曲軸，底部儲存機油。', ref:'考試手冊乙部第一章'},
+{id:'q520', topic:'b1', part:'B', q:'什麼是「壓縮壓力」？', opts:['油壓','壓縮衝程結束時氣缸內的壓力','水壓','氣壓'], ans:1, explain:'壓縮壓力是壓縮衝程結束時氣缸內的空氣壓力。', ref:'考試手冊乙部第一章'},
+{id:'q521', topic:'b1', part:'B', q:'引擎「排氣歧管」的作用是什麼？', opts:['進氣','收集各缸排氣並導向排氣管','點火','潤滑'], ans:1, explain:'排氣歧管收集各氣缸的排氣並導向排氣管。', ref:'考試手冊乙部第一章'},
+{id:'q522', topic:'b1', part:'B', q:'引擎「進氣歧管」的作用是什麼？', opts:['排氣','將空氣/混合氣分配到各氣缸','點火','潤滑'], ans:1, explain:'進氣歧管將空氣（柴油機）或混合氣（汽油機）分配到各氣缸。', ref:'考試手冊乙部第一章'},
+{id:'q523', topic:'b1', part:'B', q:'引擎「機油濾清器」的作用是什麼？', opts:['過濾燃油','過濾機油中的雜質','過濾空氣','過濾冷卻液'], ans:1, explain:'機油濾清器過濾機油中的金屬碎屑和雜質。', ref:'考試手冊乙部第一章'},
+{id:'q524', topic:'b1', part:'B', q:'引擎「燃油濾清器」的作用是什麼？', opts:['過濾機油','過濾燃油中的雜質和水分','過濾空氣','過濾冷卻液'], ans:1, explain:'燃油濾清器過濾燃油中的雜質和水分。', ref:'考試手冊乙部第一章'},
+{id:'q525', topic:'b1', part:'B', q:'引擎「空氣濾清器」的作用是什麼？', opts:['過濾燃油','過濾進入引擎的空氣','過濾機油','過濾冷卻液'], ans:1, explain:'空氣濾清器過濾進入引擎的空氣中的灰塵和雜質。', ref:'考試手冊乙部第一章'},
+{id:'q526', topic:'b1', part:'B', q:'引擎「冷卻系統」的作用是什麼？', opts:['加熱引擎','保持引擎在最佳工作溫度','儲存燃油','排氣'], ans:1, explain:'冷卻系統保持引擎在最佳工作溫度，防止過熱。', ref:'考試手冊乙部第一章'},
+{id:'q527', topic:'b1', part:'B', q:'直接冷卻系統和間接冷卻系統的區別是什麼？', opts:['沒有區別','直接用海水冷卻 vs 用淡水循環+海水冷卻熱交換器','一個用油一個用水','一個用風一個用水'], ans:1, explain:'直接冷卻用海水直接流過引擎；間接冷卻用淡水循環冷卻引擎，再用海水冷卻淡水。', ref:'考試手冊乙部第一章'},
+{id:'q528', topic:'b1', part:'B', q:'間接冷卻系統的優點是什麼？', opts:['更便宜','淡水不會腐蝕引擎，且有緩衝溫度','更簡單','更重'], ans:1, explain:'間接冷卻用淡水不會腐蝕引擎內部，且淡水溫度變化更平穩。', ref:'考試手冊乙部第一章'},
+{id:'q529', topic:'b1', part:'B', q:'什麼是「熱交換器」？', opts:['散熱器','在兩種流體之間傳遞熱量的裝置','加熱器','冷卻塔'], ans:1, explain:'熱交換器在兩種流體（淡水和海水）之間傳遞熱量，使它們不直接混合。', ref:'考試手冊乙部第一章'},
+{id:'q530', topic:'b1', part:'B', q:'引擎「冷卻液」的作用是什麼？', opts:['潤滑','吸收和傳遞引擎熱量','點火','密封'], ans:1, explain:'冷卻液吸收引擎熱量並傳遞到散熱器散發。', ref:'考試手冊乙部第一章'},
+{id:'q531', topic:'b2', part:'B', q:'蓄電池滿電時的電解液比重約為多少？', opts:['1.00','1.10','1.27','1.50'], ans:2, explain:'鉛酸蓄電池滿電時電解液比重約1.27。', ref:'考試手冊乙部第二章'},
+{id:'q532', topic:'b2', part:'B', q:'三相電線的顏色代碼是什麼？', opts:['紅黃藍','棕黑灰','綠白黑','紅綠黃'], ans:1, explain:'三相電線顏色：L1棕、L2黑、L3灰。地線為黃綠相間。', ref:'考試手冊乙部第二章'},
+{id:'q533', topic:'b2', part:'B', q:'離心泵使用前需要什麼操作？', opts:['加潤滑油','引水','預熱','充電'], ans:1, explain:'離心泵需要引水才能啟動（自吸能力差）。', ref:'考試手冊乙部第二章'},
+{id:'q534', topic:'b2', part:'B', q:'操舵機常見類型是什麼？', opts:['電動式','鏈條連桿式','手動式','液壓式'], ans:1, explain:'常見為鏈條連桿式操舵機。', ref:'考試手冊乙部第二章'},
+{id:'q535', topic:'b2', part:'B', q:'液壓舵機出現「氣鎖」應如何處理？', opts:['加油','放氣（排氣）','換油','不管它'], ans:1, explain:'氣鎖是液壓系統中有空氣，應打開放氣閥排氣。', ref:'考試手冊乙部第二章'},
+{id:'q536', topic:'b2', part:'B', q:'蓄電池電解液比重低於多少需要充電？', opts:['1.00','1.10','1.20','1.27'], ans:2, explain:'電解液比重低於約1.20時需要充電。', ref:'考試手冊乙部第二章'},
+{id:'q537', topic:'b2', part:'B', q:'蓄電池的正極標記是什麼？', opts:['藍色','紅色或「+」','綠色','黃色'], ans:1, explain:'蓄電池正極用紅色或「+」標記。', ref:'考試手冊乙部第二章'},
+{id:'q538', topic:'b2', part:'B', q:'蓄電池的負極標記是什麼？', opts:['紅色','黑色或「-」','綠色','黃色'], ans:1, explain:'蓄電池負極用黑色或「-」標記。', ref:'考試手冊乙部第二章'},
+{id:'q539', topic:'b2', part:'B', q:'什麼是「齒輪泵」？', opts:['離心泵','正排量泵','噴射泵','手動泵'], ans:1, explain:'齒輪泵是正排量泵，通過齒輪嚙合輸送液體。', ref:'考試手冊乙部第二章'},
+{id:'q540', topic:'b2', part:'B', q:'什麼是「往復泵」？', opts:['離心泵','正排量泵','噴射泵','手動泵'], ans:1, explain:'往復泵是正排量泵，通過活塞往復運動輸送液體。', ref:'考試手冊乙部第二章'},
+{id:'q541', topic:'b2', part:'B', q:'地線的顏色是什麼？', opts:['紅色','黃綠相間','藍色','黑色'], ans:1, explain:'地線為黃綠相間顏色。', ref:'考試手冊乙部第二章'},
+{id:'q542', topic:'b2', part:'B', q:'什麼是「接地指示燈」？', opts:['照明燈','顯示電氣系統接地狀態的指示燈','航行燈','警告燈'], ans:1, explain:'接地指示燈顯示電氣系統接地是否正常。', ref:'考試手冊乙部第二章'},
+{id:'q543', topic:'b2', part:'B', q:'直流電（DC）和交流電（AC）的區別是什麼？', opts:['沒有區別','DC電流方向不變，AC電流方向交替變化','DC用於大船，AC用於小船','DC更安全'], ans:1, explain:'DC電流方向不變，AC電流方向周期性交替變化。', ref:'考試手冊乙部第二章'},
+{id:'q544', topic:'b2', part:'B', q:'船上蓄電池通常提供什麼電壓？', opts:['3V','6V','12V或24V','220V'], ans:2, explain:'船上蓄電池通常為12V或24V。', ref:'考試手冊乙部第二章'},
+{id:'q545', topic:'b2', part:'B', q:'蓄電池保養應注意什麼？', opts:['不需要保養','保持清潔乾燥、液位正常、定期充電','只檢查外觀','只檢查重量'], ans:1, explain:'蓄電池應保持清潔乾燥、電解液液位正常、定期充電。', ref:'考試手冊乙部第二章'},
+{id:'q546', topic:'b2', part:'B', q:'蓄電池充電時應注意什麼？', opts:['不需要注意','通風良好、遠離明火、檢查液位','密封房間內充電','快速充電'], ans:1, explain:'充電時應保持通風良好、遠離明火（產生氫氣）、檢查液位。', ref:'考試手冊乙部第二章'},
+{id:'q547', topic:'b2', part:'B', q:'船上「配電盤」的作用是什麼？', opts:['儲存電力','分配和控制船上電力','發電','蓄電'], ans:1, explain:'配電盤分配和控制船上電力，保護電路。', ref:'考試手冊乙部第二章'},
+{id:'q548', topic:'b2', part:'B', q:'「斷路器」的作用是什麼？', opts:['儲存電力','過載或短路時自動斷開保護電路','分配電力','發電'], ans:1, explain:'斷路器在電路過載或短路時自動斷開，保護電路和設備。', ref:'考試手冊乙部第二章'},
+{id:'q549', topic:'b2', part:'B', q:'「保險絲」的作用是什麼？', opts:['儲存電力','過載時熔斷保護電路','分配電力','發電'], ans:1, explain:'保險絲在電流過大時熔斷，保護電路和設備。', ref:'考試手冊乙部第二章'},
+{id:'q550', topic:'b2', part:'B', q:'船上「發電機」的作用是什麼？', opts:['儲存電力','將機械能轉換為電能','分配電力','蓄電'], ans:1, explain:'發電機將引擎的機械能轉換為電能供船上使用。', ref:'考試手冊乙部第二章'},
+{id:'q551', topic:'b2', part:'B', q:'船上「起動馬達」的作用是什麼？', opts:['發電','用電力轉動曲軸啟動引擎','泵水','操舵'], ans:1, explain:'起動馬達用電力轉動曲軸來啟動引擎。', ref:'考試手冊乙部第二章'},
+{id:'q552', topic:'b2', part:'B', q:'操舵機的「應急手柄」有什麼作用？', opts:['裝飾用','操舵機故障時手動操舵','加速','減速'], ans:1, explain:'應急手柄在操舵機故障時可用於手動操舵。', ref:'考試手冊乙部第二章'},
+{id:'q553', topic:'b2', part:'B', q:'船上「污水泵」的作用是什麼？', opts:['泵飲用水','排出船艙積水','泵燃油','泵潤滑油'], ans:1, explain:'污水泵排出船艙積水，防止船隻因進水沉沒。', ref:'考試手冊乙部第二章'},
+{id:'q554', topic:'b2', part:'B', q:'船上「淡水泵」的作用是什麼？', opts:['泵海水','供應船上淡水系統','泵燃油','泵污水'], ans:1, explain:'淡水泵為船上淡水系統（水龍頭、淋浴等）供水。', ref:'考試手冊乙部第二章'},
+{id:'q555', topic:'b2', part:'B', q:'蓄電池電解液是什麼？', opts:['純水','稀硫酸','鹽水','蒸餾水'], ans:1, explain:'鉛酸蓄電池的電解液是稀硫酸。', ref:'考試手冊乙部第二章'},
+{id:'q556', topic:'b2', part:'B', q:'蓄電池電解液液位過低應加什麼？', opts:['硫酸','蒸餾水','自來水','機油'], ans:1, explain:'電解液液位過低應加蒸餾水（不是硫酸）。', ref:'考試手冊乙部第二章'},
+{id:'q557', topic:'b2', part:'B', q:'船上為什麼要有「通風系統」？', opts:['舒適','排除有害氣體、提供新鮮空氣','散熱','美觀'], ans:1, explain:'通風系統排除有害氣體（如一氧化碳、石油氣）、提供新鮮空氣。', ref:'考試手冊乙部第二章'},
+{id:'q558', topic:'b2', part:'B', q:'船上電氣系統的「絕緣」為什麼重要？', opts:['不重要','防止漏電和觸電','美觀','減重'], ans:1, explain:'絕緣防止漏電和觸電，保障人員安全。', ref:'考試手冊乙部第二章'},
+{id:'q559', topic:'b2', part:'B', q:'什麼是「安培」（Ampere）？', opts:['電壓單位','電流單位','電阻單位','功率單位'], ans:1, explain:'安培是電流的單位。', ref:'考試手冊乙部第二章'},
+{id:'q560', topic:'b2', part:'B', q:'什麼是「伏特」（Volt）？', opts:['電流單位','電壓單位','電阻單位','功率單位'], ans:1, explain:'伏特是電壓的單位。', ref:'考試手冊乙部第二章'},
+{id:'q561', topic:'b2', part:'B', q:'什麼是「瓦特」（Watt）？', opts:['電流單位','功率單位','電阻單位','電壓單位'], ans:1, explain:'瓦特是功率的單位。', ref:'考試手冊乙部第二章'},
+{id:'q562', topic:'b2', part:'B', q:'電壓×電流等於什麼？', opts:['電阻','功率','電量','頻率'], ans:1, explain:'電壓（V）× 電流（A）= 功率（W）。', ref:'考試手冊乙部第二章'},
+{id:'q563', topic:'b2', part:'B', q:'船上為什麼要使用「防水」電氣設備？', opts:['美觀','防止海水和濕氣造成短路和腐蝕','減重','便宜'], ans:1, explain:'防水電氣設備防止海水和濕氣造成短路和腐蝕。', ref:'考試手冊乙部第二章'},
+{id:'q564', topic:'b2', part:'B', q:'船上「電氣接地」的目的是什麼？', opts:['節省電力','保護人員安全，漏電時電流通過接地線排出','美觀','減重'], ans:1, explain:'接地保護人員安全，漏電時電流通過接地線排出，防止觸電。', ref:'考試手冊乙部第二章'},
+{id:'q565', topic:'b2', part:'B', q:'船上「岸電連接」應注意什麼？', opts:['不需要注意','電壓匹配、接地正確、使用防水接頭','任何電壓都可以','不需要接地'], ans:1, explain:'岸電連接應確保電壓匹配、接地正確、使用防水接頭。', ref:'考試手冊乙部第二章'},
+{id:'q566', topic:'b2', part:'B', q:'蓄電池長期不使用應如何處理？', opts:['不需要處理','定期充電保持電量','完全放電','拆下來'], ans:1, explain:'長期不使用應定期充電，防止過度放電損壞電池。', ref:'考試手冊乙部第二章'},
+{id:'q567', topic:'b2', part:'B', q:'船上「電路圖」的作用是什麼？', opts:['裝飾用','顯示電氣系統的連接和佈線','計算電費','測量電壓'], ans:1, explain:'電路圖顯示電氣系統的連接和佈線，方便維修和故障排除。', ref:'考試手冊乙部第二章'},
+{id:'q568', topic:'b2', part:'B', q:'船上應配備什麼電氣安全設備？', opts:['不需要','絕緣手套、斷路器、接地系統','只需保險絲','只需電燈'], ans:1, explain:'應配備絕緣手套、斷路器、接地系統等電氣安全設備。', ref:'考試手冊乙部第二章'},
+{id:'q569', topic:'b2', part:'B', q:'船上「電氣火災」應使用什麼滅火器？', opts:['水劑','泡沫','CO₂或乾粉','沙'], ans:2, explain:'電氣火災用CO₂或乾粉滅火器，不能用水或泡沫。', ref:'考試手冊乙部第二章'},
+{id:'q570', topic:'b2', part:'B', q:'什麼是「短路」？', opts:['電路正常','電流不經負載直接流過低電阻路徑','電路太長','電壓太高'], ans:1, explain:'短路是電流不經負載直接流過低電阻路徑，會產生大電流和高熱。', ref:'考試手冊乙部第二章'},
+{id:'q571', topic:'b3', part:'B', q:'引擎排氣呈黑色表示什麼？', opts:['正常','油多氣少（燃燒不完全）','燒機油','有水'], ans:1, explain:'黑煙 = 油多氣少，燃燒不完全。', ref:'考試手冊乙部第三章'},
+{id:'q572', topic:'b3', part:'B', q:'引擎排氣呈藍色表示什麼？', opts:['正常','油多氣少','燒機油','有水'], ans:2, explain:'藍煙 = 燒機油。', ref:'考試手冊乙部第三章'},
+{id:'q573', topic:'b3', part:'B', q:'引擎排氣呈白色表示什麼？', opts:['正常','油多氣少','燒機油','有水（冷卻液洩漏）'], ans:3, explain:'白煙 = 有水，通常是冷卻液洩漏進入燃燒室。', ref:'考試手冊乙部第三章'},
+{id:'q574', topic:'b3', part:'B', q:'啟動引擎前應檢查什麼？', opts:['只需檢查油門','燃油、潤滑油、冷卻液、皮帶、閥門','只需檢查鑰匙','不需檢查'], ans:1, explain:'應檢查燃油、潤滑油、冷卻液液位、皮帶張力和閥門狀態。', ref:'考試手冊乙部第三章'},
+{id:'q575', topic:'b3', part:'B', q:'航行中應監控引擎的什麼參數？', opts:['只需看轉速','油壓、油溫、水溫、排氣顏色','只需聽聲音','不需監控'], ans:1, explain:'應定時檢查油壓、油溫、水溫和觀察排氣顏色。', ref:'考試手冊乙部第三章'},
+{id:'q576', topic:'b3', part:'B', q:'引擎過熱應如何處理？', opts:['加速','減速或停車，檢查冷卻系統','加冷水','不管它'], ans:1, explain:'引擎過熱應減速或停車，檢查冷卻系統（水泵、散熱器、冷卻液）。', ref:'考試手冊乙部第三章'},
+{id:'q577', topic:'b3', part:'B', q:'引擎「失去動力」可能原因是什麼？', opts:['天氣問題','燃油濾清器堵塞、進氣不暢、噴油嘴故障','電池問題','潤滑油問題'], ans:1, explain:'常見原因：燃油濾清器堵塞、進氣不暢、噴油嘴故障。', ref:'考試手冊乙部第三章'},
+{id:'q578', topic:'b3', part:'B', q:'引擎「無法啟動」可能原因是什麼？', opts:['天氣問題','電池電量不足、燃油不足、起動馬達故障','油門問題','排氣管問題'], ans:1, explain:'常見原因：電池電量不足、燃油不足、起動馬達故障。', ref:'考試手冊乙部第三章'},
+{id:'q579', topic:'b3', part:'B', q:'什麼是「皮帶張力」？', opts:['皮帶的顏色','皮帶的鬆緊度','皮帶的長度','皮帶的寬度'], ans:1, explain:'皮帶張力是皮帶的鬆緊度，過鬆會打滑，過緊會磨損軸承。', ref:'考試手冊乙部第三章'},
+{id:'q580', topic:'b3', part:'B', q:'引擎「異常振動」可能原因是什麼？', opts:['正常','螺旋槳損壞、引擎腳鬆動、軸線不正','天氣問題','水溫問題'], ans:1, explain:'常見原因：螺旋槳損壞、引擎腳鬆動、軸線不正。', ref:'考試手冊乙部第三章'},
+{id:'q581', topic:'b3', part:'B', q:'引擎「異常噪音」應如何處理？', opts:['忽略','立即檢查來源並處理','加大油門','關閉音樂'], ans:1, explain:'異常噪音應立即檢查來源，可能是嚴重問題的前兆。', ref:'考試手冊乙部第三章'},
+{id:'q582', topic:'b3', part:'B', q:'引擎「漏油」應如何處理？', opts:['忽略','找到洩漏點並修復','用布擦掉','繼續使用'], ans:1, explain:'應找到洩漏點並修復，漏油可能導致火災或引擎損壞。', ref:'考試手冊乙部第三章'},
+{id:'q583', topic:'b3', part:'B', q:'引擎「漏水」應如何處理？', opts:['忽略','檢查冷卻系統各接頭和軟管','加更多水','繼續使用'], ans:1, explain:'應檢查冷卻系統各接頭和軟管，找到洩漏點修復。', ref:'考試手冊乙部第三章'},
+{id:'q584', topic:'b3', part:'B', q:'引擎「排氣管冒黑煙」的處理方法是什麼？', opts:['繼續行駛','檢查燃油系統和進氣系統','加更多油','不管它'], ans:1, explain:'黑煙表示燃燒不完全，應檢查燃油系統（噴油嘴）和進氣系統（空氣濾清器）。', ref:'考試手冊乙部第三章'},
+{id:'q585', topic:'b3', part:'B', q:'引擎「機油壓力過低」表示什麼？', opts:['正常','機油不足、油泵故障或軸承磨損','水溫過高','燃油不足'], ans:1, explain:'機油壓力過低可能因機油不足、油泵故障或軸承磨損。', ref:'考試手冊乙部第三章'},
+{id:'q586', topic:'b3', part:'B', q:'引擎「水溫過高」應如何處理？', opts:['加速','減速或停車，檢查冷卻系統','加冷水到引擎上','打開水箱蓋'], ans:1, explain:'應減速或停車，檢查冷卻液量、水泵、散熱器。', ref:'考試手冊乙部第三章'},
+{id:'q587', topic:'b3', part:'B', q:'引擎「燃油中有空氣」應如何處理？', opts:['繼續使用','排氣（bleed）燃油系統','加更多油','加速'], ans:1, explain:'應排氣（bleed）燃油系統，排出空氣。', ref:'考試手冊乙部第三章'},
+{id:'q588', topic:'b3', part:'B', q:'引擎「電池不充電」可能原因是什麼？', opts:['電池壞了','發電機故障、皮帶鬆動或電路問題','天氣問題','油的問題'], ans:1, explain:'常見原因：發電機故障、傳動皮帶鬆動或電路問題。', ref:'考試手冊乙部第三章'},
+{id:'q589', topic:'b3', part:'B', q:'引擎「燃油濾清器堵塞」的症狀是什麼？', opts:['無症狀','動力下降、引擎抖動、無法啟動','排氣白色','水溫升高'], ans:1, explain:'燃油濾清器堵塞會導致動力下降、引擎抖動甚至無法啟動。', ref:'考試手冊乙部第三章'},
+{id:'q590', topic:'b3', part:'B', q:'什麼是「鋅陽極」（犧牲陽極）？', opts:['裝飾件','保護金屬免受電化學腐蝕的消耗性金屬塊','防水塗料','密封件'], ans:1, explain:'鋅陽極是犧牲性金屬塊，優先被腐蝕以保護其他金屬部件。', ref:'考試手冊乙部第三章'},
+{id:'q591', topic:'b3', part:'B', q:'鋅陽極應多久檢查/更換？', opts:['不需要','每3-6個月或當腐蝕嚴重時','每年一次','每月一次'], ans:1, explain:'應每3-6個月檢查，當腐蝕超過50%時更換。', ref:'考試手冊乙部第三章'},
+{id:'q592', topic:'b3', part:'B', q:'引擎「葉輪泵」（impeller）的作用是什麼？', opts:['泵燃油','海水泵的核心部件，泵送海水冷卻引擎','泵潤滑油','泵淡水'], ans:1, explain:'葉輪泵是海水泵的核心部件，泵送海水冷卻引擎。', ref:'考試手冊乙部第三章'},
+{id:'q593', topic:'b3', part:'B', q:'葉輪泵應多久檢查？', opts:['不需要','每半年或每年檢查一次','每月檢查','每週檢查'], ans:1, explain:'應每半年或每年檢查葉輪，磨損嚴重時更換。', ref:'考試手冊乙部第三章'},
+{id:'q594', topic:'b3', part:'B', q:'引擎「機油」應多久更換？', opts:['不需要更換','根據使用時數或每季度/半年','每年一次','每週一次'], ans:1, explain:'應根據引擎使用時數或定期（每季度/半年）更換機油。', ref:'考試手冊乙部第三章'},
+{id:'q595', topic:'b3', part:'B', q:'引擎「燃油濾清器」應多久更換？', opts:['不需要更換','每半年或每年更換一次','每月更換','每週更換'], ans:1, explain:'應每半年或每年更換燃油濾清器。', ref:'考試手冊乙部第三章'},
+{id:'q596', topic:'b3', part:'B', q:'引擎「空氣濾清器」應多久清潔/更換？', opts:['不需要','定期清潔，嚴重堵塞時更換','每年一次','每週一次'], ans:1, explain:'應定期清潔空氣濾清器，嚴重堵塞時更換。', ref:'考試手冊乙部第三章'},
+{id:'q597', topic:'b3', part:'B', q:'引擎冬季保養應注意什麼？', opts:['不需要','排淨冷卻水防止凍裂、加防凍液','只檢查機油','只檢查燃油'], ans:1, explain:'冬季應排淨冷卻水或加防凍液，防止凍裂引擎。', ref:'考試手冊乙部第三章'},
+{id:'q598', topic:'b3', part:'B', q:'引擎「停機程序」應注意什麼？', opts:['直接關鑰匙','怠速運轉幾分鐘後再關閉','高速運轉後直接關閉','不需要程序'], ans:1, explain:'應怠速運轉幾分鐘讓引擎冷卻後再關閉，保護渦輪和內部零件。', ref:'考試手冊乙部第三章'},
+{id:'q599', topic:'b3', part:'B', q:'引擎「排氣系統」漏氣有什麼危險？', opts:['無危險','一氧化碳中毒和噪音','只會有噪音','只會浪費油'], ans:1, explain:'排氣系統漏氣會導致一氧化碳進入船艙，造成中毒危險。', ref:'考試手冊乙部第三章'},
+{id:'q600', topic:'b3', part:'B', q:'引擎「軸線」（propeller shaft）的保養應注意什麼？', opts:['不需要','檢查軸封是否漏水、潤滑','只檢查外觀','只檢查螺栓'], ans:1, explain:'應檢查軸封是否漏水、軸線潤滑是否正常。', ref:'考試手冊乙部第三章'},
+{id:'q601', topic:'b3', part:'B', q:'引擎「軟管」應多久檢查？', opts:['不需要','定期檢查有無老化、裂紋、洩漏','每年一次','每週一次'], ans:1, explain:'應定期檢查所有軟管有無老化、裂紋和洩漏。', ref:'考試手冊乙部第三章'},
+{id:'q602', topic:'b3', part:'B', q:'引擎「啟動電池」接線應注意什麼？', opts:['不需要注意','接線牢固、無腐蝕、正負極正確','隨意接','只看顏色'], ans:1, explain:'應確保接線牢固、無腐蝕、正負極連接正確。', ref:'考試手冊乙部第三章'},
+{id:'q603', topic:'b3', part:'B', q:'引擎「燃油系統」排氣（bleeding）的步驟是什麼？', opts:['隨意擰開','鬆開排氣螺絲，手動泵油直到無氣泡','直接啟動','加更多油'], ans:1, explain:'鬆開排氣螺絲，用手動泵泵油直到流出的燃油無氣泡。', ref:'考試手冊乙部第三章'},
+{id:'q604', topic:'b3', part:'B', q:'引擎「冷卻水出口」有什麼指示作用？', opts:['無作用','觀察水流確認冷卻系統正常工作','排氣','排油'], ans:1, explain:'冷卻水出口有水流排出表示冷卻系統正常工作。', ref:'考試手冊乙部第三章'},
+{id:'q605', topic:'b3', part:'B', q:'引擎「機油尺」的正確讀法是什麼？', opts:['隨意讀','拔出擦淨，重新插入再拔出讀數','直接讀','不需讀'], ans:1, explain:'正確讀法：拔出機油尺擦淨，重新插入到底再拔出讀數。', ref:'考試手冊乙部第三章'},
+{id:'q606', topic:'b3', part:'B', q:'引擎「燃油箱」應注意什麼？', opts:['不需要注意','定期排水、檢查油量、防止汙染','只需檢查油量','只需檢查外觀'], ans:1, explain:'應定期排放油箱底部水分、檢查油量、防止燃油汙染。', ref:'考試手冊乙部第三章'},
+{id:'q607', topic:'b3', part:'B', q:'引擎「排氣管」為什麼要包紮隔熱材料？', opts:['美觀','防止燙傷和降低機艙溫度','減重','防水'], ans:1, explain:'排氣管溫度極高，包紮隔熱材料防止燙傷和降低機艙溫度。', ref:'考試手冊乙部第三章'},
+{id:'q608', topic:'b3', part:'B', q:'引擎「啟動馬達」運轉但引擎不啟動可能原因是什麼？', opts:['馬達壞了','燃油系統有空氣、燃油不足或噴油嘴故障','電池沒電','鑰匙壞了'], ans:1, explain:'馬達能轉說明電池有電，問題可能在燃油系統。', ref:'考試手冊乙部第三章'},
+{id:'q609', topic:'b3', part:'B', q:'引擎「齒輪箱」的作用是什麼？', opts:['發電','傳遞和改變引擎輸出到螺旋槳的轉速和方向','冷卻','潤滑'], ans:1, explain:'齒輪箱傳遞引擎動力到螺旋槳，並可改變轉速和方向（前進/後退）。', ref:'考試手冊乙部第三章'},
+{id:'q610', topic:'b3', part:'B', q:'引擎「聯軸器」的作用是什麼？', opts:['連接燃油管','連接引擎和齒輪箱/軸線','冷卻','潤滑'], ans:1, explain:'聯軸器連接引擎輸出軸和齒輪箱或螺旋槳軸。', ref:'考試手冊乙部第三章'},
+{id:'q611', topic:'b4', part:'B', q:'在密閉空間使用CO₂滅火器有什麼危險？', opts:['爆炸','觸電','導致缺氧窒息','無危險'], ans:2, explain:'CO₂滅火器在密閉空間使用會排擠氧氣，導致缺氧窒息。', ref:'考試手冊乙部第四章'},
+{id:'q612', topic:'b4', part:'B', q:'油類火災應使用什麼滅火器？', opts:['水劑','泡沫','CO₂或乾粉','沙'], ans:2, explain:'油類火災用CO₂或乾粉滅火器。泡沫也可以用於油類火。', ref:'考試手冊乙部第四章'},
+{id:'q613', topic:'b4', part:'B', q:'船上嚴禁什麼行為？', opts:['使用手機','吸煙','唱歌','拍照'], ans:1, explain:'船上嚴禁吸煙，以防火災。', ref:'考試手冊乙部第四章'},
+{id:'q614', topic:'b4', part:'B', q:'滅火的三個基本原理是什麼？', opts:['加水、蓋住、逃走','消除燃料、隔絕氧氣、降低溫度','用水、用沙、用布','報警、滅火、逃生'], ans:1, explain:'滅火三原理：消除燃料、隔絕氧氣、降低溫度。', ref:'考試手冊乙部第四章'},
+{id:'q615', topic:'b4', part:'B', q:'A類火災是指什麼？', opts:['油類火','普通可燃物火災（木、紙、布）','電器火','金屬火'], ans:1, explain:'A類火災指普通可燃物（木、紙、布等）火災。', ref:'考試手冊乙部第四章'},
+{id:'q616', topic:'b4', part:'B', q:'B類火災是指什麼？', opts:['普通火','易燃液體火災（油、汽油、柴油）','電器火','金屬火'], ans:1, explain:'B類火災指易燃液體火災。', ref:'考試手冊乙部第四章'},
+{id:'q617', topic:'b4', part:'B', q:'C類火災是指什麼？', opts:['普通火','油類火','電氣設備火災','金屬火'], ans:2, explain:'C類火災指電氣設備火災。', ref:'考試手冊乙部第四章'},
+{id:'q618', topic:'b4', part:'B', q:'為什麼不能用水撲滅油類火災？', opts:['可以用水','水比油重會沉底，油繼續燃燒且可能擴散','水會爆炸','浪費水'], ans:1, explain:'水比油重會沉底，油浮在水面繼續燃燒，水還可能使燃燒的油擴散。', ref:'考試手冊乙部第四章'},
+{id:'q619', topic:'b4', part:'B', q:'加油時應注意什麼安全事項？', opts:['不需要注意','關閉引擎、接地防靜電、通風、禁止吸煙','可以吸煙','不需要關閉引擎'], ans:1, explain:'加油時應關閉引擎、接地防靜電、通風排氣、禁止吸煙和明火。', ref:'考試手冊乙部第四章'},
+{id:'q620', topic:'b4', part:'B', q:'加油前為什麼要排放艙底氣體？', opts:['不需要','防止汽油蒸汽積聚引發爆炸','通風','降溫'], ans:1, explain:'汽油蒸汽比空氣重，會積聚在艙底，必須通風排除防止爆炸。', ref:'考試手冊乙部第四章'},
+{id:'q621', topic:'b4', part:'B', q:'船上「消防桶」應裝什麼？', opts:['水','沙','油','泥土'], ans:1, explain:'消防桶應裝沙，用於撲滅小型火災。', ref:'考試手冊乙部第四章'},
+{id:'q622', topic:'b4', part:'B', q:'滅火器應放在什麼位置？', opts:['隨意放置','易取、分散在各艙室','只放在機艙','只放在甲板'], ans:1, explain:'滅火器應放在易取位置，並分散在各艙室。', ref:'考試手冊乙部第四章'},
+{id:'q623', topic:'b4', part:'B', q:'什麼是「油水分離器」？', opts:['分離燃油和水','處理船底含油污水的設備','冷卻設備','潤滑設備'], ans:1, explain:'油水分離器處理船底含油污水，防止油污排放入海。', ref:'考試手冊乙部第四章'},
+{id:'q624', topic:'b4', part:'B', q:'排放油污入海最高可罰多少？', opts:['$10,000','$50,000','$200,000','$500,000'], ans:2, explain:'排放油污入海最高可罰$200,000。', ref:'考試手冊乙部第四章'},
+{id:'q625', topic:'b4', part:'B', q:'船底「艙底水」應如何處理？', opts:['直接排海','通過油水分離器處理後才能排放','積滿再處理','不需要處理'], ans:1, explain:'艙底水應通過油水分離器處理後才能排放。', ref:'考試手冊乙部第四章'},
+{id:'q626', topic:'b4', part:'B', q:'船上「消防設備」應多久檢查？', opts:['不需要','每月檢查，每年專業檢測','每週檢查','每年一次'], ans:1, explain:'應每月檢查消防設備，每年進行專業檢測。', ref:'考試手冊乙部第四章'},
+{id:'q627', topic:'b4', part:'B', q:'滅火器壓力表指針應在什麼區域？', opts:['紅色區域','綠色區域','黃色區域','任何區域'], ans:1, explain:'滅火器壓力表指針應在綠色區域，表示壓力正常。', ref:'考試手冊乙部第四章'},
+{id:'q628', topic:'b4', part:'B', q:'滅火器壓力表指針在紅色區域表示什麼？', opts:['壓力正常','壓力不足需要更換或充裝','壓力過高','可以使用'], ans:1, explain:'紅色區域表示壓力不足，滅火器需要更換或重新充裝。', ref:'考試手冊乙部第四章'},
+{id:'q629', topic:'b4', part:'B', q:'船上發生火災的應變步驟是什麼？', opts:['跳船','停車→關閉油路→使用滅火器→報告→疏散','繼續航行','只報警'], ans:1, explain:'火災應變：1.停車 2.關閉油路 3.使用滅火器 4.報告海事處 5.必要時疏散。', ref:'考試手冊乙部第四章'},
+{id:'q630', topic:'b4', part:'B', q:'為什麼船上要禁止使用明火？', opts:['美觀','防止引燃油氣造成火災或爆炸','節約燃料','法律規定'], ans:1, explain:'船上可能有油氣積聚，明火可能引燃造成火災或爆炸。', ref:'考試手冊乙部第四章'},
+{id:'q631', topic:'b4', part:'B', q:'船上「滅火毯」的作用是什麼？', opts:['保暖','覆蓋小型火源或包裹身體逃生','裝飾','防水'], ans:1, explain:'滅火毯用於覆蓋小型火源或在火場中包裹身體逃生。', ref:'考試手冊乙部第四章'},
+{id:'q632', topic:'b4', part:'B', q:'船上「消防栓」和「消防水帶」的作用是什麼？', opts:['沖洗甲板','滅火','泵水','飲用'], ans:1, explain:'消防栓和水帶用於滅火，連接水泵噴水。', ref:'考試手冊乙部第四章'},
+{id:'q633', topic:'b4', part:'B', q:'船上「逃生路線」應注意什麼？', opts:['不需要','保持暢通、標示清晰、所有人員熟悉','只在白天','只標示一次'], ans:1, explain:'逃生路線應保持暢通、標示清晰，所有人員應熟悉。', ref:'考試手冊乙部第四章'},
+{id:'q634', topic:'b4', part:'B', q:'船上「救生演習」應多久進行一次？', opts:['不需要','每次出航前或定期','每年一次','每月一次'], ans:1, explain:'應在每次出航前或定期進行安全演習。', ref:'考試手冊乙部第四章'},
+{id:'q635', topic:'b4', part:'B', q:'船上「一氧化碳」中毒的危險源是什麼？', opts:['無危險','引擎排氣、石油氣燃燒不完全','海水','電池'], ans:1, explain:'引擎排氣和石油氣燃燒不完全會產生一氧化碳。', ref:'考試手冊乙部第四章'},
+{id:'q636', topic:'b5', part:'B', q:'石油氣比空氣重還是輕？', opts:['比空氣輕','比空氣重','一樣重','視溫度而定'], ans:1, explain:'石油氣比空氣重，所以會積聚在艙底。', ref:'考試手冊乙部第五章'},
+{id:'q637', topic:'b5', part:'B', q:'石油氣氣瓶應如何放置？', opts:['橫放','倒立','直立並牢固固定','任意放置'], ans:2, explain:'氣瓶應直立並牢固固定，置於通風良好的專用艙櫃內。', ref:'考試手冊乙部第五章'},
+{id:'q638', topic:'b5', part:'B', q:'檢查石油氣洩漏應用什麼方法？', opts:['用火測試','用肥皂水','用鼻子聞','不用檢查'], ans:1, explain:'用肥皂水檢查洩漏，絕對不能用火測試！', ref:'考試手冊乙部第五章'},
+{id:'q639', topic:'b5', part:'B', q:'為什麼不能用火檢查石油氣洩漏？', opts:['可以','可能引燃氣體造成爆炸','火不夠大','浪費火柴'], ans:1, explain:'用火檢查可能引燃洩漏的石油氣，造成爆炸。', ref:'考試手冊乙部第五章'},
+{id:'q640', topic:'b5', part:'B', q:'石油氣氣瓶應放在什麼位置？', opts:['隨意放置','通風良好的專用艙櫃內','密閉空間','甲板上'], ans:1, explain:'氣瓶應放在通風良好的專用艙櫃內，遠離熱源和火源。', ref:'考試手冊乙部第五章'},
+{id:'q641', topic:'b5', part:'B', q:'發現石油氣洩漏應如何處理？', opts:['開燈檢查','開窗通風、關閉氣閥、不使用電氣開關、疏散人員','點火檢查','繼續使用'], ans:1, explain:'應開窗通風、關閉氣閥、不使用電氣開關（防產生火花）、疏散人員。', ref:'考試手冊乙部第五章'},
+{id:'q642', topic:'b5', part:'B', q:'石油氣洩漏時為什麼不能使用電氣開關？', opts:['可以使用','開關可能產生火花引燃氣體','浪費電','無實際原因'], ans:1, explain:'電氣開關操作時可能產生火花，足以引燃洩漏的石油氣。', ref:'考試手冊乙部第五章'},
+{id:'q643', topic:'b5', part:'B', q:'石油氣「軟管」應使用什麼類型？', opts:['普通塑膠管','認可的石油氣專用軟管','橡膠管','金屬管'], ans:1, explain:'應使用認可的石油氣專用軟管，定期檢查和更換。', ref:'考試手冊乙部第五章'},
+{id:'q644', topic:'b5', part:'B', q:'石油氣軟管應多久更換？', opts:['不需要更換','根據製造商建議定期更換','每年更換','每週更換'], ans:1, explain:'應根據製造商建議定期更換，通常每幾年更換一次。', ref:'考試手冊乙部第五章'},
+{id:'q645', topic:'b5', part:'B', q:'石油氣系統的「減壓閥」有什麼作用？', opts:['增加壓力','將氣瓶高壓降低到安全使用壓力','關閉氣路','測量壓力'], ans:1, explain:'減壓閥將氣瓶內的高壓降低到爐具等設備能安全使用的低壓。', ref:'考試手冊乙部第五章'},
+{id:'q646', topic:'b5', part:'B', q:'石油氣系統的「電磁閥」（solenoid valve）有什麼作用？', opts:['增加壓力','遠程控制氣路開關','減壓','測量'], ans:1, explain:'電磁閥可遠程控制氣路開關，緊急時可從控制面板關閉。', ref:'考試手冊乙部第五章'},
+{id:'q647', topic:'b5', part:'B', q:'石油氣「氣體探測器」應安裝在什麼位置？', opts:['天花板','艙底（因石油氣比空氣重）','隨意位置','不需要安裝'], ans:1, explain:'因石油氣比空氣重會沉到艙底，探測器應安裝在較低位置。', ref:'考試手冊乙部第五章'},
+{id:'q648', topic:'b5', part:'B', q:'石油氣爐具使用後應注意什麼？', opts:['不需要注意','關閉爐具開關和氣瓶閥門','只需關閉爐具','繼續開著'], ans:1, explain:'使用後應關閉爐具開關和氣瓶閥門。', ref:'考試手冊乙部第五章'},
+{id:'q649', topic:'b5', part:'B', q:'石油氣「氣櫃」（gas locker）的設計要求是什麼？', opts:['隨意設計','密閉、通向船外的排水口、通風','開放式','不需要'], ans:1, explain:'氣櫃應密閉，底部有通向船外的排水口，確保洩漏氣體排到船外。', ref:'考試手冊乙部第五章'},
+{id:'q650', topic:'b5', part:'B', q:'石油氣氣瓶的「安全閥」有什麼作用？', opts:['減壓','壓力過高時自動洩壓防止爆炸','關閉氣路','測量壓力'], ans:1, explain:'安全閥在氣瓶壓力過高時自動洩壓，防止氣瓶爆炸。', ref:'考試手冊乙部第五章'},
+{id:'q651', topic:'b5', part:'B', q:'石油氣氣瓶可以放在臥艙內嗎？', opts:['可以','不可以，應放在通風良好的專用位置','視情況而定','只有小型氣瓶可以'], ans:1, explain:'氣瓶不應放在臥艙內，應放在通風良好的專用艙櫃。', ref:'考試手冊乙部第五章'},
+{id:'q652', topic:'b5', part:'B', q:'石油氣「通風」為什麼重要？', opts:['不重要','防止氣體積聚造成爆炸和窒息','降溫','美觀'], ans:1, explain:'通風防止石油氣積聚，降低爆炸和窒息風險。', ref:'考試手冊乙部第五章'},
+{id:'q653', topic:'b5', part:'B', q:'石油氣氣瓶的「有效期」是指什麼？', opts:['氣體用完日期','氣瓶檢驗合格的有效期限','購買日期','沒有有效期'], ans:1, explain:'氣瓶有檢驗合格的有效期限，過期氣瓶不應使用。', ref:'考試手冊乙部第五章'},
+{id:'q654', topic:'b5', part:'B', q:'船上使用石油氣應遵循什麼原則？', opts:['隨意使用','用時開、用完關、定期查、通風好','一直開著','不需要注意'], ans:1, explain:'使用原則：用時開、用完關、定期檢查、保持通風。', ref:'考試手冊乙部第五章'},
+{id:'q655', topic:'b5', part:'B', q:'石油氣管道應使用什麼材質？', opts:['普通塑膠管','認可的銅管或專用軟管','橡膠管','木管'], ans:1, explain:'應使用認可的銅管或石油氣專用軟管。', ref:'考試手冊乙部第五章'},
+{id:'q656', topic:'b5', part:'B', q:'石油氣「壓力調節器」應多久檢查？', opts:['不需要','定期檢查有無損壞和洩漏','每年一次','每週一次'], ans:1, explain:'應定期檢查壓力調節器有無損壞和洩漏。', ref:'考試手冊乙部第五章'},
+{id:'q657', topic:'b5', part:'B', q:'石油氣「氣瓶更換」時應注意什麼？', opts:['不需要注意','通風、遠離火源、檢查接口密封','可以吸煙','快速更換'], ans:1, explain:'更換時應保持通風、遠離火源、檢查接口密封。', ref:'考試手冊乙部第五章'},
+{id:'q658', topic:'b5', part:'B', q:'石油氣「燃燒不完全」會產生什麼有毒氣體？', opts:['氧氣','一氧化碳','二氧化碳','氮氣'], ans:1, explain:'燃燒不完全會產生一氧化碳，無色無味但有毒。', ref:'考試手冊乙部第五章'},
+{id:'q659', topic:'b5', part:'B', q:'石油氣系統「緊急關閉」應怎麼做？', opts:['不需關閉','關閉氣瓶主閥、電磁閥，開窗通風','繼續使用','報警'], ans:1, explain:'緊急時關閉氣瓶主閥和電磁閥，開窗通風。', ref:'考試手冊乙部第五章'},
+{id:'q660', topic:'b5', part:'B', q:'石油氣「氣味」有什麼特點？', opts:['無味','添加了臭味劑以便偵測洩漏','甜味','酸味'], ans:1, explain:'石油氣本身無味，但添加了臭味劑（硫醇）以便偵測洩漏。', ref:'考試手冊乙部第五章'},
+{id:'q661', topic:'a9', part:'A', q:'什麼是「EPIRB」？', opts:['急救箱','緊急無線電示位標','滅火器','救生圈'], ans:1, explain:'EPIRB是緊急無線電示位標，發送遇險信號讓搜救人員定位。', ref:'考試手冊第九章'},
+{id:'q662', topic:'a9', part:'A', q:'船上應配備什麼急救設備？', opts:['不需要','急救箱（含繃帶、消毒藥水、止血帶等）','只需繃帶','只需消毒藥水'], ans:1, explain:'船上應配備急救箱，含繃帶、消毒藥水、止血帶、紗布等基本急救用品。', ref:'考試手冊第九章'},
+{id:'q663', topic:'a9', part:'A', q:'救生衣的正確穿戴方法是什麼？', opts:['隨意穿','按照說明書正確穿戴並繫緊','只掛在肩上','放在身邊就好'], ans:1, explain:'應按照說明書正確穿戴，所有扣帶繫緊，確保不會脫落。', ref:'考試手冊第九章'},
+{id:'q664', topic:'a9', part:'A', q:'兒童需要什麼特別的救生設備？', opts:['不需要','兒童專用救生衣（尺寸適合）','成人救生衣','只需救生圈'], ans:1, explain:'兒童應使用尺寸適合的兒童救生衣。', ref:'考試手冊第九章'},
+{id:'q665', topic:'a9', part:'A', q:'救生圈上應標示什麼？', opts:['不需要','船名','價格','顏色'], ans:1, explain:'救生圈應標示船名。', ref:'考試手冊第九章'},
+{id:'q666', topic:'a9', part:'A', q:'什麼是「自亮燈」救生圈？', opts:['普通救生圈','帶有自動發光燈的救生圈','帶手電筒的救生圈','帶喇叭的救生圈'], ans:1, explain:'自亮燈救生圈在落水後自動發光，方便夜間搜救。', ref:'考試手冊第九章'},
+{id:'q667', topic:'a9', part:'A', q:'遇險信號彈的有效期通常是多久？', opts:['永久','約3-4年','1年','10年'], ans:1, explain:'遇險信號彈通常有3-4年有效期，過期應更換。', ref:'考試手冊第九章'},
+{id:'q668', topic:'a9', part:'A', q:'使用遇險信號彈應注意什麼？', opts:['隨意使用','確認安全、朝風向發射、不要對人','對人發射','在船艙內發射'], ans:1, explain:'應確認安全、朝風向發射、不要對人、避免在易燃物附近使用。', ref:'考試手冊第九章'},
+{id:'q669', topic:'a9', part:'A', q:'船上「滅火器」的種類不包括以下哪種？', opts:['泡沫','CO₂','乾粉','汽油'], ans:3, explain:'汽油不是滅火器類型。常見類型有泡沫、CO₂、乾粉和水劑。', ref:'考試手冊第九章'},
+{id:'q670', topic:'a9', part:'A', q:'「乾粉滅火器」適用於什麼火災？', opts:['只適用於油類','油類和電器火災','只適用於電器','只適用於普通火'], ans:1, explain:'乾粉滅火器適用於油類和電器火災，是通用型。', ref:'考試手冊第九章'},
+{id:'q671', topic:'a9', part:'A', q:'滅火器的「有效期」標籤在哪裡？', opts:['不需要','通常在瓶身標籤上','在說明書上','在包裝盒上'], ans:1, explain:'有效期標籤通常在滅火器瓶身上。', ref:'考試手冊第九章'},
+{id:'q672', topic:'a9', part:'A', q:'船上為什麼要備有「沙桶」？', opts:['裝飾用','用於撲滅小型火災和吸收油污','裝垃圾','壓重'], ans:1, explain:'沙桶用於撲滅小型火災和吸收甲板上的油污。', ref:'考試手冊第九章'},
+{id:'q673', topic:'a9', part:'A', q:'救生衣應如何保養？', opts:['不需要保養','定期檢查、保持乾燥、避免陽光直射','泡在水裡','隨意丟放'], ans:1, explain:'應定期檢查、保持乾燥、避免陽光直射和高溫。', ref:'考試手冊第九章'},
+{id:'q674', topic:'a9', part:'A', q:'船上「消防斧」的作用是什麼？', opts:['砍柴','火場中破拆障礙物和通風','裝飾','釣魚'], ans:1, explain:'消防斧用於火場中破拆障礙物和進行通風。', ref:'考試手冊第九章'},
+{id:'q675', topic:'a9', part:'A', q:'船上應在什麼位置放置救生圈？', opts:['隨意放置','甲板兩側易取位置','鎖在櫃裡','只放在船頭'], ans:1, explain:'救生圈應放在甲板兩側易取位置。', ref:'考試手冊第九章'},
+{id:'q676', topic:'a9', part:'A', q:'船上「應急燈」的作用是什麼？', opts:['裝飾','停電時自動亮起提供照明','釣魚','加熱'], ans:1, explain:'應急燈在停電時自動亮起，提供緊急照明。', ref:'考試手冊第九章'},
+{id:'q677', topic:'a9', part:'A', q:'船上「滅火器」的容量要求是什麼？', opts:['隨意','根據船長和類型有最低要求','越大越好','不需要'], ans:1, explain:'根據船長和類型，滅火器有最低容量要求。', ref:'考試手冊第九章'},
+{id:'q678', topic:'a9', part:'A', q:'船上「急救箱」應放在什麼位置？', opts:['隨意','固定且易取的位置','鎖在櫃裡','引擎艙內'], ans:1, explain:'急救箱應放在固定且易取的位置。', ref:'考試手冊第九章'},
+{id:'q679', topic:'a9', part:'A', q:'船上「安全設備清單」有什麼作用？', opts:['無作用','記錄所有安全設備的種類、數量和檢查日期','計算價格','美觀'], ans:1, explain:'安全設備清單記錄所有設備的種類、數量和檢查日期，方便管理。', ref:'考試手冊第九章'},
+{id:'q680', topic:'a9', part:'A', q:'船上「滅火器」使用後應如何處理？', opts:['放回原位','重新充裝或更換','丟棄','不管它'], ans:1, explain:'使用後應重新充裝或更換。', ref:'考試手冊第九章'},
+{id:'q681', topic:'a10', part:'A', q:'VHF的「頻道」是什麼？', opts:['音樂頻道','無線電通訊的頻率編號','電視頻道','電話號碼'], ans:1, explain:'VHF頻道是無線電通訊的頻率編號。', ref:'考試手冊第十章'},
+{id:'q682', topic:'a10', part:'A', q:'VHF通訊的最大優點是什麼？', opts:['便宜','即時通訊、覆蓋範圍廣','私密','速度快'], ans:1, explain:'VHF的最大優點是即時通訊和覆蓋範圍廣。', ref:'考試手冊第十章'},
+{id:'q683', topic:'a10', part:'A', q:'VHF頻道16的功率應設在什麼水平？', opts:['最低','最高（以便遠距離通訊）','中等','不需要設置'], ans:1, explain:'頻道16應設在最高功率，確保遠距離能收到遇險信號。', ref:'考試手冊第十章'},
+{id:'q684', topic:'a10', part:'A', q:'VHF通訊時應注意什麼禮儀？', opts:['隨意說話','簡潔明了、使用標準用語、不佔用頻道','長篇大論','播放音樂'], ans:1, explain:'應簡潔明了、使用標準用語、不佔用頻道。', ref:'考試手冊第十章'},
+{id:'q685', topic:'a10', part:'A', q:'收到SECURITÉ安全信息後應如何處理？', opts:['不理會','注意航行安全、減速、加強瞭望','加速','轉頻道'], ans:1, explain:'應注意航行安全、減速、加強瞭望。', ref:'考試手冊第十章'},
+{id:'q686', topic:'a10', part:'A', q:'VHF「DSC」遇險呼叫的優點是什麼？', opts:['更便宜','自動發送船位和船名、可選呼','更私密','更響亮'], ans:1, explain:'DSC可自動發送船位和船名，並可選擇性呼叫特定船隻。', ref:'考試手冊第十章'},
+{id:'q687', topic:'a10', part:'A', q:'VHF電台的「呼號」是什麼？', opts:['船名','分配給電台的唯一識別碼','電話號碼','頻道號'], ans:1, explain:'呼號是分配給電台的唯一識別碼。', ref:'考試手冊第十章'},
+{id:'q688', topic:'a10', part:'A', q:'VHF通訊中「OVER」是什麼意思？', opts:['結束通訊','我的話講完，等待你的回覆','開始通訊','緊急情況'], ans:1, explain:'OVER表示我的話講完了，等待對方回覆。', ref:'考試手冊第十章'},
+{id:'q689', topic:'a10', part:'A', q:'VHF通訊中「OUT」是什麼意思？', opts:['等待回覆','通訊結束，不期待回覆','開始通訊','緊急情況'], ans:1, explain:'OUT表示通訊結束，不期待對方回覆。', ref:'考試手冊第十章'},
+{id:'q690', topic:'a10', part:'A', q:'VHF通訊中收到干擾應如何處理？', opts:['不理會','報告干擾情況、嘗試其他頻道','關閉VHF','調高音量'], ans:1, explain:'應報告干擾情況，嘗試使用其他可用頻道。', ref:'考試手冊第十章'},
+{id:'q691', topic:'a10', part:'A', q:'VHF電台應多久測試一次？', opts:['不需要測試','每次出航前測試','每月測試','每年測試'], ans:1, explain:'應在每次出航前測試VHF電台。', ref:'考試手冊第十章'},
+{id:'q692', topic:'a10', part:'A', q:'VHF「手持式」和「固定式」的區別是什麼？', opts:['沒有區別','手持式便攜但功率小，固定式功率大','手持式更貴','固定式更輕'], ans:1, explain:'手持式便攜但功率較小，固定式功率大覆蓋範圍廣。', ref:'考試手冊第十章'},
+{id:'q693', topic:'a10', part:'A', q:'VHF電台的「靜噪」功能有什麼作用？', opts:['增加音量','消除無信號時的背景噪音','改變頻道','關閉電台'], ans:1, explain:'靜噪功能消除沒有信號時的背景噪音。', ref:'考試手冊第十章'},
+{id:'q694', topic:'a10', part:'A', q:'VHF頻道16上聽到MAYDAY應如何回應？', opts:['不理會','確認收到並保持守聽','轉頻道','關閉VHF'], ans:1, explain:'應確認收到MAYDAY並保持守聽，準備提供協助。', ref:'考試手冊第十章'},
+{id:'q695', topic:'a10', part:'A', q:'VHF電台的天線應安裝在什麼位置？', opts:['隨意','盡可能高的位置','水下','船底'], ans:1, explain:'天線應安裝在盡可能高的位置，以增加通訊範圍。', ref:'考試手冊第十章'},
+{id:'q696', topic:'a11', part:'A', q:'海事處的「航海圖書」包括什麼？', opts:['小說','海圖、航海通告、潮汐表','報紙','雜誌'], ans:1, explain:'航海圖書包括海圖、航海通告、潮汐表等。', ref:'考試手冊第十一章'},
+{id:'q697', topic:'a11', part:'A', q:'海事處的「港口國監督」檢查什麼？', opts:['漁業','船舶安全設備和船員資格','天氣','港口設施'], ans:1, explain:'檢查船舶安全設備是否符合標準和船員資格是否有效。', ref:'考試手冊第十一章'},
+{id:'q698', topic:'a11', part:'A', q:'海事處的「海上救援協調中心」如何聯繫？', opts:['只用電話','VHF頻道16或電話','只用郵件','只用傳真'], ans:1, explain:'可通過VHF頻道16或電話聯繫海上救援協調中心。', ref:'考試手冊第十一章'},
+{id:'q699', topic:'a11', part:'A', q:'海事處發佈的「航行警告」時效是什麼？', opts:['永久','通常是臨時性的','只有一天','只有一週'], ans:1, explain:'航行警告通常是臨時性的，針對特定事件或情況。', ref:'考試手冊第十一章'},
+{id:'q700', topic:'a11', part:'A', q:'海事處的「海員訓練」課程包括什麼？', opts:['游泳','船舶安全、航海技術、應急處理','烹飪','音樂'], ans:1, explain:'海員訓練包括船舶安全、航海技術和應急處理等。', ref:'考試手冊第十一章'},
+{id:'q701', topic:'a11', part:'A', q:'海事處的「船隻註冊」有什麼要求？', opts:['不需要','船舶必須註冊並取得證書','只需付費','只需填表'], ans:1, explain:'船舶必須在海事處註冊並取得相關證書。', ref:'考試手冊第十一章'},
+{id:'q702', topic:'a11', part:'A', q:'海事處的「海難調查」是什麼？', opts:['漁業調查','調查海上事故原因以防止再發生','天氣調查','港口調查'], ans:1, explain:'海難調查是調查海上事故原因，提出改善建議以防止再發生。', ref:'考試手冊第十一章'},
+{id:'q703', topic:'a11', part:'A', q:'海事處的「船舶檢查」包括什麼？', opts:['只看外觀','船體結構、安全設備、機械設備、船員證書','只檢查引擎','只檢查天線'], ans:1, explain:'包括船體結構、安全設備、機械設備和船員證書等。', ref:'考試手冊第十一章'},
+{id:'q704', topic:'a11', part:'A', q:'海事處的「航海圖書」應如何獲取？', opts:['購買','可從海事處購買或免費下載','不需要','從漁民處獲取'], ans:1, explain:'可從海事處購買或從其網站免費下載。', ref:'考試手冊第十一章'},
+{id:'q705', topic:'a11', part:'A', q:'海事處的「佈告」和「通告」有什麼區別？', opts:['相同','佈告是規則，通告是臨時信息','通告是規則','沒有區別'], ans:1, explain:'佈告通常是較長期的規則，通告是臨時性的安全信息。', ref:'考試手冊第十一章'},
+{id:'q706', topic:'a12', part:'A', q:'九號颱風信號代表什麼？', opts:['烈風','烈風風力增強','颶風','強風'], ans:1, explain:'九號信號表示烈風風力正在增強。', ref:'考試手冊第十二章'},
+{id:'q707', topic:'a12', part:'A', q:'蒲福風級3級代表什麼？', opts:['無風','微風（12-19km/h）','強風','烈風'], ans:1, explain:'蒲福3級為微風，風速12-19km/h。', ref:'考試手冊第十二章'},
+{id:'q708', topic:'a12', part:'A', q:'蒲福風級10級代表什麼？', opts:['強風','暴風（89-102km/h）','烈風','颶風'], ans:1, explain:'蒲福10級為暴風，風速89-102km/h。', ref:'考試手冊第十二章'},
+{id:'q709', topic:'a12', part:'A', q:'蒲福風級12級代表什麼？', opts:['暴風','颶風（≥118km/h）','烈風','強風'], ans:1, explain:'蒲福12級為颶風，風速≥118km/h。', ref:'考試手冊第十二章'},
+{id:'q710', topic:'a12', part:'A', q:'什麼是「熱帶氣旋」？', opts:['任何風','在熱帶海洋上形成的強烈低壓系統','陸地上的風','季節風'], ans:1, explain:'熱帶氣旋是在熱帶海洋上形成的強烈低壓系統。', ref:'考試手冊第十二章'},
+{id:'q711', topic:'a12', part:'A', q:'熱帶氣旋的風向是怎樣的？', opts:['直線','逆時針旋轉（北半球）','順時針旋轉','不規則'], ans:1, explain:'北半球的熱帶氣旋風向是逆時針旋轉。', ref:'考試手冊第十二章'},
+{id:'q712', topic:'a12', part:'A', q:'颱風信號掛起時小型船隻的正確做法是什麼？', opts:['出海觀浪','立即到避風塘避風','繼續釣魚','不需要行動'], ans:1, explain:'應立即到避風塘避風，確保安全。', ref:'考試手冊第十二章'},
+{id:'q713', topic:'a12', part:'A', q:'什麼是「風浪」？', opts:['風吹過陸地','風吹過水面產生的波浪','船行產生的波浪','潮汐波'], ans:1, explain:'風浪是風吹過水面產生的波浪。', ref:'考試手冊第十二章'},
+{id:'q714', topic:'a12', part:'A', q:'什麼是「湧浪」？', opts:['風浪','風浪離開風區後傳播的長週期波浪','潮汐','水流'], ans:1, explain:'湧浪是風浪離開風區後傳播的長週期波浪。', ref:'考試手冊第十二章'},
+{id:'q715', topic:'a12', part:'A', q:'如何從天氣預報判斷是否適合出海？', opts:['看電視','綜合考慮風速、浪高、能見度和天氣趨勢','只看風速','只看溫度'], ans:1, explain:'應綜合考慮風速、浪高、能見度和天氣趨勢。', ref:'考試手冊第十二章'},
+{id:'q716', topic:'a12', part:'A', q:'什麼是「陣風」？', opts:['穩定的風','短時間內突然增強的風','微風','海風'], ans:1, explain:'陣風是短時間內突然增強的風，比平均風速大很多。', ref:'考試手冊第十二章'},
+{id:'q717', topic:'a12', part:'A', q:'什麼是「海風」和「陸風」？', opts:['相同','白天風從海吹向陸，夜間風從陸吹向海','只在颱風時有','只在冬天有'], ans:1, explain:'海陸風：白天海風（海→陸），夜間陸風（陸→海）。', ref:'考試手冊第十二章'},
+{id:'q718', topic:'a12', part:'A', q:'風速增加一倍，浪高大約增加多少？', opts:['不變','約增加一倍','約增加四倍','約增加兩倍'], ans:1, explain:'風速增加一倍，浪高大約增加一倍。', ref:'考試手冊第十二章'},
+{id:'q719', topic:'a12', part:'A', q:'什麼是「風暴潮」？', opts:['普通潮汐','颱風引起的異常海水上升','風吹動的波浪','退潮'], ans:1, explain:'風暴潮是颱風或強風引起的異常海水上升現象。', ref:'考試手冊第十二章'},
+{id:'q720', topic:'a12', part:'A', q:'颱風過後應注意什麼？', opts:['不需要注意','檢查船舶損傷、檢查錨泊情況、檢查設備','立即出海','繼續避風'], ans:1, explain:'應檢查船舶損傷、錨泊情況和所有設備。', ref:'考試手冊第十二章'},
+{id:'q721', topic:'a13', part:'A', q:'什麼是「棄船」？', opts:['賣船','當船隻無法挽救時所有人員撤離','修理船隻','停船'], ans:1, explain:'棄船是指當船隻無法挽救時，所有人員撤離船隻。', ref:'考試手冊第十三章'},
+{id:'q722', topic:'a13', part:'A', q:'棄船前應做什麼？', opts:['直接跳','穿上救生衣、攜帶應急設備、發送遇險信號','收拾行李','關閉引擎'], ans:1, explain:'棄船前應穿上救生衣、攜帶應急設備和發送遇險信號。', ref:'考試手冊第十三章'},
+{id:'q723', topic:'a13', part:'A', q:'棄船後在救生艇上應注意什麼？', opts:['游泳','保持體溫、節約淡水、保持希望、等待救援','划回岸邊','隨波漂流'], ans:1, explain:'應保持體溫、節約淡水和食物、保持希望、積極等待救援。', ref:'考試手冊第十三章'},
+{id:'q724', topic:'a13', part:'A', q:'碰撞後對方船隻離開應怎麼辦？', opts:['放棄','記錄對方船名和特徵，報告海事處','追趕','不需要行動'], ans:1, explain:'應盡量記錄對方船名、特徵和離開方向，報告海事處。', ref:'考試手冊第十三章'},
+{id:'q725', topic:'a13', part:'A', q:'碰撞後船體進水應如何應對？', opts:['跳船','使用堵漏器材止水，開動污水泵排水','繼續航行','等待沉沒'], ans:1, explain:'應使用堵漏器材止水，開動污水泵排水。', ref:'考試手冊第十三章'},
+{id:'q726', topic:'a13', part:'A', q:'什麼是「拖帶」？', opts:['錨泊','用繩索將一艘船拖動另一艘船','繫泊','漂流'], ans:1, explain:'拖帶是用繩索將一艘船（拖船）拖動另一艘船（被拖船）。', ref:'考試手冊第十三章'},
+{id:'q727', topic:'a13', part:'A', q:'拖帶時應注意什麼？', opts:['不需要注意','保持安全距離、速度穩定、信號正確','加速','隨意操作'], ans:1, explain:'應保持安全距離、速度穩定、顯示正確的拖帶信號。', ref:'考試手冊第十三章'},
+{id:'q728', topic:'a13', part:'A', q:'什麼是「直升機救援」中的安全繩？', opts:['普通繩','直升機放下來的吊繩和吊帶','拖船繩','錨鏈'], ans:1, explain:'安全繩是直升機放下來的吊繩和吊帶，用於吊起遇險人員。', ref:'考試手冊第十三章'},
+{id:'q729', topic:'a13', part:'A', q:'接受直升機救援時應注意什麼？', opts:['不需要注意','固定鬆散物品、保持甲板空曠、聽從指示','跑動','揮手'], ans:1, explain:'應固定鬆散物品、保持甲板空曠、聽從直升機人員指示。', ref:'考試手冊第十三章'},
+{id:'q730', topic:'a13', part:'A', q:'人員落水後如何保持視覺接觸？', opts:['不需要','指定一人持續指向落水者、拋救生圈','閉眼','繼續航行'], ans:1, explain:'應指定一人持續指向落水者保持視覺接觸，同時拋救生圈。', ref:'考試手冊第十三章'},
+{id:'q731', topic:'a13', part:'A', q:'什麼是「緊急逃生呼吸裝置」（EEBD）？', opts:['潛水裝置','火場中提供短暫呼吸保護的裝置','氧氣瓶','口罩'], ans:1, explain:'EEBD是火場中提供短暫呼吸保護的逃生裝置。', ref:'考試手冊第十三章'},
+{id:'q732', topic:'a13', part:'A', q:'船隻在風浪中傾斜過大應如何處理？', opts:['不需要處理','調整壓載、減速、轉向迎浪','加速','跳船'], ans:1, explain:'應調整壓載、減速、轉向迎浪以減少傾斜。', ref:'考試手冊第十三章'},
+{id:'q733', topic:'a13', part:'A', q:'引擎故障無法修復時應如何求助？', opts:['等待','VHF頻道16呼叫、拋錨、顯示遇險信號','游泳回岸','不需要求助'], ans:1, explain:'應在VHF頻道16呼叫求助，拋錨固定船位，顯示遇險信號。', ref:'考試手冊第十三章'},
+{id:'q734', topic:'a13', part:'A', q:'什麼是「緊急消防泵」？', opts:['普通泵','專門用於滅火的泵','飲水泵','污水泵'], ans:1, explain:'緊急消防泵是專門用於滅火的泵。', ref:'考試手冊第十三章'},
+{id:'q735', topic:'a13', part:'A', q:'船上人員受傷應如何急救？', opts:['不需要','止血、固定骨折、保暖、等待救援','繼續航行','跳船'], ans:1, explain:'應進行止血、固定骨折、保暖等急救措施，等待專業救援。', ref:'考試手冊第十三章'},
+{id:'q736', topic:'a13', part:'A', q:'什麼是「遇險優先通信」？', opts:['普通通訊','遇險和緊急通訊優先於所有其他通訊','商業通訊','私人通訊'], ans:1, explain:'遇險和緊急通訊優先於所有其他通訊。', ref:'考試手冊第十三章'},
+{id:'q737', topic:'a13', part:'A', q:'緊急情況下如何使用手機求助？', opts:['發短信','撥打999或112','發社交媒體','拍照'], ans:1, explain:'可撥打999（香港緊急電話）或112（國際緊急電話）。', ref:'考試手冊第十三章'},
+{id:'q738', topic:'a13', part:'A', q:'什麼是「海上求生」的基本原則？', opts:['游泳','保存體力、節約資源、保持希望、積極求救','放棄','隨波漂流'], ans:1, explain:'基本原則：保存體力、節約資源、保持希望、積極求救。', ref:'考試手冊第十三章'},
+{id:'q739', topic:'a13', part:'A', q:'海上漂流時如何收集淡水？', opts:['喝海水','收集雨水、使用太陽能蒸餾器','不需要','喝海水'], ans:1, explain:'應收集雨水和使用太陽能蒸餾器，絕不能喝海水。', ref:'考試手冊第十三章'},
+{id:'q740', topic:'a13', part:'A', q:'海上漂流時為什麼不能喝海水？', opts:['可以喝','海水鹽分會加速脫水','海水有毒','海水太冷'], ans:1, explain:'海水鹽分會加速脫水，使情況更嚴重。', ref:'考試手冊第十三章'},
+{id:'q741', topic:'a14', part:'A', q:'什麼情況下不需要提交書面報告？', opts:['碰撞','無損傷的輕微事件','沉沒','傷亡'], ans:1, explain:'無損傷的輕微事件通常不需要提交書面報告。', ref:'考試手冊第十四章'},
+{id:'q742', topic:'a14', part:'A', q:'事故報告中的「證人」信息應包括什麼？', opts:['不需要','姓名、聯繫方式、所見情況','只需姓名','只需電話'], ans:1, explain:'應記錄證人姓名、聯繫方式和所見情況。', ref:'考試手冊第十四章'},
+{id:'q743', topic:'a14', part:'A', q:'事故報告中的「天氣狀況」應如何記錄？', opts:['不需要','記錄風力、風向、能見度、浪高','只記錄溫度','只記錄風向'], ans:1, explain:'應記錄風力、風向、能見度、浪高等天氣狀況。', ref:'考試手冊第十四章'},
+{id:'q744', topic:'a14', part:'A', q:'事故後船舶仍在航行應如何處理？', opts:['繼續航行','評估船舶適航性，必要時尋求協助或就近避風','不需要處理','加速到港'], ans:1, explain:'應評估船舶適航性，必要時尋求協助或就近避風。', ref:'考試手冊第十四章'},
+{id:'q745', topic:'a14', part:'A', q:'什麼是「事故調查」？', opts:['警方調查','海事處對海上事故進行的正式調查','保險調查','個人調查'], ans:1, explain:'事故調查是海事處對海上事故進行的正式調查。', ref:'考試手冊第十四章'},
+{id:'q746', topic:'a14', part:'A', q:'事故調查的目的是什麼？', opts:['懲罰','確定事故原因，提出預防建議','收費','娛樂'], ans:1, explain:'目的是確定事故原因，提出預防建議以避免再發生。', ref:'考試手冊第十四章'},
+{id:'q747', topic:'a14', part:'A', q:'事故報告中的「船舶信息」應包括什麼？', opts:['只需船名','船名、船籍港、船舶類型、總噸位','只需船籍港','只需類型'], ans:1, explain:'應包括船名、船籍港、船舶類型、總噸位等。', ref:'考試手冊第十四章'},
+{id:'q748', topic:'a14', part:'A', q:'事故後如何保護現場證據？', opts:['不需要','拍照記錄、保留損壞部件、記錄船位','清理現場','丟棄證據'], ans:1, explain:'應拍照記錄、保留損壞部件、記錄船位和航向。', ref:'考試手冊第十四章'},
+{id:'q749', topic:'a14', part:'A', q:'事故報告可以用口頭方式提交後再補書面嗎？', opts:['不可以','可以，先口頭報告再24小時內補書面','只能書面','只能口頭'], ans:1, explain:'可以先口頭報告，再在24小時內補交書面報告。', ref:'考試手冊第十四章'},
+{id:'q750', topic:'a14', part:'A', q:'什麼是「保險索賠」與事故報告的關係？', opts:['無關係','事故報告是保險索賠的重要依據','不需要報告','保險不賠'], ans:1, explain:'事故報告是保險索賠的重要依據，應詳細記錄。', ref:'考試手冊第十四章'},
+{id:'q751', topic:'b3', part:'B', q:'引擎「潤滑油變黑」表示什麼？', opts:['正常','潤滑油被污染需要更換','潤滑油太多','潤滑油太少'], ans:1, explain:'潤滑油變黑表示被燃燒產物污染，需要更換。', ref:'考試手冊乙部第三章'},
+{id:'q752', topic:'b3', part:'B', q:'引擎「排氣有異味」表示什麼？', opts:['正常','燃燒不完全或燃油品質差','排氣管太短','天氣問題'], ans:1, explain:'排氣有異味表示燃燒不完全或燃油品質差。', ref:'考試手冊乙部第三章'},
+{id:'q753', topic:'b3', part:'B', q:'引擎「啟動困難」的常見原因是什麼？', opts:['天氣太熱','電池電量不足或燃油系統有空氣','油門太大','鑰匙壞了'], ans:1, explain:'常見原因：電池電量不足、燃油系統有空氣、燃油濾清器堵塞。', ref:'考試手冊乙部第三章'},
+{id:'q754', topic:'b3', part:'B', q:'引擎「怠速不穩」的常見原因是什麼？', opts:['天氣問題','噴油嘴堵塞或進氣系統漏氣','油門問題','排氣管問題'], ans:1, explain:'常見原因：噴油嘴堵塞、進氣系統漏氣、怠速調整不當。', ref:'考試手冊乙部第三章'},
+{id:'q755', topic:'b3', part:'B', q:'引擎「功率下降」的常見原因是什麼？', opts:['天氣問題','空氣濾清器堵塞或噴油嘴故障','油門問題','排氣管問題'], ans:1, explain:'常見原因：空氣濾清器堵塞、噴油嘴故障、燃油濾清器堵塞。', ref:'考試手冊乙部第三章'},
+{id:'q756', topic:'b4', part:'B', q:'什麼是「火災三角」？', opts:['三種滅火器','燃料、氧氣、溫度（熱）三個要素','三種火災','三個滅火步驟'], ans:1, explain:'火災三角：燃料、氧氣、溫度（熱），缺少任一要素火災無法持續。', ref:'考試手冊乙部第四章'},
+{id:'q757', topic:'b4', part:'B', q:'船上「加油安全程序」的第一步是什麼？', opts:['開始加油','關閉所有引擎和電氣設備','打開油箱蓋','準備收據'], ans:1, explain:'第一步是關閉所有引擎和電氣設備，防止火花。', ref:'考試手冊乙部第四章'},
+{id:'q758', topic:'b4', part:'B', q:'船上「加油」時為什麼要接地？', opts:['不需要','防止靜電產生火花','節約電力','美觀'], ans:1, explain:'接地防止靜電積聚產生火花，引燃油氣。', ref:'考試手冊乙部第四章'},
+{id:'q759', topic:'b4', part:'B', q:'船上「加油」時油溢出應如何處理？', opts:['用水沖','立即停止加油，用沙或吸附材料處理','點火燒掉','不管它'], ans:1, explain:'應立即停止加油，用沙或吸附材料處理溢出的油。', ref:'考試手冊乙部第四章'},
+{id:'q760', topic:'b4', part:'B', q:'船上「MARPOL」公約是什麼？', opts:['漁業法規','國際防止船舶污染公約','安全公約','貿易公約'], ans:1, explain:'MARPOL是國際防止船舶造成污染公約。', ref:'考試手冊乙部第四章'},
+{id:'q761', topic:'b5', part:'B', q:'石油氣「氣瓶」的檢驗周期是什麼？', opts:['不需要檢驗','定期由認可機構檢驗','每年自己檢驗','永久不需要'], ans:1, explain:'氣瓶應定期由認可機構進行檢驗。', ref:'考試手冊乙部第五章'},
+{id:'q762', topic:'b5', part:'B', q:'石油氣「軟管」老化有什麼跡象？', opts:['無跡象','變硬、龜裂、變色','變軟','變長'], ans:1, explain:'軟管老化跡象：變硬、龜裂、變色。', ref:'考試手冊乙部第五章'},
+{id:'q763', topic:'b5', part:'B', q:'石油氣「氣瓶」不使用時應如何處理？', opts:['不需要處理','關閉閥門、直立存放','橫放','倒立'], ans:1, explain:'不使用時應關閉閥門，直立存放在通風處。', ref:'考試手冊乙部第五章'},
+{id:'q764', topic:'b5', part:'B', q:'石油氣「管道」連接應使用什麼密封？', opts:['普通膠帶','認可的密封材料和接頭','不需要密封','用繩子綁'], ans:1, explain:'應使用認可的密封材料和接頭，確保連接密封。', ref:'考試手冊乙部第五章'},
+{id:'q765', topic:'b5', part:'B', q:'石油氣「氣體探測器」應多久測試？', opts:['不需要測試','定期測試確保正常工作','每年測試','每週測試'], ans:1, explain:'應定期測試氣體探測器確保正常工作。', ref:'考試手冊乙部第五章'},
+{id:'q766', topic:'b5', part:'B', q:'石油氣「通風口」應設在什麼位置？', opts:['天花板','較低位置（因石油氣比空氣重）','隨意位置','不需要通風口'], ans:1, explain:'通風口應設在較低位置，因為石油氣比空氣重會沉到底部。', ref:'考試手冊乙部第五章'},
+{id:'q767', topic:'b5', part:'B', q:'石油氣「電磁閥」的緊急關閉位置在哪裡？', opts:['只在氣瓶旁','可在控制面板遠程關閉','不需要','只在甲板上'], ans:1, explain:'電磁閥可從控制面板遠程關閉，方便緊急操作。', ref:'考試手冊乙部第五章'},
+{id:'q768', topic:'b5', part:'B', q:'石油氣「氣櫃」的排水口為什麼要通向船外？', opts:['美觀','確保洩漏的氣體排到船外而非船內','排水方便','不需要'], ans:1, explain:'排水口通向船外確保洩漏的石油氣排到船外，不在船內積聚。', ref:'考試手冊乙部第五章'},
+{id:'q769', topic:'b5', part:'B', q:'石油氣系統「定期維護」包括什麼？', opts:['不需要','檢查軟管、接頭、閥門、氣體探測器','只需檢查氣瓶','只需檢查爐具'], ans:1, explain:'包括檢查軟管、接頭、閥門、氣體探測器和電磁閥。', ref:'考試手冊乙部第五章'},
+{id:'q770', topic:'b5', part:'B', q:'船上使用石油氣爐具時應注意什麼？', opts:['不需要注意','有人看管、遠離易燃物、保持通風','可以離開','在密閉空間使用'], ans:1, explain:'使用時應有人看管、遠離易燃物、保持通風。', ref:'考試手冊乙部第五章'}
+];
+
+// ====================== STATE ======================
+let state = loadState();
+let currentQuiz = null;
+let currentQIndex = 0;
+let selectedAnswer = -1;
+let answered = false;
+let examTimer = null;
+let examSeconds = 0;
+
+function loadState() {
+  const def = {
+    answered:0, correct:0, freeLeft:20, isPro:false,
+    topicProgress:{}, wrongQuestions:[], examScores:[],
+    streak:0, lastDate:null, level:1, xp:0
+  };
+  try {
+    const s = JSON.parse(localStorage.getItem('pvoc2_state'));
+    return s ? {...def, ...s} : def;
+  } catch { return def; }
+}
+
+function saveState() {
+  localStorage.setItem('pvoc2_state', JSON.stringify(state));
+  updateDashboard();
+}
+
+// ====================== NAV ======================
+document.querySelectorAll('.nav-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.view').forEach(v => v.style.display='none');
+    document.getElementById('view-'+btn.dataset.view).style.display='block';
+    if(btn.dataset.view==='dashboard') updateDashboard();
+    if(btn.dataset.view==='study') { document.getElementById('studyList').style.display='block'; document.getElementById('studyContent').style.display='none'; renderStudyList(); }
+    if(btn.dataset.view==='practice') renderPracticeSetup();
+    if(btn.dataset.view==='exam') renderExamHistory();
+    if(btn.dataset.view==='wrong-book') renderWrongBook();
+    if(btn.dataset.view==='leaderboard') renderLeaderboard();
+  });
+});
+
+// ====================== DASHBOARD ======================
+function updateDashboard() {
+  document.getElementById('totalAnswered').textContent = state.answered;
+  document.getElementById('accuracy').textContent = state.answered > 0 ? Math.round(state.correct/state.answered*100)+'%' : '0%';
+  document.getElementById('freeLeft').textContent = state.freeLeft;
+  document.getElementById('examReady').textContent = state.examScores.length > 0 ? Math.max(...state.examScores)+'%' : '—';
+  document.getElementById('streakCount').textContent = state.streak;
+
+  const levels = ['Lv.1 菜鳥水手','Lv.2 見習水手','Lv.3 水手','Lv.4 船副','Lv.5 大副','Lv.6 船長','Lv.7 海盜王'];
+  document.getElementById('userLevel').textContent = levels[Math.min(state.level-1, levels.length-1)];
+
+  // Part progress
+  const partAStudied = TOPICS_A.filter(t => (state.topicProgress[t.id]?.studied)).length;
+  const partBStudied = TOPICS_B.filter(t => (state.topicProgress[t.id]?.studied)).length;
+  document.getElementById('partAProgress').textContent = partAStudied+'/'+TOPICS_A.length+' 章節';
+  document.getElementById('partBProgress').textContent = partBStudied+'/'+TOPICS_B.length+' 章節';
+  document.getElementById('partABar').style.width = (partAStudied/TOPICS_A.length*100)+'%';
+  document.getElementById('partBBar').style.width = (partBStudied/TOPICS_B.length*100)+'%';
+
+  // Recommendations
+  const recGrid = document.getElementById('recommendGrid');
+  const allTopics = [...TOPICS_A, ...TOPICS_B];
+  const unStudied = allTopics.filter(t => !state.topicProgress[t.id]?.studied).slice(0,3);
+  const weakTopics = allTopics.filter(t => {
+    const p = state.topicProgress[t.id];
+    return p && p.attempted > 0 && (p.correct/p.attempted) < 0.7;
+  }).slice(0,3);
+  const recs = unStudied.length > 0 ? unStudied : weakTopics;
+  recGrid.innerHTML = recs.map(t => `
+    <div class="topic-card" onclick="openStudy('${t.id}')">
+      <div class="topic-icon">${t.icon}</div>
+      <div class="topic-title">${t.title}</div>
+      <div class="topic-desc">${t.desc}</div>
+      <div class="topic-meta"><span>${t.part==='A'?'甲部':'乙部'}</span><span>${t.questions}題</span></div>
+    </div>
+  `).join('');
+
+  // Weak topics
+  const weakDiv = document.getElementById('weakTopics');
+  if(state.answered >= 20) {
+    const allWeak = allTopics.filter(t => {
+      const p = state.topicProgress[t.id];
+      return p && p.attempted > 0 && (p.correct/p.attempted) < 0.6;
+    });
+    if(allWeak.length > 0) {
+      weakDiv.innerHTML = allWeak.map(t => {
+        const p = state.topicProgress[t.id];
+        const rate = Math.round(p.correct/p.attempted*100);
+        return `<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+          <span>${t.icon} ${t.title}</span>
+          <span style="color:var(--red)">${rate}%</span>
+        </div>`;
+      }).join('');
+    } else {
+      weakDiv.innerHTML = '<div style="color:var(--green)">🎉 目前沒有明顯薄弱章節，繼續保持！</div>';
+    }
+  }
+}
+
+// ====================== STUDY ======================
+function renderStudyList() {
+  const renderTopics = (topics, containerId) => {
+    document.getElementById(containerId).innerHTML = topics.map(t => {
+      const p = state.topicProgress[t.id] || {};
+      const studied = p.studied ? '✅' : '';
+      return `
+      <div class="topic-card" onclick="openStudy('${t.id}')">
+        <div class="topic-icon">${t.icon}</div>
+        <div class="topic-title">${t.title} ${studied}</div>
+        <div class="topic-desc">${t.desc}</div>
+        <div class="topic-meta"><span>${t.questions}道練習題</span><span class="tag tag-${t.part==='A'?'part-a':'part-b'}">${t.part==='A'?'甲部':'乙部'}</span></div>
+        ${p.attempted ? `<div class="topic-progress"><div class="topic-progress-fill" style="width:${Math.round(p.correct/p.attempted*100)}%"></div></div>` : ''}
+      </div>`;
+    }).join('');
+  };
+  renderTopics(TOPICS_A, 'partATopics');
+  renderTopics(TOPICS_B, 'partBTopics');
+}
+
+function openStudy(topicId) {
+  const allTopics = [...TOPICS_A, ...TOPICS_B];
+  const topic = allTopics.find(t => t.id === topicId);
+  if(!topic) return;
+
+  document.getElementById('studyList').style.display='none';
+  const contentDiv = document.getElementById('studyContent');
+  contentDiv.style.display='block';
+  contentDiv.innerHTML = `
+    <div class="back-btn" onclick="closeStudyContent()">← 返回章節列表</div>
+    ${topic.content}
+    <div style="margin-top:20px;text-align:center;">
+      <button class="btn btn-primary" onclick="practiceTopic('${topicId}')">📝 開始本章練習</button>
+      <button class="btn btn-secondary" onclick="markStudied('${topicId}')" style="margin-left:8px;">✅ 標記已學</button>
+    </div>
+  `;
+  window.scrollTo(0,0);
+}
+
+function closeStudyContent() {
+  document.getElementById('studyContent').style.display='none';
+  document.getElementById('studyList').style.display='block';
+}
+
+function markStudied(topicId) {
+  if(!state.topicProgress[topicId]) state.topicProgress[topicId] = {attempted:0,correct:0,studied:false};
+  state.topicProgress[topicId].studied = true;
+  saveState();
+  alert('✅ 已標記為已學習');
+}
+
+function practiceTopic(topicId) {
+  startPractice('topic', topicId);
+}
+
+// ====================== PRACTICE ======================
+function renderPracticeSetup() {
+  document.getElementById('practiceSetup').style.display='block';
+  document.getElementById('practiceQuiz').style.display='none';
+  document.getElementById('practiceResult').style.display='none';
+}
+
+function startPractice(mode, topicId) {
+  let questions;
+  if(mode === 'all') {
+    questions = shuffle([...QUESTIONS]).slice(0,40);
+  } else if(mode === 'partA') {
+    questions = shuffle(QUESTIONS.filter(q=>q.part==='A')).slice(0,40);
+  } else if(mode === 'partB') {
+    questions = shuffle(QUESTIONS.filter(q=>q.part==='B')).slice(0,20);
+  } else if(mode === 'wrong') {
+    if(state.wrongQuestions.length === 0) { alert('錯題本是空的！'); return; }
+    questions = state.wrongQuestions.map(wid => QUESTIONS.find(q=>q.id===wid)).filter(Boolean);
+  } else if(mode === 'topic') {
+    questions = QUESTIONS.filter(q => q.topic === topicId);
+  } else if(mode === 'weak') {
+    if(!state.isPro) { showPaywall(); return; }
+    const weakTopics = Object.entries(state.topicProgress)
+      .filter(([id,p]) => p.attempted > 0 && p.correct/p.attempted < 0.6)
+      .map(([id]) => id);
+    questions = shuffle(QUESTIONS.filter(q => weakTopics.includes(q.topic))).slice(0,20);
+    if(questions.length === 0) { alert('目前沒有薄弱章節！'); return; }
+  } else if(mode === 'mock') {
+    if(!state.isPro) { showPaywall(); return; }
+    questions = shuffle([...QUESTIONS]).slice(0,30);
+  }
+
+  currentQuiz = { mode, questions, answers:[], score:0 };
+  currentQIndex = 0;
+  selectedAnswer = -1;
+  answered = false;
+
+  document.getElementById('practiceSetup').style.display='none';
+  document.getElementById('practiceResult').style.display='none';
+  document.getElementById('practiceQuiz').style.display='block';
+  renderQuestion();
+}
+
+function renderQuestion() {
+  if(!currentQuiz) return;
+  const q = currentQuiz.questions[currentQIndex];
+  const total = currentQuiz.questions.length;
+  const container = document.getElementById('practiceQuiz');
+  container.innerHTML = `
+    <div class="quiz-container fade-in">
+      <div class="quiz-header">
+        <div class="quiz-counter">
+          <span class="tag tag-${q.part==='A'?'part-a':'part-b'}">${q.part==='A'?'甲部':'乙部'}</span>
+          &nbsp;第 ${currentQIndex+1}/${total} 題
+        </div>
+        <div style="font-size:13px;color:var(--text2)">正確率：${currentQuiz.answers.filter(a=>a.correct).length}/${currentQuiz.answers.length||0}</div>
+      </div>
+      <div class="question-text">${q.q}</div>
+      <div class="options-list" id="optionsList">
+        ${q.opts.map((opt,i) => `
+          <button class="option-btn" data-idx="${i}" onclick="selectOption(${i})">
+            <span class="option-letter">${'ABCD'[i]}</span>
+            <span>${opt}</span>
+          </button>
+        `).join('')}
+      </div>
+      <div class="explanation" id="explanation">
+        <div class="explanation-title">💡 解析</div>
+        ${q.explain}
+        <div class="ref">📖 出處：${q.ref}</div>
+      </div>
+      <div class="quiz-actions" id="quizActions">
+        <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" style="display:none">
+          ${currentQIndex < total-1 ? '下一題 →' : '查看結果'}
+        </button>
+      </div>
+    </div>
+  `;
+  answered = false;
+  selectedAnswer = -1;
+}
+
+function selectOption(idx) {
+  if(answered) return;
+  answered = true;
+  selectedAnswer = idx;
+  const q = currentQuiz.questions[currentQIndex];
+  const isCorrect = idx === q.ans;
+
+  // Record
+  currentQuiz.answers.push({ qId:q.id, selected:idx, correct:isCorrect });
+
+  // Update state
+  state.answered++;
+  if(isCorrect) state.correct++;
+  else if(!state.wrongQuestions.includes(q.id)) state.wrongQuestions.push(q.id);
+
+  // Topic progress
+  if(!state.topicProgress[q.topic]) state.topicProgress[q.topic] = {attempted:0,correct:0,studied:false};
+  state.topicProgress[q.topic].attempted++;
+  if(isCorrect) state.topicProgress[q.topic].correct++;
+
+  // Free left
+  if(state.freeLeft > 0 && !state.isPro) state.freeLeft--;
+
+  // XP
+  state.xp += isCorrect ? 10 : 2;
+  state.level = Math.floor(state.xp / 100) + 1;
+
+  // Streak
+  const today = new Date().toDateString();
+  if(state.lastDate !== today) {
+    const yesterday = new Date(Date.now()-86400000).toDateString();
+    state.streak = state.lastDate === yesterday ? state.streak+1 : 1;
+    state.lastDate = today;
+  }
+
+  saveState();
+
+  // UI feedback
+  const btns = document.querySelectorAll('#optionsList .option-btn');
+  btns.forEach((btn,i) => {
+    btn.onclick = null;
+    if(i === q.ans) btn.classList.add('correct');
+    if(i === idx && !isCorrect) btn.classList.add('wrong');
+  });
+
+  document.getElementById('explanation').classList.add('show');
+  document.getElementById('nextBtn').style.display='inline-block';
+
+  if(!isCorrect) {
+    document.querySelector('.quiz-container').classList.add('shake');
+    setTimeout(() => document.querySelector('.quiz-container').classList.remove('shake'), 300);
+  }
+}
+
+function nextQuestion() {
+  if(currentQIndex < currentQuiz.questions.length - 1) {
+    currentQIndex++;
+    selectedAnswer = -1;
+    answered = false;
+
+    // Check free limit
+    if(state.freeLeft <= 0 && !state.isPro) {
+      showPaywall();
+      return;
+    }
+    renderQuestion();
+  } else {
+    showPracticeResult();
+  }
+}
+
+function showPracticeResult() {
+  const correct = currentQuiz.answers.filter(a=>a.correct).length;
+  const total = currentQuiz.questions.length;
+  const pct = Math.round(correct/total*100);
+  const pass = pct >= 60;
+
+  document.getElementById('practiceQuiz').style.display='none';
+  const container = document.getElementById('practiceResult');
+  container.style.display='block';
+  container.innerHTML = `
+    <div class="result-container fade-in">
+      <div style="font-size:40px">${pass ? '🎉' : '😥'}</div>
+      <div class="result-label">本次練習成績</div>
+      <div class="result-score ${pass?'pass':'fail'}">${pct}%</div>
+      <div class="result-detail">答對 ${correct}/${total} 題</div>
+      <div class="result-bar">
+        ${currentQuiz.answers.map(a => `<div class="result-dot ${a.correct?'correct':'wrong'}"></div>`).join('')}
+      </div>
+      ${pass ? '<div style="color:var(--green);margin:12px 0">✅ 達到合格標準（60%）</div>' : '<div style="color:var(--red);margin:12px 0">❌ 未達合格標準，繼續加油！</div>'}
+      <div style="margin-top:20px;">
+        <button class="btn btn-primary" onclick="renderPracticeSetup()">返回練習</button>
+        <button class="btn btn-secondary" onclick="startPractice('${currentQuiz.mode}')" style="margin-left:8px;">再來一組</button>
+      </div>
+    </div>
+  `;
+  if(pass) spawnConfetti();
+}
+
+// ====================== EXAM ======================
+function renderExamHistory() {
+  const container = document.getElementById('examHistory');
+  if(state.examScores.length === 0) {
+    container.innerHTML = '<div style="text-align:center;color:var(--text2);padding:20px;">還沒有考試記錄，開始第一次模擬考吧！</div>';
+    return;
+  }
+  container.innerHTML = '<h3 style="margin:20px 0 12px;">📋 考試記錄</h3>' +
+    state.examScores.slice(-10).reverse().map((s,i) => `
+      <div class="lb-row">
+        <div class="lb-rank">${i+1}</div>
+        <div class="lb-name">模擬考試 #${state.examScores.length-i}</div>
+        <div class="lb-score" style="color:${s>=60?'var(--green)':'var(--red)'}">${s}%</div>
+      </div>
+    `).join('');
+}
+
+function startExam(part) {
+  if(part === 'full' && !state.isPro) { showPaywall(); return; }
+
+  let questions;
+  if(part === 'partA') questions = shuffle(QUESTIONS.filter(q=>q.part==='A')).slice(0,40);
+  else if(part === 'partB') questions = shuffle(QUESTIONS.filter(q=>q.part==='B')).slice(0,20);
+  else questions = shuffle([...QUESTIONS]).slice(0,40);
+
+  currentQuiz = { mode:'exam', questions, answers:[], score:0, part };
+  currentQIndex = 0;
+  selectedAnswer = -1;
+  answered = false;
+  examSeconds = part === 'full' ? 90*60 : 45*60;
+
+  document.getElementById('examSetup').style.display='none';
+  document.getElementById('examResult').style.display='none';
+  document.getElementById('examQuiz').style.display='block';
+
+  renderExamQuestion();
+  startExamTimer();
+}
+
+function startExamTimer() {
+  clearInterval(examTimer);
+  examTimer = setInterval(() => {
+    examSeconds--;
+    const m = Math.floor(examSeconds/60);
+    const s = examSeconds%60;
+    const timerEl = document.getElementById('examTimer');
+    if(timerEl) timerEl.textContent = `⏱️ ${m}:${s.toString().padStart(2,'0')}`;
+    if(examSeconds <= 0) {
+      clearInterval(examTimer);
+      showExamResult();
+    }
+  }, 1000);
+}
+
+function renderExamQuestion() {
+  const q = currentQuiz.questions[currentQIndex];
+  const total = currentQuiz.questions.length;
+  const container = document.getElementById('examQuiz');
+  const m = Math.floor(examSeconds/60);
+  const s = examSeconds%60;
+  container.innerHTML = `
+    <div class="quiz-container fade-in">
+      <div class="quiz-header">
+        <div class="quiz-counter">
+          <span class="tag tag-${q.part==='A'?'part-a':'part-b'}">${q.part==='A'?'甲部':'乙部'}</span>
+          &nbsp;第 ${currentQIndex+1}/${total} 題
+        </div>
+        <div class="quiz-timer" id="examTimer">⏱️ ${m}:${s.toString().padStart(2,'0')}</div>
+      </div>
+      <div class="question-text">${q.q}</div>
+      <div class="options-list" id="examOptionsList">
+        ${q.opts.map((opt,i) => `
+          <button class="option-btn" data-idx="${i}" onclick="selectExamOption(${i})">
+            <span class="option-letter">${'ABCD'[i]}</span>
+            <span>${opt}</span>
+          </button>
+        `).join('')}
+      </div>
+      <div class="quiz-actions">
+        ${currentQIndex > 0 ? '<button class="btn btn-secondary" onclick="prevExamQuestion()">← 上一題</button>' : ''}
+        <button class="btn btn-primary" id="examNextBtn" onclick="nextExamQuestion()" ${currentQuiz.answers.length <= currentQIndex ? 'disabled' : ''}>
+          ${currentQIndex < total-1 ? '下一題 →' : '交卷'}
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+function selectExamOption(idx) {
+  if(currentQuiz.answers[currentQIndex] !== undefined) return;
+  currentQuiz.answers[currentQIndex] = idx;
+  const q = currentQuiz.questions[currentQIndex];
+  const btns = document.querySelectorAll('#examOptionsList .option-btn');
+  btns.forEach((btn,i) => {
+    if(i === idx) btn.classList.add('selected');
+  });
+  document.getElementById('examNextBtn').disabled = false;
+}
+
+function nextExamQuestion() {
+  if(currentQIndex < currentQuiz.questions.length - 1) {
+    currentQIndex++;
+    renderExamQuestion();
+  } else {
+    clearInterval(examTimer);
+    showExamResult();
+  }
+}
+
+function prevExamQuestion() {
+  if(currentQIndex > 0) {
+    currentQIndex--;
+    renderExamQuestion();
+    // Restore selection
+    const ans = currentQuiz.answers[currentQIndex];
+    if(ans !== undefined) {
+      const btns = document.querySelectorAll('#examOptionsList .option-btn');
+      btns[ans]?.classList.add('selected');
+      document.getElementById('examNextBtn').disabled = false;
+    }
+  }
+}
+
+function showExamResult() {
+  let correct = 0;
+  currentQuiz.questions.forEach((q,i) => {
+    if(currentQuiz.answers[i] === q.ans) correct++;
+  });
+  const total = currentQuiz.questions.length;
+  const pct = Math.round(correct/total*100);
+  const pass = pct >= 60;
+
+  state.examScores.push(pct);
+  state.answered += total;
+  state.correct += correct;
+  saveState();
+
+  document.getElementById('examQuiz').style.display='none';
+  const container = document.getElementById('examResult');
+  container.style.display='block';
+  container.innerHTML = `
+    <div class="result-container fade-in">
+      <div style="font-size:40px">${pass ? '🎓' : '📝'}</div>
+      <div class="result-label">模擬考試成績</div>
+      <div class="result-score ${pass?'pass':'fail'}">${pct}%</div>
+      <div class="result-detail">答對 ${correct}/${total} 題（合格線：60%）</div>
+      <div class="result-bar">
+        ${currentQuiz.questions.map((q,i) => `<div class="result-dot ${currentQuiz.answers[i]===q.ans?'correct':'wrong'}"></div>`).join('')}
+      </div>
+      ${pass ? '<div style="color:var(--green);margin:12px 0;font-size:18px">🎉 恭喜通過！</div>' : '<div style="color:var(--red);margin:12px 0;font-size:18px">繼續努力，下次一定通過！</div>'}
+      <div style="margin-top:20px;">
+        <button class="btn btn-primary" onclick="document.getElementById('examSetup').style.display='block';document.getElementById('examResult').style.display='none';renderExamHistory();">返回</button>
+        <button class="btn btn-secondary" onclick="startExam('${currentQuiz.part||'partA'}')" style="margin-left:8px;">再考一次</button>
+      </div>
+    </div>
+  `;
+  if(pass) spawnConfetti();
+}
+
+// ====================== WRONG BOOK ======================
+function renderWrongBook() {
+  const container = document.getElementById('wrongList');
+  const count = document.getElementById('wrongCount');
+  if(state.wrongQuestions.length === 0) {
+    count.textContent = '(0題)';
+    container.innerHTML = '<div style="text-align:center;color:var(--text2);padding:40px;">🎉 錯題本是空的，太棒了！</div>';
+    return;
+  }
+  count.textContent = `(${state.wrongQuestions.length}題)`;
+  container.innerHTML = state.wrongQuestions.map(wid => {
+    const q = QUESTIONS.find(qq => qq.id === wid);
+    if(!q) return '';
+    return `
+      <div class="quiz-container" style="margin-bottom:12px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <span class="tag tag-${q.part==='A'?'part-a':'part-b'}">${q.part==='A'?'甲部':'乙部'}</span>
+          <button class="btn btn-secondary" style="padding:4px 10px;font-size:12px;" onclick="removeWrong('${q.id}')">移除</button>
+        </div>
+        <div class="question-text" style="font-size:14px;">${q.q}</div>
+        <div style="font-size:13px;color:var(--green);margin-top:8px;">✅ 正確答案：${'ABCD'[q.ans]}. ${q.opts[q.ans]}</div>
+        <div class="explanation show" style="margin-top:8px;">
+          <div class="explanation-title">💡 解析</div>
+          ${q.explain}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function removeWrong(qId) {
+  state.wrongQuestions = state.wrongQuestions.filter(id => id !== qId);
+  saveState();
+  renderWrongBook();
+}
+
+// ====================== LEADERBOARD ======================
+function renderLeaderboard() {
+  const fakeData = [
+    {name:'張小明',score:98,emoji:'🥇'},
+    {name:'李大海',score:95,emoji:'🥈'},
+    {name:'王船長',score:92,emoji:'🥉'},
+    {name:'陳水手',score:90,emoji:'⚓'},
+    {name:'趙航海',score:88,emoji:'⛵'},
+    {name:'林勇',score:85,emoji:'🚤'},
+    {name:'黃威',score:82,emoji:'🛥️'},
+    {name:'劉遠洋',score:80,emoji:'🌊'},
+  ];
+  const myScore = state.examScores.length > 0 ? Math.max(...state.examScores) : 0;
+  const all = [...fakeData, {name:'我',score:myScore,emoji:'⭐',isMe:true}];
+  all.sort((a,b) => b.score - a.score);
+
+  document.getElementById('leaderboardList').innerHTML = all.slice(0,10).map((u,i) => `
+    <div class="lb-row" style="${u.isMe?'border-color:var(--accent);background:rgba(59,130,246,0.1)':''}">
+      <div class="lb-rank ${i===0?'gold':i===1?'silver':i===2?'bronze':''}">${i+1}</div>
+      <div class="lb-avatar">${u.emoji}</div>
+      <div class="lb-name">${u.name}${u.isMe?' (你)':''}</div>
+      <div class="lb-score">${u.score}%</div>
+    </div>
+  `).join('');
+}
+
+// ====================== PAYWALL ======================
+function showPaywall() {
+  document.getElementById('paywallModal').classList.add('show');
+}
+function closePaywall() {
+  document.getElementById('paywallModal').classList.remove('show');
+}
+function handlePurchase() {
+  // Simulate purchase
+  state.isPro = true;
+  state.freeLeft = 999;
+  saveState();
+  closePaywall();
+  alert('🎉 購買成功！已解鎖全部PRO功能！');
+}
+function handleTrial() {
+  closePaywall();
+}
+
+// ====================== HELPERS ======================
+function shuffle(arr) {
+  for(let i = arr.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [arr[i],arr[j]] = [arr[j],arr[i]];
+  }
+  return arr;
+}
+
+function spawnConfetti() {
+  const container = document.getElementById('confetti');
+  container.innerHTML = '';
+  const colors = ['#3b82f6','#22c55e','#f59e0b','#ef4444','#8b5cf6','#ec4899'];
+  for(let i = 0; i < 50; i++) {
+    const confetti = document.createElement('div');
+    confetti.style.cssText = `
+      position:absolute;
+      width:${Math.random()*8+4}px;
+      height:${Math.random()*8+4}px;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      left:${Math.random()*100}%;
+      top:-10px;
+      border-radius:${Math.random()>0.5?'50%':'0'};
+      animation: confettiFall ${Math.random()*2+1.5}s linear forwards;
+      animation-delay:${Math.random()*0.5}s;
+    `;
+    container.appendChild(confetti);
+  }
+  setTimeout(() => container.innerHTML='', 4000);
+
+  // Add confetti animation
+  if(!document.getElementById('confettiStyle')) {
+    const style = document.createElement('style');
+    style.id = 'confettiStyle';
+    style.textContent = `@keyframes confettiFall { to { transform: translateY(100vh) rotate(720deg); opacity:0; } }`;
+    document.head.appendChild(style);
+  }
+}
+
+// ====================== INIT ======================
+updateDashboard();
+</script>
+</body>
+</html>
