@@ -96,6 +96,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro', 'Segoe UI', san
 .option-btn.correct .option-letter { background: var(--green); color:#000; }
 .option-btn.wrong .option-letter { background: var(--red); color:#fff; }
 .option-btn.selected .option-letter { background: var(--accent); color:#fff; }
+.option-btn.disabled { pointer-events: none; opacity: 0.8; }
 
 .explanation { margin-top:16px; padding:16px; background: rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.3); border-radius:10px; font-size:13px; line-height:1.6; display:none; }
 .explanation.show { display:block; }
@@ -1674,6 +1675,16 @@ function selectOption(idx) {
   const q = currentQuiz.questions[currentQIndex];
   const isCorrect = idx === q.ans;
 
+  // Disable ALL options immediately
+  const btns = document.querySelectorAll('#optionsList .option-btn');
+  btns.forEach((btn,i) => {
+    btn.style.pointerEvents = 'none';
+    btn.onclick = null;
+    if(i === q.ans) btn.classList.add('correct');
+    if(i === idx && !isCorrect) btn.classList.add('wrong');
+    if(i === idx) btn.classList.add('selected');
+  });
+
   // Record
   currentQuiz.answers.push({ qId:q.id, selected:idx, correct:isCorrect });
 
@@ -1703,14 +1714,6 @@ function selectOption(idx) {
   }
 
   saveState();
-
-  // UI feedback
-  const btns = document.querySelectorAll('#optionsList .option-btn');
-  btns.forEach((btn,i) => {
-    btn.onclick = null;
-    if(i === q.ans) btn.classList.add('correct');
-    if(i === idx && !isCorrect) btn.classList.add('wrong');
-  });
 
   document.getElementById('explanation').classList.add('show');
   document.getElementById('nextBtn').style.display='inline-block';
